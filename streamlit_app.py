@@ -6,15 +6,20 @@ import re
 from collections import Counter
 import nltk
 from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+from nltk import pos_tag, word_tokenize
+from nltk.util import ngrams
+import spacy
 
 # Download NLTK resources (run once)
-try:
-    nltk.data.find('corpora/stopwords')
-except LookupError:
-    try:
-        nltk.download('stopwords', quiet=True)
-    except:
-        st.error("Failed to download NLTK resources. Some features might not work correctly.")
+nltk.data.find('corpora/stopwords')
+nltk.download('stopwords', quiet=True)
+nltk.download('wordnet')
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+
+# Download spaCy resources (run once)
+nlp = spacy.load("en_core_web_sm")
 
 # Set page config
 st.set_page_config(
@@ -44,10 +49,34 @@ def process_text(text, custom_stopwords=None):
     if custom_stopwords:
         stop_words.update(custom_stopwords)
     
-    # Remove stop words and filter out short words
-    words = [word for word in text.split() if word not in stop_words and len(word) > 2]
+    # Tokenize
+    tokens = word_tokenize(text)
     
-    return " ".join(words)
+    # Initialize lemmatizer
+    lemmatizer = WordNetLemmatizer()
+    
+    # POS tag tokens to improve lemmatization
+    tagged_tokens = pos_tag(tokens)
+    
+    # Lemmatize words based on POS tags
+    lemmatized_words = []
+    for word, tag in tagged_tokens:
+        if word not in stop_words and len(word) > 2:
+            # Convert POS tag to WordNet format
+            if tag.startswith('J'):
+                pos = 'a'  # adjective
+            elif tag.startswith('V'):
+                pos = 'v'  # verb
+            elif tag.startswith('N'):
+                pos = 'n'  # noun
+            elif tag.startswith('R'):
+                pos = 'r'  # adverb
+            else:
+                pos = 'n'  # default to noun
+                
+            lemmatized_words.append(lemmatizer.lemmatize(word, pos=pos))
+    
+    return " ".join(lemmatized_words)
 
 # Process skills (comma-separated)
 def process_skills(skills_text, custom_stopwords=None):
