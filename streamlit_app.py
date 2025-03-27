@@ -18,7 +18,7 @@ nltk.download('punkt_tab')
 nltk.download('averaged_perceptron_tagger_eng')
 
 # Download spaCy resources (run once)
-nlp = spacy.load("en_core_web_trf")
+nlp = spacy.load("en_core_web_lg")
 
 # Set page config
 st.set_page_config(
