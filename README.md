@@ -18,7 +18,7 @@ The tool uses a dataset of job postings with information about:
 
 ## How to Run
 1. Install requirements: `pip install -r requirements.txt`
-2. Run the app: `streamlit run viz_3.py`
+2. Run the app: `streamlit run streamlit_app.py`
 
 ## Live Demo
-Check out the live app: [Resume Relief on Streamlit Cloud](https://your-streamlit-url-here)
+Check out the live app: [Resume Relief on Streamlit Cloud](https://resume-relief.streamlit.app/)
