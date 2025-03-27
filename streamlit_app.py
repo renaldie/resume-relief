@@ -13,7 +13,7 @@ import spacy
 
 # Download NLTK resources (run once)
 nltk.data.find('corpora/stopwords')
-nltk.download('stopwords', quiet=True)
+nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('punkt_tab')
 nltk.download('averaged_perceptron_tagger_eng')
