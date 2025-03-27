@@ -12,7 +12,6 @@ from nltk.util import ngrams
 import spacy
 
 # Download NLTK resources (run once)
-nltk.data.find('corpora/stopwords')
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('punkt_tab')
