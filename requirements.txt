@@ -1,5 +1,6 @@
+streamlit==1.31.0
 pandas==2.0.3
-streamlit==1.32.0
 matplotlib==3.8.2
 wordcloud==1.9.3
 nltk==3.8.1
+libgtk2.0-dev

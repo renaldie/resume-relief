@@ -11,7 +11,10 @@ from nltk.corpus import stopwords
 try:
     nltk.data.find('corpora/stopwords')
 except LookupError:
-    nltk.download('stopwords')
+    try:
+        nltk.download('stopwords', quiet=True)
+    except:
+        st.error("Failed to download NLTK resources. Some features might not work correctly.")
 
 # Set page config
 st.set_page_config(
