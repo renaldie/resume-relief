@@ -72,7 +72,7 @@ def generate_wordcloud(text, title, colormap):
     if not text or len(text.strip()) == 0:
         return None
         
-    font_path = "C:/Windows/Fonts/simhei.ttf"
+    font_path = "data/simhei.ttf"
     
     wc = WordCloud(
         font_path=font_path,
