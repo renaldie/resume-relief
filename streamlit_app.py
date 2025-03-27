@@ -16,7 +16,7 @@ nltk.data.find('corpora/stopwords')
 nltk.download('stopwords', quiet=True)
 nltk.download('wordnet')
 nltk.download('punkt_tab')
-nltk.download('averaged_perceptron_tagger')
+nltk.download('averaged_perceptron_tagger_eng')
 
 # Download spaCy resources (run once)
 nlp = spacy.load("en_core_web_sm")
