@@ -164,8 +164,8 @@ def main():
         "Other": "Other 💅",
     }
 
-    # Calculate number of columns to use (max 5)
-    num_columns = min(len(categories_major), 5)
+    # Calculate number of columns to use (max 4)
+    num_columns = min(len(categories_major), 4)
     category_cols = st.columns(num_columns)
 
     # Initialize session state for selected category if not exists
