@@ -3,4 +3,3 @@ pandas
 matplotlib
 wordcloud
 nltk
-libgtk2.0-dev
