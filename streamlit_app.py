@@ -288,19 +288,19 @@ def main():
                     # No more levels to display
                     break
     
-    # Insights section at the bottom
-    st.markdown("## Insights from the Comparison")
-    st.write("""
-    ### Observations:
-    - Compare the tag clouds to see how job requirements evolve with seniority within the same category
-    - Note which skills are common across all levels versus those that appear only at specific levels
-    - Pay attention to terms that increase in prominence as seniority increases
+    # # Insights section at the bottom
+    # st.markdown("## Insights from the Comparison")
+    # st.write("""
+    # ### Observations:
+    # - Compare the tag clouds to see how job requirements evolve with seniority within the same category
+    # - Note which skills are common across all levels versus those that appear only at specific levels
+    # - Pay attention to terms that increase in prominence as seniority increases
     
-    ### Career Path Planning:
-    - Use these visualizations to understand skill progression for career advancement in your chosen field
-    - Identify skills to develop for moving to the next seniority level
-    - Compare how requirements differ across job categories to identify transferable skills
-    """)
+    # ### Career Path Planning:
+    # - Use these visualizations to understand skill progression for career advancement in your chosen field
+    # - Identify skills to develop for moving to the next seniority level
+    # - Compare how requirements differ across job categories to identify transferable skills
+    # """)
 
 if __name__ == "__main__":
     main()
