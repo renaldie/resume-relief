@@ -28,6 +28,12 @@ def generate_wordcloud(text, title, colormap):
     # Ensure text is a string
     text = str(text)
     
+    # Filter out non-English characters
+    text = re.sub(r'[^\x00-\x7F]+', ' ', text)  # Remove non-ASCII characters
+    
+    # Additional cleaning if needed
+    text = re.sub(r'\s+', ' ', text).strip()  # Normalize whitespace
+    
     font_path = "data/simhei.ttf"
     
     wc = WordCloud(
@@ -43,7 +49,6 @@ def generate_wordcloud(text, title, colormap):
     plt.figure(figsize=(10, 6))
     plt.imshow(wc, interpolation='bilinear')
     plt.axis("off")
-    plt.title(title, fontsize=16)
     return plt
 
 # Main app
@@ -267,20 +272,43 @@ def main():
                                 if fig:
                                     st.pyplot(fig)
                                     
-                                    # Display top 10 terms
-                                    word_freq = Counter(processed_text.split())
-                                    if word_freq:
-                                        # Get the most common 10 terms
-                                        most_common = word_freq.most_common(10)
+                                    # # Filter text for English characters only before splitting
+                                    # english_only_text = re.sub(r'[^\x00-\x7F]+', ' ', processed_text)
+                                    # english_only_text = re.sub(r'\s+', ' ', english_only_text).strip()
+                                    
+                                    # # Display top 10 terms (English only)
+                                    # word_freq = Counter(english_only_text.split())
+                                    # if word_freq:
+                                    #     # Get the most common 10 terms
+                                    #     most_common = word_freq.most_common(10)
                                         
-                                        # Create dataframe with 1-based indexing
-                                        freq_df = pd.DataFrame(most_common, columns=['Term', 'Frequency'])
-                                        freq_df.index = range(1, len(freq_df) + 1)  # Start index from 1 instead of 0
+                                    #     # Create dataframe with 1-based indexing
+                                    #     freq_df = pd.DataFrame(most_common, columns=['Term', 'Frequency'])
+                                    #     freq_df.index = range(1, len(freq_df) + 1)  # Start index from 1 instead of 0
                                         
-                                        st.write("Top 10 Must Needs:")
-                                        st.dataframe(freq_df)
-                                    else:
-                                        st.info("No meaningful terms could be extracted after removing common stopwords.")
+                                    #     st.write("Top 10 Must Needs:")
+                                    #     st.dataframe(freq_df)
+                                    # else:
+                                    #     st.info("No meaningful terms could be extracted after removing common stopwords.")
+
+                                # Chinese
+                                # if fig:
+                                #     st.pyplot(fig)
+                                    
+                                #     # Display top 10 terms
+                                #     word_freq = Counter(processed_text.split())
+                                #     if word_freq:
+                                #         # Get the most common 10 terms
+                                #         most_common = word_freq.most_common(10)
+                                        
+                                #         # Create dataframe with 1-based indexing
+                                #         freq_df = pd.DataFrame(most_common, columns=['Term', 'Frequency'])
+                                #         freq_df.index = range(1, len(freq_df) + 1)  # Start index from 1 instead of 0
+                                        
+                                #         st.write("Top 10 Must Needs:")
+                                #         st.dataframe(freq_df)
+                                #     else:
+                                #         st.info("No meaningful terms could be extracted after removing common stopwords.")
                     
                     # Move to the next level
                     level_index += 1
@@ -301,6 +329,21 @@ def main():
     # - Identify skills to develop for moving to the next seniority level
     # - Compare how requirements differ across job categories to identify transferable skills
     # """)
+
+    # Add a simple credit at the bottom
+    st.markdown("---")
+    
+    cols = st.columns([2, 1, 2])
+    with cols[1]:
+        st.markdown(
+            """
+            <div style="text-align: center">
+                © 2025 Resume Relief<br>
+                Made by <a href="https://www.linkedin.com/in/ren-e/" target="_blank">Ren</a> in Hsinchu with ❤️<br>
+            </div>
+            """, 
+            unsafe_allow_html=True
+        )
 
 if __name__ == "__main__":
     main()
