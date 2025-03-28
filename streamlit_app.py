@@ -4,21 +4,6 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import re
 from collections import Counter
-import nltk
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-from nltk import pos_tag, word_tokenize
-from nltk.util import ngrams
-import spacy
-
-# Download NLTK resources (run once)
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('punkt_tab')
-nltk.download('averaged_perceptron_tagger_eng')
-
-# Download spaCy resources (run once)
-nlp = spacy.load("en_core_web_lg")
 
 # Set page config
 st.set_page_config(
@@ -31,78 +16,18 @@ st.title("What do I need to get a job? 😭")
 # Load the data
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/jobs_complete.csv", encoding="utf-8-sig")
+    # Load data just once
+    df = pd.read_csv("data/jobs_processed.csv", encoding="utf-8-sig")
     return df
-
-# Process text to extract meaningful terms
-def process_text(text, custom_stopwords=None):
-    if pd.isna(text):
-        return ""
-    
-    # Convert to lowercase and remove punctuation
-    text = str(text).lower()
-    text = re.sub(r'[^\w\s]', ' ', text)
-    
-    # Get stopwords
-    stop_words = set(stopwords.words('english'))
-    if custom_stopwords:
-        stop_words.update(custom_stopwords)
-    
-    # Tokenize
-    tokens = word_tokenize(text)
-    
-    # Initialize lemmatizer
-    lemmatizer = WordNetLemmatizer()
-    
-    # POS tag tokens to improve lemmatization
-    tagged_tokens = pos_tag(tokens)
-    
-    # Lemmatize words based on POS tags
-    lemmatized_words = []
-    for word, tag in tagged_tokens:
-        if word not in stop_words and len(word) > 2:
-            # Convert POS tag to WordNet format
-            if tag.startswith('J'):
-                pos = 'a'  # adjective
-            elif tag.startswith('V'):
-                pos = 'v'  # verb
-            elif tag.startswith('N'):
-                pos = 'n'  # noun
-            elif tag.startswith('R'):
-                pos = 'r'  # adverb
-            else:
-                pos = 'n'  # default to noun
-                
-            lemmatized_words.append(lemmatizer.lemmatize(word, pos=pos))
-    
-    return " ".join(lemmatized_words)
-
-# Process skills (comma-separated)
-def process_skills(skills_text, custom_stopwords=None):
-    if pd.isna(skills_text):
-        return ""
-    
-    # Convert to lowercase
-    skills_text = str(skills_text).lower()
-    
-    # Split by comma
-    skills = [skill.strip() for skill in skills_text.split(',')]
-    
-    # Get stopwords
-    stop_words = set(stopwords.words('english'))
-    if custom_stopwords:
-        stop_words.update(custom_stopwords)
-    
-    # Remove stop words and filter out short skills
-    skills = [skill for skill in skills if skill and skill not in stop_words and len(skill) > 2]
-    
-    return " ".join(skills)
 
 # Generate wordcloud with specific colormap
 def generate_wordcloud(text, title, colormap):
-    if not text or len(text.strip()) == 0:
+    if text is None or pd.isna(text) or len(str(text).strip()) == 0:
         return None
-        
+    
+    # Ensure text is a string
+    text = str(text)
+    
     font_path = "data/simhei.ttf"
     
     wc = WordCloud(
@@ -126,15 +51,10 @@ def main():
     # Load data
     df = load_data()
     
-    # Custom stopwords relevant to job descriptions
-    custom_stopwords = {'experience', 'job', 'work', 'skills', 'year', 'years', 'company',
-                        'team', 'role', 'ability', 'required', 'requirements', 'responsibilities',
-                        'candidate', 'position', 'including', 'using', 'knowledge'}
-    
-    # Get unique category_major values
-    categories_major = sorted(df['category_major'].dropna().unique())
+    # Get unique category values
+    categories_major = sorted(df['category'].dropna().unique())
     if not categories_major:
-        st.error("No category_major data found in the dataset.")
+        st.error("No category data found in the dataset.")
         return
     
     # Get unique seniority levels with a specific order
@@ -159,11 +79,6 @@ def main():
 
     # Map the actual seniority levels to display
     seniority_levels = seniority_order.copy()
-
-    # Check if we have any seniority data
-    if not seniority_levels:
-        st.error("No seniority data found in the dataset.")
-        return
 
     # 1. Category major buttons at the top
     st.write("## A Job in 🏢")
@@ -257,17 +172,28 @@ def main():
     # Use the selected metric from session state
     selected_metric = st.session_state.selected_metric
     
-    # Filter data by selected category
-    filtered_by_category = df[df['category_major'] == selected_category]
+    # Map selected_metric to the processed column name
+    metric_column_map = {
+        'skills': 'processed_skills',
+        'job_description': 'processed_job_description',
+        'requirements': 'processed_requirements'
+    }
     
-    if filtered_by_category.empty:
+    processed_column = metric_column_map[selected_metric]
+    
+    # Filter data by selected category
+    filtered_data = df[df['category'] == selected_category]
+    
+    if filtered_data.empty:
         st.warning(f"No data available for the selected category: {selected_category}")
         return
     
     # 3. Display data for all seniority levels
-    st.markdown("## Climbing the Ladder 📈")
     display_category = category_labels.get(selected_category, selected_category)
-    st.write(f"Oh, wow! {len(filtered_by_category)} jobs in {display_category}")
+    
+    # Get total job count for this category from the dataset
+    total_jobs = filtered_data['count'].sum() if 'count' in filtered_data.columns else len(filtered_data)
+    st.markdown(f"## Oh, wow! {total_jobs} jobs in {display_category}")
     
     # Assign color maps to different seniority levels
     color_maps = {
@@ -286,15 +212,8 @@ def main():
     columns_per_row = 3
     rows = 2
     
-    # First filter the seniority levels to only include those with data
-    seniority_with_data = []
-    for level in seniority_levels:
-        # Get data for this seniority level (no special handling needed for Internship now)
-        level_data = filtered_by_category[filtered_by_category['seniority'] == level]
-        
-        # Only include levels that have data
-        if not level_data.empty:
-            seniority_with_data.append(level)
+    # Get seniority levels that have data for this category
+    seniority_with_data = filtered_data['seniority'].tolist()
     
     # Check if we have any data to display
     if not seniority_with_data:
@@ -317,64 +236,57 @@ def main():
                     level = seniority_with_data[level_index]
                     
                     # Get data for this seniority level in the selected category
-                    level_data = filtered_by_category[filtered_by_category['seniority'] == level]
+                    level_row = filtered_data[filtered_data['seniority'] == level].iloc[0]
+                    job_count = level_row['count']
+                    processed_text = level_row[processed_column]
                     
                     with cols[col]:
                         display_level = seniority_labels.get(level, level)
                         st.subheader(display_level)
-                        st.write(f"Found: {len(level_data)}")
+                        st.write(f"{job_count} job(s)")
                         
-                        # Process text based on selected comparison metric
-                        if selected_metric == 'skills':
-                            processed_text = " ".join(level_data['skills'].fillna('').apply(
-                                lambda x: process_skills(x, custom_stopwords)
-                            ))
-                        else:
-                            processed_text = " ".join(level_data[selected_metric].fillna('').apply(
-                                lambda x: process_text(x, custom_stopwords)
-                            ))
-
                         # Check if we have enough text data
-                        if not processed_text or len(processed_text.strip()) < 50:  # Minimum threshold
-                            st.info(f"Found {len(level_data)} job postings, but the extracted terms were insufficient.")
+                        if processed_text is None or pd.isna(processed_text):
+                            st.info(f"Found {job_count} job(s), but no text data was available.")
                         else:
-                            # Generate word cloud
-                            # Select colormap based on seniority level or default
-                            colormap = color_maps.get(level, default_colormaps[level_index % len(default_colormaps)])
-                            
-                            # Generate and display word cloud
-                            fig = generate_wordcloud(
-                                processed_text,
-                                f"{level} - Top Terms",
-                                colormap
-                            )
-                            if fig:
-                                st.pyplot(fig)
+                            # Convert to string and check length
+                            processed_text = str(processed_text)
+                            if len(processed_text.strip()) < 30:  # Minimum threshold
+                                st.info(f"Found {job_count} job(s), but the extracted terms were insufficient.")
+                            else:
+                                # Generate word cloud
+                                # Select colormap based on seniority level or default
+                                colormap = color_maps.get(level, default_colormaps[level_index % len(default_colormaps)])
                                 
-                                # Display top 10 terms
-                                word_freq = Counter(processed_text.split())
-                                if word_freq:
-                                    # Get the most common 10 terms
-                                    most_common = word_freq.most_common(10)
+                                # Generate and display word cloud
+                                fig = generate_wordcloud(
+                                    processed_text,
+                                    f"{display_level} - Top Terms",
+                                    colormap
+                                )
+                                if fig:
+                                    st.pyplot(fig)
                                     
-                                    # Create dataframe with 1-based indexing
-                                    freq_df = pd.DataFrame(most_common, columns=['Term', 'Frequency'])
-                                    freq_df.index = range(1, len(freq_df) + 1)  # Start index from 1 instead of 0
-                                    
-                                    st.write("Top 10 Terms:")
-                                    st.dataframe(freq_df)
-                                else:
-                                    st.info("No meaningful terms could be extracted after removing common stopwords.")
+                                    # Display top 10 terms
+                                    word_freq = Counter(processed_text.split())
+                                    if word_freq:
+                                        # Get the most common 10 terms
+                                        most_common = word_freq.most_common(10)
+                                        
+                                        # Create dataframe with 1-based indexing
+                                        freq_df = pd.DataFrame(most_common, columns=['Term', 'Frequency'])
+                                        freq_df.index = range(1, len(freq_df) + 1)  # Start index from 1 instead of 0
+                                        
+                                        st.write("Top 10 Must Needs:")
+                                        st.dataframe(freq_df)
+                                    else:
+                                        st.info("No meaningful terms could be extracted after removing common stopwords.")
                     
                     # Move to the next level
                     level_index += 1
                 else:
                     # No more levels to display
                     break
-            
-            # Only add separator if we have another row with data
-            if level_index < len(seniority_with_data):
-                st.markdown("---")
     
     # Insights section at the bottom
     st.markdown("## Insights from the Comparison")
