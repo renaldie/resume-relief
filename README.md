@@ -18,6 +18,7 @@ The tool uses a dataset of job postings with information about:
 
 ## How to Run
 1. Install requirements: `pip install -r requirements.txt`
+2. Run data proprocessng: `python preprocess_data.py`
 2. Run the app: `streamlit run streamlit_app.py`
 
 ## Live Demo
