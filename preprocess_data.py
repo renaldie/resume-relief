@@ -104,8 +104,8 @@ def main():
 
     # Process the original data
     df = pd.concat([jobs_associate, 
-                            jobs_director, 
-                            jobs_entry_level, 
+                            # jobs_director, 
+                            # jobs_entry_level, 
                             jobs_executive, 
                             jobs_internship_level,
                             jobs_mid_senior_level], ignore_index=True)
