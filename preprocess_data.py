@@ -44,7 +44,7 @@ def process_text(text, custom_stopwords=None):
     tagged_tokens = pos_tag(tokens)
     
     # Lemmatize words based on POS tags
-    lemmatized_words = []
+    lemmatized_words = [] #['Cheical Eng', 'MBA', ]
     for word, tag in tagged_tokens:
         if word not in stop_words and len(word) > 2:
             # Convert POS tag to WordNet format
