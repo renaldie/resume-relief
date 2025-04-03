@@ -277,6 +277,8 @@ def main():
                                 )
                                 if fig:
                                     st.pyplot(fig)
+                                else:
+                                    st.info(f"Found {job_count} job(s), but couldn't generate a word cloud from the available terms.")
                                     
                                     # # Filter text for English characters only before splitting
                                     # english_only_text = re.sub(r'[^\x00-\x7F]+', ' ', processed_text)
@@ -315,8 +317,7 @@ def main():
                                 #         st.dataframe(freq_df)
                                 #     else:
                                 #         st.info("No meaningful terms could be extracted after removing common stopwords.")
-                                else:
-                                    st.info(f"Found {job_count} job(s), but couldn't generate a word cloud from the available terms.")
+                            
                     # Move to the next level
                     level_index += 1
                 else:
