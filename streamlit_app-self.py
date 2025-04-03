@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import re
 from collections import Counter
-import string
 
 # Set page config
 st.set_page_config(
@@ -29,21 +28,14 @@ def generate_wordcloud(text, title, colormap):
     # Ensure text is a string
     text = str(text)
     
-    # Filter out non-English characters (remove Chinese)
-    text = re.sub(r'[\u4e00-\u9fff]+', '', text)  # Remove Chinese characters
-    text = re.sub(r'[^\x00-\x7F]+', ' ', text)    # Remove other non-ASCII characters
+    # Filter out non-English characters
+    text = re.sub(r'[^\x00-\x7F]+', ' ', text)  # Remove non-ASCII characters
     
-    # Clean and normalize text as in your friend's code
-    text = re.sub(r"[【|】]", "", text)                        # Remove 【 and 】
-    text = re.sub(r"：", ":", text)                           # Replace full-width colon
-    text = re.sub(rf"[{re.escape(string.punctuation)}]", "", text)  # Remove punctuation
-    text = re.sub(r"\d+", "", text)                          # Remove all digits
-    
-    # Normalize whitespace
-    text = re.sub(r'\s+', ' ', text).strip()
+    # Additional cleaning if needed
+    text = re.sub(r'\s+', ' ', text).strip()  # Normalize whitespace
     
     # Check if any meaningful content remains after filtering
-    if not text or len(text) < 10:  # Require more content for meaningful wordcloud
+    if not text or len(text) < 3:
         return None
     
     try:
@@ -53,18 +45,15 @@ def generate_wordcloud(text, title, colormap):
             max_font_size=80,
             width=800,
             height=400,
-            colormap=colormap,
-            prefer_horizontal=0.9,
-            relative_scaling=0.5,
-            random_state=42
+            colormap=colormap
         ).generate(text)
         
-        fig, ax = plt.subplots(figsize=(10, 6))
-        ax.imshow(wc, interpolation='bilinear')
-        ax.axis("off")
-        plt.tight_layout(pad=0)
-        return fig
-    except Exception as e:
+        plt.figure(figsize=(10, 6))
+        plt.imshow(wc, interpolation='bilinear')
+        plt.axis("off")
+        return plt
+    except ValueError as e:
+        # Handle the case where there are no valid words after filtering
         print(f"Error generating word cloud: {e}")
         return None
 
