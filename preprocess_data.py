@@ -8,6 +8,8 @@ from nltk.util import ngrams
 import spacy
 import time
 import os
+import jieba
+import googletrans
 
 # Download NLTK resources (run once)
 nltk.download('stopwords')
@@ -17,16 +19,182 @@ nltk.download('averaged_perceptron_tagger_eng')
 
 # Download spaCy resources (run once)
 nlp = spacy.load("en_core_web_trf")
+nlp_zh = spacy.load("zh_core_web_trf")
 
 ##########
 # TODO
 # Process text for 'Job Description' and 'Requirements' - 
-def process_text(text, custom_stopwords=None):
-    if pd.isna(text):
+def process_text(text, custom_stopwords=None, keep_phrases=True, min_word_length=2, 
+               use_spacy=True, extract_entities=True, bigrams=True, handle_chinese=True,
+               translate_chinese=True):
+    """
+    Process text data for NLP tasks with advanced options and multilingual support.
+    
+    Parameters:
+    -----------
+    text : str
+        The input text to process
+    custom_stopwords : set or list, optional
+        Additional stopwords to remove
+    keep_phrases : bool, default=True
+        Whether to maintain important multi-word phrases
+    min_word_length : int, default=2
+        Minimum character length for words to keep
+    use_spacy : bool, default=True
+        Whether to use spaCy for advanced processing
+    extract_entities : bool, default=True
+        Whether to extract and preserve named entities
+    bigrams : bool, default=True
+        Whether to include common bigrams
+    handle_chinese : bool, default=True
+        Whether to handle Chinese text using jieba segmentation
+    translate_chinese : bool, default=True
+        Whether to translate Chinese text to English
+    
+    Returns:
+    --------
+    str
+        Processed text
+    """
+    if pd.isna(text) or not text:
         return ""
     
-    # Convert to lowercase and remove punctuation
+    # Convert to string and lowercase
     text = str(text).lower()
+    
+    # Check if text contains Chinese characters
+    has_chinese = bool(re.search(r'[\u4e00-\u9fff]', text)) if handle_chinese else False
+    
+    # Handle Chinese text if detected
+    if has_chinese:
+        try:
+            # Import Chinese processing libraries
+            import jieba
+            
+            # For translation (if enabled)
+            if translate_chinese:
+                try:
+                    from googletrans import Translator
+                    translator = Translator()
+                    
+                    # Translate Chinese text to English
+                    # Note: In production, should handle API limits and errors
+                    translation = translator.translate(text, src='zh-cn', dest='en')
+                    translated_text = translation.text.lower()
+                    
+                    # Combine original and translated text (preserving both)
+                    combined_text = f"{text} {translated_text}"
+                    text = combined_text
+                except ImportError:
+                    print("googletrans not installed. Install with: pip install googletrans==4.0.0-rc1")
+                except Exception as e:
+                    print(f"Translation failed: {e}. Proceeding with original text.")
+            
+            # Segment Chinese text
+            seg_list = jieba.cut(text, cut_all=False)
+            segmented_text = " ".join(seg_list)
+            
+            # Replace original text with segmented text for further processing
+            text = segmented_text
+            
+        except ImportError:
+            print("jieba not installed. Install with: pip install jieba")
+            # Continue with unsegmented text if jieba is not available
+        except Exception as e:
+            print(f"Chinese text processing failed: {e}. Proceeding with original text.")
+    
+    # Preserve common phrases before tokenization if keep_phrases is True
+    important_phrases = []
+    if keep_phrases:
+        # Job-related multi-word terms to preserve (English and Chinese equivalents)
+        phrase_patterns = [
+            # English terms
+            r'machine learning', r'deep learning', r'data science', r'data analysis',
+            r'artificial intelligence', r'business intelligence', r'product management',
+            r'project management', r'software development', r'web development',
+            r'full stack', r'front end', r'back end', r'devops', r'cloud computing',
+            r'aws', r'azure', r'google cloud', r'data engineering', r'natural language processing',
+            r'computer vision', r'user experience', r'user interface', r'scrum master',
+            r'agile methodology', r'customer relationship management', r'search engine optimization',
+            r'digital marketing', r'content marketing', r'social media', r'human resources',
+            r'financial analysis', r'supply chain', r'quality assurance', r'quality control',
+            r'business administration', r'operations management', r'customer service',
+            r'power bi', r'tableau', r'sql server', r'ms excel', r'ms office',
+            
+            # Chinese equivalent terms
+            r'机器学习', r'深度学习', r'数据科学', r'数据分析',
+            r'人工智能', r'商业智能', r'产品管理',
+            r'项目管理', r'软件开发', r'网站开发',
+            r'全栈', r'前端', r'后端', r'运维', r'云计算',
+            r'数据工程', r'自然语言处理',
+            r'计算机视觉', r'用户体验', r'用户界面', r'敏捷开发',
+            r'客户关系管理', r'搜索引擎优化',
+            r'数字营销', r'内容营销', r'社交媒体', r'人力资源',
+            r'财务分析', r'供应链', r'质量保证', r'质量控制',
+            r'工商管理', r'运营管理', r'客户服务'
+        ]
+        
+        for phrase in phrase_patterns:
+            if re.search(r'\b' + phrase + r'\b', text):
+                # Replace spaces with underscores to preserve the phrase
+                text = re.sub(r'\b' + phrase + r'\b', phrase.replace(' ', '_'), text)
+                important_phrases.append(phrase.replace(' ', '_'))
+    
+    # Use spaCy for advanced NLP if enabled
+    if use_spacy and nlp is not None:
+        try:
+            # Process with spaCy
+            doc = nlp(text)
+            
+            processed_tokens = []
+            
+            # Extract named entities if requested
+            entities = []
+            if extract_entities:
+                entities = [e.text.replace(' ', '_') for e in doc.ents 
+                           if e.label_ in ['ORG', 'PRODUCT', 'WORK_OF_ART', 'LAW', 'LANGUAGE', 'GPE']]
+            
+            # Process tokens
+            for token in doc:
+                # Skip stopwords and short words
+                if (custom_stopwords and token.text in custom_stopwords) or len(token.text) <= min_word_length:
+                    continue
+                
+                # Skip if it's a stopword (unless it's in our important phrases)
+                if token.is_stop and token.text not in important_phrases and token.text not in entities:
+                    continue
+                
+                # Use lemma
+                lemma = token.lemma_
+                
+                # Keep original form for proper nouns and technical terms
+                if token.pos_ in ['PROPN', 'X'] or token.text in important_phrases or token.text in entities:
+                    processed_tokens.append(token.text)
+                else:
+                    processed_tokens.append(lemma)
+            
+            # Add extracted entities to ensure they're preserved
+            processed_tokens.extend([e for e in entities if e not in processed_tokens])
+            
+            # Generate bigrams if enabled
+            if bigrams and len(processed_tokens) > 1:
+                bigram_list = ['_'.join(bg) for bg in zip(processed_tokens[:-1], processed_tokens[1:])]
+                # Only keep meaningful bigrams (filter out common word combinations)
+                meaningful_bigrams = [bg for bg in bigram_list 
+                                     if not any(common in bg for common in ['the_', '_the', '_and', 'and_', '_of', 'of_'])]
+                # Add top bigrams (limit to avoid explosion)
+                top_bigrams = meaningful_bigrams[:10]  # Limit to top 10 bigrams
+                processed_tokens.extend(top_bigrams)
+            
+            return " ".join(processed_tokens)
+            
+        except Exception as e:
+            # Fallback to traditional method if spaCy fails
+            print(f"spaCy processing failed: {e}. Falling back to traditional method.")
+            pass
+    
+    # Traditional method (fallback)
+    # Remove punctuation but preserve underscores (for phrases we've already processed)
     text = re.sub(r'[^\w\s]', ' ', text)
     
     # Get stopwords
@@ -44,24 +212,62 @@ def process_text(text, custom_stopwords=None):
     tagged_tokens = pos_tag(tokens)
     
     # Lemmatize words based on POS tags
-    lemmatized_words = [] #['Cheical Eng', 'MBA', ]
+    lemmatized_words = []
     for word, tag in tagged_tokens:
-        if word not in stop_words and len(word) > 2:
-            # Convert POS tag to WordNet format
-            if tag.startswith('J'):
-                pos = 'a'  # adjective
-            elif tag.startswith('V'):
-                pos = 'v'  # verb
-            elif tag.startswith('N'):
-                pos = 'n'  # noun
-            elif tag.startswith('R'):
-                pos = 'r'  # adverb
-            else:
-                pos = 'n'  # default to noun
-                
-            lemmatized_words.append(lemmatizer.lemmatize(word, pos=pos))
+        # Skip stopwords and short words (unless they're our preserved phrases)
+        if (word in stop_words and '_' not in word) or len(word) <= min_word_length:
+            continue
+        
+        # Keep phrases that we preserved earlier
+        if word in important_phrases:
+            lemmatized_words.append(word)
+            continue
+            
+        # Convert POS tag to WordNet format
+        if tag.startswith('J'):
+            pos = 'a'  # adjective
+        elif tag.startswith('V'):
+            pos = 'v'  # verb
+        elif tag.startswith('N'):
+            pos = 'n'  # noun
+        elif tag.startswith('R'):
+            pos = 'r'  # adverb
+        else:
+            pos = 'n'  # default to noun
+            
+        lemmatized_words.append(lemmatizer.lemmatize(word, pos=pos))
+    
+    # Generate bigrams if enabled
+    if bigrams and len(lemmatized_words) > 1:
+        bigram_list = ['_'.join(bg) for bg in zip(lemmatized_words[:-1], lemmatized_words[1:])]
+        # Filter meaningful bigrams
+        meaningful_bigrams = [bg for bg in bigram_list 
+                             if not any(common in bg for common in ['the_', '_the', '_and', 'and_', '_of', 'of_'])]
+        # Add top bigrams (limit to avoid explosion)
+        lemmatized_words.extend(meaningful_bigrams[:10])
     
     return " ".join(lemmatized_words)
+
+# Add this function to your code
+def preprocess_chinese_specific(df):
+    """Handle Chinese-specific preprocessing tasks"""
+    from multilingual_config import DEGREE_MAPPING, TECH_SKILLS_MAPPING
+    
+    # Map Chinese education terms to standardized English equivalents
+    education_pattern = '|'.join(DEGREE_MAPPING.keys())
+    mask = df['education'].str.contains(education_pattern, na=False)
+    
+    for zh_term, en_term in DEGREE_MAPPING.items():
+        df.loc[mask, 'education'] = df.loc[mask, 'education'].str.replace(zh_term, en_term)
+    
+    # Map Chinese skill terms to standardized English equivalents
+    skills_pattern = '|'.join(TECH_SKILLS_MAPPING.keys())
+    mask = df['skills'].str.contains(skills_pattern, na=False)
+    
+    for zh_term, en_term in TECH_SKILLS_MAPPING.items():
+        df.loc[mask, 'skills'] = df.loc[mask, 'skills'].str.replace(zh_term, en_term)
+    
+    return df
 
 # Process skills
 def process_skills(skills_text, custom_stopwords=None):
@@ -91,8 +297,12 @@ def main():
     
     # Custom stopwords relevant to job descriptions
     custom_stopwords = {'experience', 'job', 'work', 'skills', 'year', 'years', 'company',
-                        'team', 'role', 'ability', 'required', 'requirements', 'responsibilities',
-                        'candidate', 'position', 'including', 'using', 'knowledge'}
+                      'team', 'role', 'ability', 'required', 'requirements', 'responsibilities',
+                      'candidate', 'position', 'including', 'using', 'knowledge'}
+    
+    # Add Chinese stopwords to your custom stopwords
+    from multilingual_config import CHINESE_STOPWORDS
+    custom_stopwords.update(CHINESE_STOPWORDS)
     
     # Load the original data
     jobs_associate = pd.read_csv('data/raw/Jobs_associate.csv', encoding="utf-8-sig")
@@ -104,11 +314,11 @@ def main():
 
     # Process the original data
     df = pd.concat([jobs_associate, 
-                            jobs_director, 
-                            jobs_entry_level, 
-                            jobs_executive, 
-                            jobs_internship_level,
-                            jobs_mid_senior_level], ignore_index=True)
+                     jobs_director, 
+                     jobs_entry_level, 
+                     jobs_executive, 
+                     jobs_internship_level,
+                     jobs_mid_senior_level], ignore_index=True)
     
     # Rule 1.
     # If employment_type is 'Part-time' and title contains intern-related terms and seniority is empty
@@ -159,6 +369,10 @@ def main():
         'Executive (VP, GM, C-Level)',
     ]
     
+    # Add Chinese stopwords to your custom stopwords
+    from multilingual_config import CHINESE_STOPWORDS
+    custom_stopwords.update(CHINESE_STOPWORDS)
+
     # Create result dataframe
     results = []
     
@@ -177,16 +391,35 @@ def main():
                     lambda x: process_skills(x, custom_stopwords)
                 ))
                 
-                # Process job description
+                # Process job description with enhanced options
                 processed_description = " ".join(level_data['job_description'].fillna('').apply(
-                    lambda x: process_text(x, custom_stopwords)
+                    lambda x: process_text(
+                        x, 
+                        custom_stopwords=custom_stopwords,
+                        keep_phrases=True,
+                        use_spacy=True,
+                        extract_entities=True,
+                        bigrams=True,
+                        handle_chinese=True,
+                        translate_chinese=False
+                    )
                 ))
+
                 
-                # Process requirements
+                # Process requirements with enhanced options
                 processed_requirements = " ".join(level_data['requirements'].fillna('').apply(
-                    lambda x: process_text(x, custom_stopwords)
+                    lambda x: process_text(
+                        x, 
+                        custom_stopwords=custom_stopwords,
+                        keep_phrases=True,
+                        use_spacy=True,
+                        extract_entities=True,
+                        bigrams=True,
+                        handle_chinese=True,
+                        translate_chinese=False
+                    )
                 ))
-                
+
                 # Add to results
                 results.append({
                     'category': category,
