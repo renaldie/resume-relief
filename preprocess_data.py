@@ -18,7 +18,9 @@ nltk.download('averaged_perceptron_tagger_eng')
 # Download spaCy resources (run once)
 nlp = spacy.load("en_core_web_trf")
 
-# Process text to extract meaningful terms
+##########
+# TODO
+# Process text for 'Job Description' and 'Requirements' - 
 def process_text(text, custom_stopwords=None):
     if pd.isna(text):
         return ""
@@ -61,7 +63,7 @@ def process_text(text, custom_stopwords=None):
     
     return " ".join(lemmatized_words)
 
-# Process skills (comma-separated)
+# Process skills
 def process_skills(skills_text, custom_stopwords=None):
     if pd.isna(skills_text):
         return ""
@@ -81,6 +83,7 @@ def process_skills(skills_text, custom_stopwords=None):
     skills = [skill for skill in skills if skill and skill not in stop_words and len(skill) > 2]
     
     return " ".join(skills)
+##########
 
 def main():
     print("Starting data preprocessing...")
