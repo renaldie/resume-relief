@@ -34,22 +34,28 @@ def generate_wordcloud(text, title, colormap):
     # Additional cleaning if needed
     text = re.sub(r'\s+', ' ', text).strip()  # Normalize whitespace
     
-    font_path = "data/simhei.ttf"
+    # Check if any meaningful content remains after filtering
+    if not text or len(text) < 3:
+        return None
     
-    wc = WordCloud(
-        font_path=font_path,
-        background_color="white",
-        max_words=100,
-        max_font_size=80,
-        width=800,
-        height=400,
-        colormap=colormap
-    ).generate(text)
-    
-    plt.figure(figsize=(10, 6))
-    plt.imshow(wc, interpolation='bilinear')
-    plt.axis("off")
-    return plt
+    try:
+        wc = WordCloud(
+            background_color="white",
+            max_words=100,
+            max_font_size=80,
+            width=800,
+            height=400,
+            colormap=colormap
+        ).generate(text)
+        
+        plt.figure(figsize=(10, 6))
+        plt.imshow(wc, interpolation='bilinear')
+        plt.axis("off")
+        return plt
+    except ValueError as e:
+        # Handle the case where there are no valid words after filtering
+        print(f"Error generating word cloud: {e}")
+        return None
 
 # Main app
 def main():
@@ -309,7 +315,8 @@ def main():
                                 #         st.dataframe(freq_df)
                                 #     else:
                                 #         st.info("No meaningful terms could be extracted after removing common stopwords.")
-                    
+                                else:
+                                    st.info(f"Found {job_count} job(s), but couldn't generate a word cloud from the available terms.")
                     # Move to the next level
                     level_index += 1
                 else:
