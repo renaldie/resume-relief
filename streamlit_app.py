@@ -9,10 +9,16 @@ import string
 # Set page config
 st.set_page_config(
     page_title="Resume Relief",
-    page_icon="😮‍💨",
+    page_icon="assets/logo.jpg",
     layout="wide",
 )
-st.title("What do I need to get a job? 😭")
+
+col1, col2 = st.columns([0.2, 1.5])
+with col1:
+    st.image("assets/logo.jpg", width=100)
+    
+with col2:
+    st.title("What do I need to get a job? 😭")
 
 # Load the data
 @st.cache_data
