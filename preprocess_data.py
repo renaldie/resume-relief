@@ -368,21 +368,22 @@ def main():
     from multilingual_config import CHINESE_STOPWORDS
     custom_stopwords.update(CHINESE_STOPWORDS)
     
-    # Load the original data
-    jobs_associate = pd.read_csv('data/raw/Jobs_associate.csv', encoding="utf-8-sig")
-    jobs_director = pd.read_csv('data/raw/Jobs_director.csv', encoding="utf-8-sig")
-    jobs_entry_level = pd.read_csv('data/raw/Jobs_entry_level.csv', encoding="utf-8-sig")
-    jobs_executive = pd.read_csv('data/raw/Jobs_executive.csv', encoding="utf-8-sig")
-    jobs_internship_level = pd.read_csv('data/raw/Jobs_internship_level.csv', encoding="utf-8-sig")
-    jobs_mid_senior_level = pd.read_csv('data/raw/Jobs_mid_senior_level.csv', encoding="utf-8-sig")
+    seniority_list = [
+        'director',
+        'executive',
+        'internship_level',
+        'entry_level',
+        'mid_senior_level',
+        'associate',
+    ]
 
-    # Process the original data
-    df = pd.concat([jobs_associate, 
-                     jobs_director, 
-                     jobs_entry_level, 
-                     jobs_executive, 
-                     jobs_internship_level,
-                     jobs_mid_senior_level], ignore_index=True)
+    dataframes = []
+    for seniority in seniority_list:
+        file_path = f'data/raw/Jobs_{seniority}.csv'
+        df = pd.read_csv(file_path, encoding="utf-8-sig")
+        dataframes.append(df)
+    df = pd.concat(dataframes, ignore_index=True)
+    print(f"Total records loaded: {len(df)}")
     
     # Rule 1.
     # If employment_type is 'Part-time' and title contains intern-related terms and seniority is empty

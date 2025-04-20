@@ -1,0 +1,7 @@
+# Ignore environment variables
+.env
+
+# Ignore specific data files
+data/104_jobs_all_categories_clean.csv
+data/104_jobs_all_categories_clean.zip
+data/104_jobs_data.zip
