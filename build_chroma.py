@@ -120,3 +120,15 @@ for index, row in jobs_df.iterrows():
     documents.append(doc)
 
 vectorstore.add_documents(documents=documents)
+
+job_id = job['metadata'].get('job_id')
+company_field = job['metadata'].get('company_field')
+category_major = job['metadata'].get('category_major')
+employment_type = job['metadata'].get('employment_type')
+seniority = job['metadata'].get('seniority')
+location = job['metadata'].get('location')
+experience = job['metadata'].get('experience')
+salary_range = job['metadata'].get('salary_range')
+skills = job['metadata'].get('skills')
+job_url = job['metadata'].get('job_url')
+company_url = job['metadata'].get('company_url')

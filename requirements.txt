@@ -16,4 +16,4 @@ langchain-ollama
 langchain-google-genai
 chromadb
 langchain-chroma
-langchain_core
+langchain-core
