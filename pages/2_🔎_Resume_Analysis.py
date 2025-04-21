@@ -82,10 +82,8 @@ def get_api_key():
 # Initialize LLM with appropriate API key
 def init_llm():
     if USE_GITHUB_MODEL:
-        # No need to initialize LLM for GitHub model since we're using the OpenAI client directly
         return None
     else:
-        # Use Google API for local development
         api_key = get_api_key()
         return ChatGoogleGenerativeAI(
             model="gemini-1.5-flash-8b",
@@ -158,24 +156,15 @@ def agent_extract_resume(resume, llm):
         """
 
     if USE_GITHUB_MODEL:
-        # Use GitHub model directly
-        try:
-            response = client.chat.completions.create(
-                model=MODEL_NAME,
-                messages=[
-                    {"role": "system", "content": "You are an expert resume analyzer."},
-                    {"role": "user", "content": resume_template.replace("{resume_text}", resume)}
-                ],
-                temperature=0.7,
-                max_tokens=500
-            )
-            return response.choices[0].message.content.strip()
-        except Exception as e:
-            st.error(f"Error using GitHub model: {str(e)}")
-            return "Error analyzing resume"
+        resume_prompt_template = PromptTemplate(
+            input_variables=["resume_text"],
+            template=resume_template,
+        )
+
+        chain = resume_prompt_template | MODEL_NAME | StrOutputParser()
+        output = chain.invoke(input={"resume_text": resume})
+        return output
     else:
-        # Use LangChain with Google API
-        # PromptTemplate
         resume_prompt_template = PromptTemplate(
             input_variables=["resume_text"],
             template=resume_template,
@@ -353,7 +342,6 @@ if uploaded_file:
                                 st.markdown(f"**Apply Here**: {job_url}")
                                 st.markdown(f"**Company Profile**: {company_url}")
             else:
-                st.warning("Job matching is not available in this environment.")
                 st.info("The resume analysis is complete, but job matching requires a local database setup.")   
 
 else:
