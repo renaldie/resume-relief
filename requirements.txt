@@ -7,7 +7,6 @@ nltk
 spacy
 jieba
 googletrans
-en_core_web_lg @ https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.8.0/en_core_web_lg-3.8.0.tar.gz
 
 # LangChain
 python-dotenv
@@ -19,4 +18,4 @@ langchain-chroma
 langchain-core
 openai
 langchain-openai
-sqlite3 >= 3.35.0
+pysqlite3-binary
