@@ -5,3 +5,4 @@
 data/104_jobs_all_categories_clean.csv
 data/104_jobs_all_categories_clean.zip
 data/104_jobs_data.zip
+.streamlit/secrets.toml
