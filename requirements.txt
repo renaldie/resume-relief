@@ -17,3 +17,5 @@ langchain-google-genai
 chromadb
 langchain-chroma
 langchain-core
+openai
+langchain-openai
