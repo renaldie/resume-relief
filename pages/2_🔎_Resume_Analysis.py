@@ -125,9 +125,7 @@ def init_vector_store():
             collection_name="cake_db",
             embedding_function=embedding,
             persist_directory=db_dir,
-            # Don't create a new collection if it doesn't exist
             create_collection_if_not_exists=False,
-            # Read-only mode
             collection_metadata={"read_only": True}
         )
     except Exception as e:
@@ -188,25 +186,36 @@ def agent_extract_resume(resume, llm):
         return output
 
 def agent_retrieve_jobs(resume, k, category, seniority, vectorstore):
-    results = vectorstore.similarity_search_with_relevance_scores(
-        query=resume,
-        k=k,
-        filter={'$and': [
-            {'category_major': {'$eq': category}}, 
-            {'seniority': {'$eq': seniority}},
-        ]}
-    )
+    # Check if vectorstore is None
+    if vectorstore is None:
+        st.error("Vector database is not available.")
+        st.info("This may be because you're running in Streamlit Cloud or the database wasn't found locally.")
+        return []
     
-    # Return the results instead of printing
-    formatted_results = []
-    for doc, score in results:
-        formatted_results.append({
-            "content": doc.page_content,
-            "score": score * 100,
-            "metadata": doc.metadata
-        })
-    
-    return formatted_results
+    try:
+        # Only attempt search if vectorstore exists
+        results = vectorstore.similarity_search_with_relevance_scores(
+            query=resume,
+            k=k,
+            filter={'$and': [
+                {'category_major': {'$eq': category}}, 
+                {'seniority': {'$eq': seniority}},
+            ]}
+        )
+        
+        # Return the results instead of printing
+        formatted_results = []
+        for doc, score in results:
+            formatted_results.append({
+                "content": doc.page_content,
+                "score": score * 100,
+                "metadata": doc.metadata
+            })
+        
+        return formatted_results
+    except Exception as e:
+        st.error(f"Error searching job database: {str(e)}")
+        return []
 
 # For Streamlit usage
 def streamlit_recommendation(uploaded_file, category, seniority, k=3):
@@ -216,6 +225,11 @@ def streamlit_recommendation(uploaded_file, category, seniority, k=3):
     with st.spinner("Initializing vector store..."):
         try:
             vectorstore = init_vector_store()
+            if vectorstore is None:
+                # If running in cloud, we can still analyze the resume but can't retrieve jobs
+                st.warning("Job database is not available in this environment.")
+                st.info("We can still analyze your resume, but job matching won't be possible.")
+                # Option 1: Continue without vectorstore (resume analysis only)
         except Exception as e:
             st.error(f"Error initializing vector store: {str(e)}")
             return None
@@ -236,15 +250,17 @@ def streamlit_recommendation(uploaded_file, category, seniority, k=3):
         # Extract resume information
         with st.spinner("Analyzing resume..."):
             extracted_resume = agent_extract_resume(resume_md, llm)
-            st.write("Extraction complete")
-        
-        # Get job recommendations
-        with st.spinner("Finding matching jobs..."):
-            results = agent_retrieve_jobs(extracted_resume, k, category, seniority, vectorstore)
+            
+        # Get job recommendations if possible
+        results = []
+        if vectorstore is not None:
+            with st.spinner("Finding matching jobs..."):
+                results = agent_retrieve_jobs(extracted_resume, k, category, seniority, vectorstore)
         
         return {
             "extracted_query": extracted_resume,
-            "results": results
+            "results": results,
+            "vectorstore_available": vectorstore is not None
         }
     except Exception as e:
         st.error(f"Error during recommendation process: {str(e)}")
@@ -298,43 +314,48 @@ if uploaded_file:
             st.subheader("Resume Analysis")
             st.info(f"Based on your resume, we identified the following key elements:\n\n{result['extracted_query']}")
             
-            # Display job recommendations
-            st.subheader("Job Recommendations")
-            if not result['results']:
-                st.warning(f"No matching jobs found in the {category} category with {seniority} level. Try a different combination.")
-            else:
-                for i, job in enumerate(result['results'], 1):
+            # Display job recommendations if available
+            if result.get("vectorstore_available", False):
+                st.subheader("Job Recommendations")
+                if not result['results']:
+                    st.warning(f"No matching jobs found in the {category} category with {seniority} level. Try a different combination.")
+                else:
+                    for i, job in enumerate(result['results'], 1):
 
-                    job_title = job['metadata'].get('title')
-                    name = job['metadata'].get('company_name')
-                    job_id = job['metadata'].get('job_id')
-                    company_field = job['metadata'].get('company_field')
-                    category_major = job['metadata'].get('category_major')
-                    employment_type = job['metadata'].get('employment_type')
-                    seniority = job['metadata'].get('seniority')
-                    location = job['metadata'].get('location')
-                    experience = job['metadata'].get('experience')
-                    salary_range = job['metadata'].get('salary_range')
-                    skills = job['metadata'].get('skills')
-                    job_url = job['metadata'].get('job_url')
-                    company_url = job['metadata'].get('company_url')
-                    
-                    with st.expander(f"{job['score']:.1f}% Match | {job_title} in {name}"):
-                        # Create tabs for better organization
-                        job_tabs = st.tabs(["Details"])                     
-                        with job_tabs[0]:
-                            st.markdown(f"**Job Title**: {job_title}")
-                            st.markdown(f"**Company**: {name}")
-                            st.markdown(f"**Company Field**: {company_field}")
-                            st.markdown(f"**Job Category**: {category_major}")
-                            st.markdown(f"**Employment Type**: {employment_type}")
-                            st.markdown(f"**Seniority**: {seniority}")
-                            st.markdown(f"**Location**: {location}")
-                            st.markdown(f"**Experience**: {experience}")
-                            st.markdown(f"**Salary Range**: {salary_range}")
-                            st.markdown(f"**Skills**: {skills}")
-                            st.markdown(f"**Apply Here**: {job_url}")
-                            st.markdown(f"**Company Profile**: {company_url}")
+                        job_title = job['metadata'].get('title')
+                        name = job['metadata'].get('company_name')
+                        job_id = job['metadata'].get('job_id')
+                        company_field = job['metadata'].get('company_field')
+                        category_major = job['metadata'].get('category_major')
+                        employment_type = job['metadata'].get('employment_type')
+                        seniority = job['metadata'].get('seniority')
+                        location = job['metadata'].get('location')
+                        experience = job['metadata'].get('experience')
+                        salary_range = job['metadata'].get('salary_range')
+                        skills = job['metadata'].get('skills')
+                        job_url = job['metadata'].get('job_url')
+                        company_url = job['metadata'].get('company_url')
+                        
+                        with st.expander(f"{job['score']:.1f}% Match | {job_title} in {name}"):
+                            # Create tabs for better organization
+                            job_tabs = st.tabs(["Details"])                     
+                            with job_tabs[0]:
+                                st.markdown(f"**Job Title**: {job_title}")
+                                st.markdown(f"**Company**: {name}")
+                                st.markdown(f"**Company Field**: {company_field}")
+                                st.markdown(f"**Job Category**: {category_major}")
+                                st.markdown(f"**Employment Type**: {employment_type}")
+                                st.markdown(f"**Seniority**: {seniority}")
+                                st.markdown(f"**Location**: {location}")
+                                st.markdown(f"**Experience**: {experience}")
+                                st.markdown(f"**Salary Range**: {salary_range}")
+                                st.markdown(f"**Skills**: {skills}")
+                                st.markdown(f"**Apply Here**: {job_url}")
+                                st.markdown(f"**Company Profile**: {company_url}")
+            else:
+                st.warning("Job matching is not available in this environment.")
+                st.info("The resume analysis is complete, but job matching requires a local database setup.")   
+
 else:
     st.info("Please upload your resume to get job recommendations.")
 
