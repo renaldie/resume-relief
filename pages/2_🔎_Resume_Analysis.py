@@ -46,7 +46,7 @@ if is_streamlit_cloud():
     st.write("Using GitHub Copilot models for analysis")
     try:
         API_HOST = os.getenv("API_HOST", "github")
-        client = openai.OpenAI(base_url="https://models.inference.ai.azure.com", api_key=os.environ["GITHUB_TOKEN"])
+        client = openai.OpenAI(base_url="https://models.inference.ai.azure.com", api_key=os.environ.get("GITHUB_TOKEN"))
         MODEL_NAME = os.getenv("GITHUB_MODEL", "gpt-4o")
         EMBEDDING_LLM = os.getenv("GITHUB_MODEL", "text-embedding-3-large")
         USE_GITHUB_MODEL = True
