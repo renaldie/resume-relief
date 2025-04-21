@@ -1,7 +1,9 @@
-__import__('pysqlite3')
 import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+import importlib.util
 
+if importlib.util.find_spec("pysqlite3") is not None:
+    import pysqlite3
+    sys.modules["sqlite3"] = pysqlite3
 
 import pandas as pd
 import streamlit as st

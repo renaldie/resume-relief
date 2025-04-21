@@ -1,3 +1,10 @@
+import sys
+import importlib.util
+
+if importlib.util.find_spec("pysqlite3") is not None:
+    import pysqlite3
+    sys.modules["sqlite3"] = pysqlite3
+
 import os
 if "SSL_CERT_FILE" in os.environ:
     del os.environ["SSL_CERT_FILE"]
