@@ -9,6 +9,7 @@ jieba
 googletrans
 
 # LangChain
+pysqlite3-binary
 python-dotenv
 markitdown[all]
 langchain-ollama
@@ -18,4 +19,3 @@ langchain-chroma
 langchain-core
 openai
 langchain-openai
-pysqlite3-binary
