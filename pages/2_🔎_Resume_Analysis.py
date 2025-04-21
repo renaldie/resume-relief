@@ -96,35 +96,44 @@ def init_llm():
 
 # Create a function to initialize embeddings and vectorstore
 def init_vector_store():
+    """Initialize vector store in read-only mode to prevent any modifications to the DB."""
     # Use a location that works in both environments
     is_streamlit = is_streamlit_cloud()
     
     # Choose DB directory based on environment
     if is_streamlit:
-        # Use a temporary directory for Streamlit Cloud
-        db_dir = os.path.join(tempfile.gettempdir(), "resume_relief_chromadb")
-        # Use OpenAI embeddings through GitHub
-        embedding = OpenAIEmbeddings(
-            model=EMBEDDING_LLM,
-            openai_api_key=os.environ["GITHUB_TOKEN"],
-            openai_api_base="https://models.inference.ai.azure.com"
-        )
+        # For Streamlit Cloud deployment
+        # We'll need to load the DB from assets or a persistent storage location
+        st.error("ChromaDB access not configured for cloud deployment.")
+        st.info("Please configure a persistent storage solution for ChromaDB in cloud deployments.")
+        return None
     else:
-        # Use local directory for development
+        # Use local directory for development - exactly matching your DB creation path
         db_dir = "./cake_chromadb"
+        
+        # Check if the DB exists before proceeding
+        if not os.path.exists(db_dir) or not os.path.exists(os.path.join(db_dir, "chroma.sqlite3")):
+            st.error(f"ChromaDB not found at {db_dir}. Please ensure the database has been created.")
+            return None
+            
         # Use Nomic embeddings for local development
         embedding = OllamaEmbeddings(model="nomic-embed-text:latest")
     
-    # Ensure directory exists
-    os.makedirs(db_dir, exist_ok=True)
-    
-    # Initialize vector store
-    return Chroma(
-        collection_name="cake_db",
-        embedding_function=embedding,
-        persist_directory=db_dir,
-        create_collection_if_not_exists=True,
-    )
+    try:
+        # Initialize vector store in read-only mode
+        return Chroma(
+            collection_name="cake_db",
+            embedding_function=embedding,
+            persist_directory=db_dir,
+            # Don't create a new collection if it doesn't exist
+            create_collection_if_not_exists=False,
+            # Read-only mode
+            collection_metadata={"read_only": True}
+        )
+    except Exception as e:
+        st.error(f"Error accessing ChromaDB: {str(e)}")
+        st.info("Make sure you've already built the database with your job data.")
+        return None
 
 def convert_to_md(input_file):
     md = MarkItDown()
