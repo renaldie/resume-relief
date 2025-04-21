@@ -10,7 +10,7 @@ googletrans
 
 # LangChain
 python-dotenv
-markitdown
+markitdown[all]
 langchain-ollama
 langchain-google-genai
 chromadb
