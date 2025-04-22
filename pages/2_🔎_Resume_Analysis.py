@@ -201,12 +201,14 @@ if uploaded_file:
         
         if result:
             # Display the extracted query
+
             st.markdown("---")
-            st.subheader("Resume Analysis")
+            st.subheader("Resume Keywords")
             st.info(f"Based on your resume, we identified the following key elements:\n\n{result['extracted_query']}")
             
             # Display job recommendations if available
             if result.get("vectorstore_available", False):
+                st.markdown("---")
                 st.subheader("Job Recommendations")
                 if not result['results']:
                     st.warning(f"No matching jobs found in the {category} category with {seniority} level. Try a different combination.")
