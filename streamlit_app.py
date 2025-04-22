@@ -20,6 +20,12 @@ st.set_page_config(
     layout="wide",
 )
 
+create_page = st.Page("pages/1_✨_Job_Insights.py", title="Create entry", icon=":material/add_circle:")
+delete_page = st.Page("pages/2_🔎_Resume_Analysis.py", title="Delete entry", icon=":material/delete:")
+
+pg = st.navigation([create_page, delete_page])
+pg.run()
+
 # Main page content
 col1, col2 = st.columns([0.2, 1.5])
 with col1:

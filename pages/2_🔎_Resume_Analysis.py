@@ -41,18 +41,18 @@ AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY")
 ASTRA_DB_API_ENDPOINT = os.environ.get("ASTRA_DB_API_ENDPOINT")
 ASTRA_DB_APPLICATION_TOKEN = os.environ.get("ASTRA_DB_APPLICATION_TOKEN")
 
-# os.environ.get["GITHUB_TOKEN"] == st.secrets["GITHUB_TOKEN"]
-# os.environ.get["AZURE_OPENAI_API_KEY"] == st.secrets["AZURE_OPENAI_API_KEY"]
-# os.environ.get["ASTRA_DB_API_ENDPOINT"] == st.secrets["ASTRA_DB_API_ENDPOINT"]
-# os.environ.get["ASTRA_DB_APPLICATION_TOKEN"] == st.secrets["ASTRA_DB_APPLICATION_TOKEN"]
+# GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
+# AZURE_OPENAI_API_KEY = st.secrets["AZURE_OPENAI_API_KEY"]
+# ASTRA_DB_API_ENDPOINT = st.secrets["ASTRA_DB_API_ENDPOINT"]
+# ASTRA_DB_APPLICATION_TOKEN = st.secrets["ASTRA_DB_APPLICATION_TOKEN"]
 
 st.title("Resume Analysis 🔎")
 
 # Add your resume upload and analysis functionality
-st.write("Upload your resume to see AI jobs recommendation.")
+# st.write("Upload your resume to see AI jobs recommendation.")
 
 # Upload component
-uploaded_file = st.file_uploader("Upload your resume (PDF, DOCX)", type=["pdf", "docx"])
+uploaded_file = st.file_uploader(label="Upload your resume (PDF, DOCX)", type=["pdf", "docx"])
 
 LLM = AzureChatOpenAI(
     azure_endpoint="https://models.inference.ai.azure.com",
@@ -147,7 +147,7 @@ def agent_retrieve_jobs(resume, k, category, seniority, VECTORSTORE):
 # For Streamlit usage
 def streamlit_recommendation(uploaded_file, category, seniority, k=3):
     # Process the uploaded file
-    with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_file:
+    with tempfile.NamedTemporaryFile(delete=False) as temp_file:
         temp_file.write(uploaded_file.getvalue())
         temp_file_path = temp_file.name
     
