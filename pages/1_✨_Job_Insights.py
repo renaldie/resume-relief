@@ -102,26 +102,26 @@ st.write("## A Job in 🏢")
 
 # Create a mapping for category display names
 category_labels = {
-    "Bio, Medical": "Bio / Medical 🧬",
-    "Catering / Food & Beverage": "Catering / Food & Beverage 🍔",
-    "Construction": "Construction 🏗️",
-    "Customer Service": "Customer Service 🛎️",
-    "Design": "Design 🎨",
-    "Education": "Education 📚",
-    "Engineering": "Engineering 🔧",
-    "Finance": "Finance 💵",
-    "Game Production": "Game Production 🎮",
-    "HR": "HR 👩‍💼",
-    "IT": "IT 💻",
-    "Law": "Law ⚖️",
-    "Logistics / Trade": "Logistics / Trade 🚚",
-    "Management / Business": "Management / Business 👔",
-    "Manufacturing": "Manufacturing 🏭",
-    "Marketing / Advertising": "Marketing / Advertising 📢",
-    "Media / Communication": "Media / Communication 📡",
-    "Public Social Work": "Public Social Work 💞",
-    "Sales": "Sales 📈",
-    "Other": "Other 💅",
+    "Bio, Medical": "🧬 Bio / Medical",
+    "Catering / Food & Beverage": "🍔 Catering / Food & Beverage",
+    "Construction": "🏗️ Construction",
+    "Customer Service": "🛎️ Customer Service",
+    "Design": "🎨 Design",
+    "Education": "📚 Education",
+    "Engineering": "🔧 Engineering",
+    "Finance": "💵 Finance",
+    "Game Production": "🎮 Game Production",
+    "HR": "👩‍💼 HR",
+    "IT": "💻 IT",
+    "Law": "⚖️ Law",
+    "Logistics / Trade": "🚚 Logistics / Trade",
+    "Management / Business": "👔 Management / Business",
+    "Manufacturing": "🏭 Manufacturing",
+    "Marketing / Advertising": "📢 Marketing / Advertising",
+    "Media / Communication": "📡 Media / Communication",
+    "Public Social Work": "💞 Public Social Work",
+    "Sales": "📈 Sales",
+    "Other": "💅 Other",
 }
 
 # Calculate number of columns to use (max 4)
@@ -158,9 +158,9 @@ selected_category = st.session_state.selected_category
 # 2. Comparison criteria buttons
 st.write("## Looking at 😳")
 comparison_metrics = [
-    {"id": "skills", "label": "Skills Required 🛠️"},
-    {"id": "job_description", "label": "Job Description 📄"},
-    {"id": "requirements", "label": "Job Requirements 📋"}
+    {"id": "skills", "label": "🛠️ Skills Required"},
+    {"id": "job_description", "label": "📄 Job Description"},
+    {"id": "requirements", "label": "📋 Job Requirements"}
 ]
 
 # Create columns for the metric buttons - one for each metric

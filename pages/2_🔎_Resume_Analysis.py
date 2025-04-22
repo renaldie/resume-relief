@@ -160,19 +160,39 @@ def streamlit_recommendation(uploaded_file, category, seniority, k=10):
         if os.path.exists(temp_file_path):
             os.unlink(temp_file_path)
 
-# Load available job categories from dataset
-@st.cache_data
-def job_seniority():
-    return ['Assistant', 'Internship', 'Director', 'Entry level',
-       'Executive (VP, GM, C-Level)', 'Mid-Senior level']
+# # Load available job categories from dataset
+# @st.cache_data
+job_seniority_dict = {
+    'Internship': '🎓 Internship',
+    'Entry level': '🌱 Entry Level',
+    'Assistant': '🔍 Assistant',
+    'Mid-Senior level': '⚙️ Mid-Senior Level',
+    'Director': '🚀 Director',
+    'Executive (VP, GM, C-Level)': '👑 Executive (VP, GM, C-Level)',
+    }
 
-def job_category():
-    return ['Management / Business', 'Sales', 'Marketing / Advertising',
-       'Media / Communication', 'Design', 'IT', 'Logistics / Trade', 'HR',
-       'Manufacturing', 'Engineering', 'Finance', 'Other',
-       'Game Production', 'Customer Service', 'Construction', 'Education',
-       'Bio, Medical', 'Catering / Food & Beverage', 'Law',
-       'Public Social Work']
+job_category_dict = {
+    "Bio, Medical": "🧬 Bio / Medical",
+    "Catering / Food & Beverage": "🍔 Catering / Food & Beverage",
+    "Construction": "🏗️ Construction",
+    "Customer Service": "🛎️ Customer Service",
+    "Design": "🎨 Design",
+    "Education": "📚 Education",
+    "Engineering": "🔧 Engineering",
+    "Finance": "💵 Finance",
+    "Game Production": "🎮 Game Production",
+    "HR": "👩‍💼 HR",
+    "IT": "💻 IT",
+    "Law": "⚖️ Law",
+    "Logistics / Trade": "🚚 Logistics / Trade",
+    "Management / Business": "👔 Management / Business",
+    "Manufacturing": "🏭 Manufacturing",
+    "Marketing / Advertising": "📢 Marketing / Advertising",
+    "Media / Communication": "📡 Media / Communication",
+    "Public Social Work": "💞 Public Social Work",
+    "Sales": "📈 Sales",
+    "Other": "💅 Other",
+    }
 
 # Add Streamlit interface elements
 if uploaded_file:
@@ -183,21 +203,39 @@ if uploaded_file:
     col1, col2 = st.columns(2)
     
     with col1:
-        category = st.selectbox(
+        displayed_options = list(job_category_dict.values())
+        actual_options = list(job_category_dict.keys())
+        
+        # Get the index of the selected display value, then use that to get the corresponding key
+        display_index = st.selectbox(
             "Job Category",
-            options=job_category()
+            options=displayed_options,
+            format_func=lambda x: x  # This isn't necessary but makes the intent clearer
         )
+        
+        # Find the index of the selected display option and use it to get the corresponding key
+        selected_index = displayed_options.index(display_index)
+        category = actual_options[selected_index]
     
     with col2:
-        seniority = st.selectbox(
+        displayed_options = list(job_seniority_dict.values())
+        actual_options = list(job_seniority_dict.keys())
+        
+        # Get the index of the selected display value, then use that to get the corresponding key
+        display_index = st.selectbox(
             "Experience Level",
-            options=job_seniority()
+            options=displayed_options,
+            format_func=lambda x: x  # This isn't necessary but makes the intent clearer
         )
+        
+        # Find the index of the selected display option and use it to get the corresponding key
+        selected_index = displayed_options.index(display_index)
+        seniority = actual_options[selected_index]
     
     # Add a button to trigger analysis
     if st.button("Analyze Resume", type="primary"):
         # Get job recommendations
-        result = streamlit_recommendation(uploaded_file, category, seniority, k=3)
+        result = streamlit_recommendation(uploaded_file, category, seniority, k=10)
         
         if result:
             # Display the extracted query
@@ -209,15 +247,13 @@ if uploaded_file:
             # Display job recommendations if available
             if result.get("vectorstore_available", False):
                 st.markdown("---")
-                st.subheader("Job Recommendations")
+                st.subheader(f"Job Recommendations for {seniority} in {category}")
                 if not result['results']:
                     st.warning(f"No matching jobs found in the {category} category with {seniority} level. Try a different combination.")
                 else:
                     for i, job in enumerate(result['results'], 1):
-
                         job_title = job['metadata'].get('title')
                         name = job['metadata'].get('company_name')
-                        job_id = job['metadata'].get('job_id')
                         company_field = job['metadata'].get('company_field')
                         category_major = job['metadata'].get('category_major')
                         employment_type = job['metadata'].get('employment_type')
