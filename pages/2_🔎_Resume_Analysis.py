@@ -49,7 +49,7 @@ LLM = AzureChatOpenAI(
     azure_deployment="gpt-4.1-nano",
     openai_api_version="2025-03-01-preview", 
     model_name="gpt-4.1-nano",
-    temperature=0.8,
+    temperature=1,
     api_key=GITHUB_TOKEN,
 )
 
@@ -89,7 +89,7 @@ def agent_extract_resume(resume):
         5. Industry expertise
         6. Relevant certifications
 
-        Format your response as a targeted search query that would match this candidate with appropriate job positions.
+        Format your response as list of keywords that would match this candidate with appropriate job positions.
         Return ONLY the search query text without additional explanations or formatting.
         """
 
