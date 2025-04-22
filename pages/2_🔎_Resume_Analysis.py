@@ -53,12 +53,20 @@ LLM = AzureChatOpenAI(
     api_key=GITHUB_TOKEN,
 )
 
+# EMBEDDING = AzureOpenAIEmbeddings(
+#     azure_endpoint="https://resume-relief.openai.azure.com/",
+#     azure_deployment="text-embedding-3-large",
+#     openai_api_version="2024-02-01", 
+#     model="text-embedding-3-large",
+#     openai_api_key=AZURE_OPENAI_API_KEY,
+# )
+
 EMBEDDING = AzureOpenAIEmbeddings(
-    azure_endpoint="https://resume-relief.openai.azure.com/",
+    azure_endpoint="https://models.inference.ai.azure.com",
     azure_deployment="text-embedding-3-large",
     openai_api_version="2024-02-01", 
     model="text-embedding-3-large",
-    openai_api_key=AZURE_OPENAI_API_KEY,
+    openai_api_key=GITHUB_TOKEN,
 )
 
 VECTORSTORE = AstraDBVectorStore(
