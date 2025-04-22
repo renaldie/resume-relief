@@ -44,10 +44,11 @@ if "resume_keywords" not in st.session_state:
 if "resume_md" not in st.session_state:
     st.session_state.resume_md = None
 
-st.title("Resume Analysis 🔎")
+st.title("AI Resume Analysis in 3 Steps🔎")
+st.subheader("1 - Upload Resume ⬆️")
 
 # Upload component
-uploaded_file = st.file_uploader(label="Upload your resume (PDF, DOCX)", type=["pdf", "docx"])
+uploaded_file = st.file_uploader(label="Upload your resume (PDF, DOCX)", type=["pdf", "docx"], label_visibility='hidden')
 
 LLM = AzureChatOpenAI(
     azure_endpoint="https://models.inference.ai.azure.com",
@@ -58,21 +59,21 @@ LLM = AzureChatOpenAI(
     api_key=GITHUB_TOKEN,
 )
 
-# EMBEDDING = AzureOpenAIEmbeddings(
-#     azure_endpoint="https://resume-relief.openai.azure.com/",
-#     azure_deployment="text-embedding-3-large",
-#     openai_api_version="2024-02-01", 
-#     model="text-embedding-3-large",
-#     openai_api_key=AZURE_OPENAI_API_KEY,
-# )
-
 EMBEDDING = AzureOpenAIEmbeddings(
-    azure_endpoint="https://models.inference.ai.azure.com",
+    azure_endpoint="https://resume-relief.openai.azure.com/",
     azure_deployment="text-embedding-3-large",
     openai_api_version="2024-02-01", 
     model="text-embedding-3-large",
-    openai_api_key=GITHUB_TOKEN,
+    openai_api_key=AZURE_OPENAI_API_KEY,
 )
+
+# EMBEDDING = AzureOpenAIEmbeddings(
+#     azure_endpoint="https://models.inference.ai.azure.com",
+#     azure_deployment="text-embedding-3-large",
+#     openai_api_version="2024-02-01", 
+#     model="text-embedding-3-large",
+#     openai_api_key=GITHUB_TOKEN,
+# )
 
 VECTORSTORE = AstraDBVectorStore(
     collection_name="cake_db",
@@ -153,7 +154,7 @@ def analyze_resume(uploaded_file):
                 return None
         
         # Extract resume information
-        with st.spinner("Analyzing resume content..."):
+        with st.spinner("Getting important keywords...🐝"):
             extracted_keywords = agent_extract_resume(resume_md)
             
         return {
@@ -171,12 +172,21 @@ def analyze_resume(uploaded_file):
 def find_job_matches(keywords, category, seniority, k=10):
     """Find job matches based on resume keywords and preferences"""
     try:
-        with st.spinner("Searching for matching jobs..."):
-            results = agent_retrieve_jobs(keywords, k, category, seniority, VECTORSTORE)
+        # with st.spinner("Matching up your skills...🧙‍♂️"):
+        results = agent_retrieve_jobs(keywords, k, category, seniority, VECTORSTORE)
         return results
     except Exception as e:
         st.error(f"Error retrieving job matches: {str(e)}")
         return []
+
+def refresh_keywords():
+    """Callback for the Recreate Keywords button"""
+    if uploaded_file:
+        result = analyze_resume(uploaded_file)
+        if result:
+            st.session_state.resume_md = result["resume_md"]
+            st.session_state.resume_keywords = result["keywords"]
+            st.session_state.resume_analyzed = True
 
 # For Streamlit usage
 # def streamlit_recommendation(uploaded_file, category, seniority, k=10):
@@ -249,117 +259,26 @@ job_category_dict = {
     "Other": "💅 Other",
     }
 
-# # Add Streamlit interface elements
-# if uploaded_file:
-#     # Display success message
-#     st.success("Resume uploaded successfully! Select job category and seniority level to get recommendations.")
-    
-#     # Add category and seniority selection
-#     col1, col2 = st.columns(2)
-    
-#     with col1:
-#         displayed_options = list(job_category_dict.values())
-#         actual_options = list(job_category_dict.keys())
-        
-#         # Get the index of the selected display value, then use that to get the corresponding key
-#         display_index = st.selectbox(
-#             "Job Category",
-#             options=displayed_options,
-#             format_func=lambda x: x  # This isn't necessary but makes the intent clearer
-#         )
-        
-#         # Find the index of the selected display option and use it to get the corresponding key
-#         selected_index = displayed_options.index(display_index)
-#         category = actual_options[selected_index]
-    
-#     with col2:
-#         displayed_options = list(job_seniority_dict.values())
-#         actual_options = list(job_seniority_dict.keys())
-        
-#         # Get the index of the selected display value, then use that to get the corresponding key
-#         display_index = st.selectbox(
-#             "Experience Level",
-#             options=displayed_options,
-#             format_func=lambda x: x  # This isn't necessary but makes the intent clearer
-#         )
-        
-#         # Find the index of the selected display option and use it to get the corresponding key
-#         selected_index = displayed_options.index(display_index)
-#         seniority = actual_options[selected_index]
-    
-#     # Add a button to trigger analysis
-#     if st.button("Analyze Resume", type="primary"):
-#         # Get job recommendations
-#         result = streamlit_recommendation(uploaded_file, category, seniority, k=10)
-        
-#         if result:
-#             # Display the extracted query
-
-#             st.markdown("---")
-#             st.subheader("Resume Keywords")
-#             st.info(f"Based on your resume, we identified the following key elements:\n\n{result['extracted_query']}")
-            
-#             # Display job recommendations if available
-#             if result.get("vectorstore_available", False):
-#                 st.markdown("---")
-#                 st.subheader(f"Job Recommendations for {seniority} in {category}")
-#                 if not result['results']:
-#                     st.warning(f"No matching jobs found in the {category} category with {seniority} level. Try a different combination.")
-#                 else:
-#                     for i, job in enumerate(result['results'], 1):
-#                         job_title = job['metadata'].get('title')
-#                         name = job['metadata'].get('company_name')
-#                         company_field = job['metadata'].get('company_field')
-#                         category_major = job['metadata'].get('category_major')
-#                         employment_type = job['metadata'].get('employment_type')
-#                         seniority = job['metadata'].get('seniority')
-#                         location = job['metadata'].get('location')
-#                         experience = job['metadata'].get('experience')
-#                         salary_range = job['metadata'].get('salary_range')
-#                         skills = job['metadata'].get('skills')
-#                         job_url = job['metadata'].get('job_url')
-#                         company_url = job['metadata'].get('company_url')
-                        
-#                         with st.expander(f"{job['score']:.1f}% Match | {job_title} in {name}"):
-#                             # Create tabs for better organization
-#                             job_tabs = st.tabs(["Details"])                     
-#                             with job_tabs[0]:
-#                                 st.markdown(f"**Job Title**: {job_title}")
-#                                 st.markdown(f"**Company**: {name}")
-#                                 st.markdown(f"**Company Field**: {company_field}")
-#                                 st.markdown(f"**Job Category**: {category_major}")
-#                                 st.markdown(f"**Employment Type**: {employment_type}")
-#                                 st.markdown(f"**Seniority**: {seniority}")
-#                                 st.markdown(f"**Location**: {location}")
-#                                 st.markdown(f"**Experience**: {experience}")
-#                                 st.markdown(f"**Salary Range**: {salary_range}")
-#                                 st.markdown(f"**Skills**: {skills}")
-#                                 st.markdown(f"**Apply Here**: {job_url}")
-#                                 st.markdown(f"**Company Profile**: {company_url}")
-#             else:
-#                 st.info("The resume analysis is complete, but job matching requires a local database setup.")   
-
-# else:
-#     st.info("Please upload your resume to get job recommendations.")
-
 # STEP 1: Resume Analysis Only
 if uploaded_file and not st.session_state.resume_analyzed:
-    if st.button("Analyze Resume", type="primary"):
-        # Process resume using existing analyze_resume function
-        result = analyze_resume(uploaded_file)
-        if result:
-            st.session_state.resume_md = result["resume_md"]
-            st.session_state.resume_keywords = result["keywords"]
-            st.session_state.resume_analyzed = True
+    # if st.button("Analyze Resume", type="primary"):
+    #     # Process resume using existing analyze_resume function
+    result = analyze_resume(uploaded_file)
+    if result:
+        st.session_state.resume_md = result["resume_md"]
+        st.session_state.resume_keywords = result["keywords"]
+        st.session_state.resume_analyzed = True
 
 # STEP 2: Display Keywords and Job Category Selection
 if st.session_state.resume_analyzed:
     st.markdown("---")
-    st.subheader("Resume Keywords")
-    st.info(f"Based on your resume, we identified the following key elements:\n\n{st.session_state.resume_keywords}")
-    
+    st.subheader("2 - Magic Keywords ✨")
+    st.info(f"{st.session_state.resume_keywords}")
+    st.button("Recreate Keywords", type="primary", on_click=refresh_keywords)
+
     st.markdown("---")
-    st.subheader("Find Matching Jobs")
+    st.subheader("3 - Voila, We Found These for You! 🧙‍♂️")
+    st.info("Select your dream **Industry** and **Seniority Level**")
     
     # Add category and seniority selection
     col1, col2 = st.columns(2)
@@ -369,7 +288,7 @@ if st.session_state.resume_analyzed:
         displayed_options = list(job_category_dict.values())
         actual_options = list(job_category_dict.keys())
         display_index = st.selectbox(
-            "Job Category",
+            "Industry",
             options=displayed_options
         )
         selected_index = displayed_options.index(display_index)
@@ -380,60 +299,53 @@ if st.session_state.resume_analyzed:
         displayed_options = list(job_seniority_dict.values())
         actual_options = list(job_seniority_dict.keys())
         display_index = st.selectbox(
-            "Experience Level",
+            "Seniority Level",
             options=displayed_options
         )
         selected_index = displayed_options.index(display_index)
         seniority = actual_options[selected_index]
     
     # Find matching jobs button
-    if st.button("Find Matching Jobs", type="primary"):
-        # Use the existing find_job_matches function
-        results = find_job_matches(st.session_state.resume_keywords, category, seniority)
+    # if st.button("Find Matching Jobs", type="primary"):
+    # Use the existing find_job_matches function
+    results = find_job_matches(st.session_state.resume_keywords, category, seniority)
+    
+    # Keep your existing job display code
+    for i, job in enumerate(results, 1):
+        # All your existing job display code...
+        job_title = job['metadata'].get('title')
+        name = job['metadata'].get('company_name')
+        company_field = job['metadata'].get('company_field')
+        category_major = job['metadata'].get('category_major')
+        employment_type = job['metadata'].get('employment_type')
+        seniority = job['metadata'].get('seniority')
+        location = job['metadata'].get('location')
+        experience = job['metadata'].get('experience')
+        salary_range = job['metadata'].get('salary_range')
+        skills = job['metadata'].get('skills')
+        job_url = job['metadata'].get('job_url')
+        company_url = job['metadata'].get('company_url')
         
-        # Display results
-        if not results:
-            st.warning(f"No matching jobs found in the {category} category with {seniority} level. Try a different combination.")
-        else:
-            st.markdown("---")
-            st.subheader(f"Job Recommendations for {seniority} in {category}")
-            
-            # Keep your existing job display code
-            for i, job in enumerate(results, 1):
-                # All your existing job display code...
-                job_title = job['metadata'].get('title')
-                name = job['metadata'].get('company_name')
-                company_field = job['metadata'].get('company_field')
-                category_major = job['metadata'].get('category_major')
-                employment_type = job['metadata'].get('employment_type')
-                seniority = job['metadata'].get('seniority')
-                location = job['metadata'].get('location')
-                experience = job['metadata'].get('experience')
-                salary_range = job['metadata'].get('salary_range')
-                skills = job['metadata'].get('skills')
-                job_url = job['metadata'].get('job_url')
-                company_url = job['metadata'].get('company_url')
-                
-                with st.expander(f"{job['score']:.1f}% Match | {job_title} in {name}"):
-                    # Create tabs for better organization
-                    job_tabs = st.tabs(["Details"])                     
-                    with job_tabs[0]:
-                        st.markdown(f"**Job Title**: {job_title}")
-                        st.markdown(f"**Company**: {name}")
-                        st.markdown(f"**Company Field**: {company_field}")
-                        st.markdown(f"**Job Category**: {category_major}")
-                        st.markdown(f"**Employment Type**: {employment_type}")
-                        st.markdown(f"**Seniority**: {seniority}")
-                        st.markdown(f"**Location**: {location}")
-                        st.markdown(f"**Experience**: {experience}")
-                        st.markdown(f"**Salary Range**: {salary_range}")
-                        st.markdown(f"**Skills**: {skills}")
-                        st.markdown(f"**Apply Here**: {job_url}")
-                        st.markdown(f"**Company Profile**: {company_url}")
+        with st.expander(f"{job['score']:.1f}% Match | {job_title} in {name}"):
+            # Create tabs for better organization
+            job_tabs = st.tabs(["Details"])                     
+            with job_tabs[0]:
+                st.markdown(f"**Job Title**: {job_title}")
+                st.markdown(f"**Company**: {name}")
+                st.markdown(f"**Company Field**: {company_field}")
+                st.markdown(f"**Job Category**: {category_major}")
+                st.markdown(f"**Employment Type**: {employment_type}")
+                st.markdown(f"**Seniority**: {seniority}")
+                st.markdown(f"**Location**: {location}")
+                st.markdown(f"**Experience**: {experience}")
+                st.markdown(f"**Salary Range**: {salary_range}")
+                st.markdown(f"**Skills**: {skills}")
+                st.markdown(f"**Apply Here**: {job_url}")
+                st.markdown(f"**Company Profile**: {company_url}")
 
 
 # Initial state instructions
 if not uploaded_file:
-    st.info("Please upload your resume to begin the analysis.")
+    st.info("Upload your resume to begin the magic 💫")
 elif not st.session_state.resume_analyzed:
     st.info("Click 'Analyze Resume' to extract keywords from your resume.")
