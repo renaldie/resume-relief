@@ -1,10 +1,5 @@
 import sys
 import importlib.util
-
-if importlib.util.find_spec("pysqlite3") is not None:
-    import pysqlite3
-    sys.modules["sqlite3"] = pysqlite3
-
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -20,30 +15,12 @@ st.set_page_config(
     layout="wide",
 )
 
-create_page = st.Page("pages/1_✨_Job_Insights.py", title="Create entry", icon=":material/add_circle:")
-delete_page = st.Page("pages/2_🔎_Resume_Analysis.py", title="Delete entry", icon=":material/delete:")
+home_page = st.Page("pages/home_page.py", title="Home", icon="🪴")
+page_1 = st.Page("pages/1_✨_Job_Insights.py", title="Job Insights", icon="✨")
+page_2 = st.Page("pages/2_🔎_Resume_Analysis.py", title="Resume Analysis", icon="🔎")
 
-pg = st.navigation([create_page, delete_page])
+pg = st.navigation([home_page, page_1, page_2])
 pg.run()
-
-# Main page content
-col1, col2 = st.columns([0.2, 1.5])
-with col1:
-    st.image("assets/logo.jpg", width=100)
-    
-with col2:
-    st.title("Goodbye Jobless 😎")
-st.markdown("""
-## Welcome to Resume Relief!
-
-This tool helps you understand job requirements across different industries and seniority levels,
-and provides insights on how your resume matches those requirements.
-
-**👈 Use the sidebar to navigate between pages:**
-- ✨ **Job Insights**: Explore job market requirements
-- 🔎 **Resume Analysis**: Upload your resume to get AI recommendations
-
-""")
 
 # Main app
 def main():
@@ -56,11 +33,23 @@ def main():
             """
             <div style="text-align: center">
                 © 2025 Resume Relief<br>
-                Made by <a href="https://renaldi-ega.notion.site" target="_blank">Ren</a> in Hsinchu with ❤️<br>
+                Made by Team 1 in Hsinchu with ❤️<br>
             </div>
             """, 
             unsafe_allow_html=True
         )
+
+    # cols = st.columns([2, 1, 2])
+    # with cols[1]:
+    #     st.markdown(
+    #         """
+    #         <div style="text-align: center">
+    #             © 2025 Resume Relief<br>
+    #             Made by <a href="https://renaldi-ega.notion.site" target="_blank">Ren</a> in Hsinchu with ❤️<br>
+    #         </div>
+    #         """, 
+    #         unsafe_allow_html=True
+    #     )
 
 if __name__ == "__main__":
     main()

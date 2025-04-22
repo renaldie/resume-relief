@@ -1,10 +1,5 @@
 import sys
 import importlib.util
-
-if importlib.util.find_spec("pysqlite3") is not None:
-    import pysqlite3
-    sys.modules["sqlite3"] = pysqlite3
-
 import os
 if "SSL_CERT_FILE" in os.environ:
     del os.environ["SSL_CERT_FILE"]
@@ -36,15 +31,10 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_openai import OpenAIEmbeddings
 
 load_dotenv()
-GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
-AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY")
-ASTRA_DB_API_ENDPOINT = os.environ.get("ASTRA_DB_API_ENDPOINT")
-ASTRA_DB_APPLICATION_TOKEN = os.environ.get("ASTRA_DB_APPLICATION_TOKEN")
-
-# GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
-# AZURE_OPENAI_API_KEY = st.secrets["AZURE_OPENAI_API_KEY"]
-# ASTRA_DB_API_ENDPOINT = st.secrets["ASTRA_DB_API_ENDPOINT"]
-# ASTRA_DB_APPLICATION_TOKEN = st.secrets["ASTRA_DB_APPLICATION_TOKEN"]
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN") or st.secrets.get("GITHUB_TOKEN")
+AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY") or st.secrets.get("AZURE_OPENAI_API_KEY")
+ASTRA_DB_API_ENDPOINT = os.environ.get("ASTRA_DB_API_ENDPOINT") or st.secrets.get("ASTRA_DB_API_ENDPOINT")
+ASTRA_DB_APPLICATION_TOKEN = os.environ.get("ASTRA_DB_APPLICATION_TOKEN") or st.secrets.get("ASTRA_DB_APPLICATION_TOKEN")
 
 st.title("Resume Analysis 🔎")
 
@@ -269,14 +259,14 @@ if uploaded_file:
 else:
     st.info("Please upload your resume to get job recommendations.")
 
-# Footer
-st.markdown("---")
-st.markdown(
-    """
-    <div style="text-align: center">
-        © 2025 Resume Relief<br>
-        Made with ❤️ by <a href="https://renaldi-ega.notion.site" target="_blank">Ren</a>
-    </div>
-    """, 
-    unsafe_allow_html=True
-)
+# # Footer
+# st.markdown("---")
+# st.markdown(
+#     """
+#     <div style="text-align: center">
+#         © 2025 Resume Relief<br>
+#         Made with ❤️ by <a href="https://renaldi-ega.notion.site" target="_blank">Ren</a>
+#     </div>
+#     """, 
+#     unsafe_allow_html=True
+# )

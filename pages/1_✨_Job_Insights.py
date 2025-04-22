@@ -6,14 +6,9 @@ import re
 from collections import Counter
 import string
 
-col1, col2 = st.columns([0.2, 1.5])
-with col1:
-    st.image("assets/logo.jpg", width=100)
-    
-with col2:
-    st.title("Job Insights ✨")
+st.title("Job Insights ✨")
 
-"""Display job analysis and word clouds by category and seniority level."""
+"""Find out what is trending 📊"""
 
 # Load the data
 @st.cache_data
@@ -161,7 +156,7 @@ for i, category in enumerate(categories_major):
 selected_category = st.session_state.selected_category
 
 # 2. Comparison criteria buttons
-st.write("## Looking at 📊")
+st.write("## Looking at 😳")
 comparison_metrics = [
     {"id": "skills", "label": "Skills Required 🛠️"},
     {"id": "job_description", "label": "Job Description 📄"},
