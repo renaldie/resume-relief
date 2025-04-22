@@ -124,7 +124,7 @@ def agent_retrieve_jobs(resume, k, category, seniority, VECTORSTORE):
     return formatted_results
 
 # For Streamlit usage
-def streamlit_recommendation(uploaded_file, category, seniority, k=3):
+def streamlit_recommendation(uploaded_file, category, seniority, k=10):
     # Process the uploaded file
     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
         temp_file.write(uploaded_file.getvalue())
