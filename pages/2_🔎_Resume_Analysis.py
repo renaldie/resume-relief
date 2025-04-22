@@ -136,6 +136,48 @@ def agent_retrieve_jobs(resume, k, category, seniority, VECTORSTORE):
     
     return formatted_results
 
+# Add these two new functions before the Streamlit UI code:
+
+def analyze_resume(uploaded_file):
+    """Process the uploaded resume file and extract keywords"""
+    with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+        temp_file.write(uploaded_file.getvalue())
+        temp_file_path = temp_file.name
+    
+    try:
+        # Convert resume to markdown
+        with st.spinner("Converting resume to text..."):
+            resume_md = convert_to_md(temp_file_path)
+            if not resume_md:
+                st.error("Failed to convert resume to text. Please check the file format.")
+                return None
+        
+        # Extract resume information
+        with st.spinner("Analyzing resume content..."):
+            extracted_keywords = agent_extract_resume(resume_md)
+            
+        return {
+            "resume_md": resume_md,
+            "keywords": extracted_keywords
+        }
+    except Exception as e:
+        st.error(f"Error during resume analysis: {str(e)}")
+        return None
+    finally:
+        # Clean up temporary file
+        if os.path.exists(temp_file_path):
+            os.unlink(temp_file_path)
+
+def find_job_matches(keywords, category, seniority, k=10):
+    """Find job matches based on resume keywords and preferences"""
+    try:
+        with st.spinner("Searching for matching jobs..."):
+            results = agent_retrieve_jobs(keywords, k, category, seniority, VECTORSTORE)
+        return results
+    except Exception as e:
+        st.error(f"Error retrieving job matches: {str(e)}")
+        return []
+
 # For Streamlit usage
 # def streamlit_recommendation(uploaded_file, category, seniority, k=10):
 #     # Process the uploaded file
@@ -304,7 +346,7 @@ job_category_dict = {
 if uploaded_file and not st.session_state.resume_analyzed:
     if st.button("Analyze Resume", type="primary"):
         # Process resume using existing analyze_resume function
-        result = agent_extract_resume(uploaded_file)
+        result = analyze_resume(uploaded_file)
         if result:
             st.session_state.resume_md = result["resume_md"]
             st.session_state.resume_keywords = result["keywords"]
