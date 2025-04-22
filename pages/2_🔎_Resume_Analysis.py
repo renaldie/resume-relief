@@ -351,7 +351,6 @@ if uploaded_file and not st.session_state.resume_analyzed:
             st.session_state.resume_md = result["resume_md"]
             st.session_state.resume_keywords = result["keywords"]
             st.session_state.resume_analyzed = True
-            st.experimental_rerun()  # Refresh UI
 
 # STEP 2: Display Keywords and Job Category Selection
 if st.session_state.resume_analyzed:
