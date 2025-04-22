@@ -304,7 +304,7 @@ job_category_dict = {
 if uploaded_file and not st.session_state.resume_analyzed:
     if st.button("Analyze Resume", type="primary"):
         # Process resume using existing analyze_resume function
-        result = analyze_resume(uploaded_file)
+        result = agent_extract_resume(uploaded_file)
         if result:
             st.session_state.resume_md = result["resume_md"]
             st.session_state.resume_keywords = result["keywords"]
