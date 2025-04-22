@@ -81,7 +81,7 @@ def agent_extract_resume(resume):
         Resume:
         {resume_text}
 
-        Create a concise search query that captures the candidate's:
+        Create a concise keywords that captures the candidate's:
         1. Primary technical skills (languages, frameworks, tools)
         2. Most recent or significant job roles/titles
         3. Years of experience in key areas
@@ -90,7 +90,7 @@ def agent_extract_resume(resume):
         6. Relevant certifications
 
         Format your response as list of keywords that would match this candidate with appropriate job positions.
-        Return ONLY the search query text without additional explanations or formatting.
+        Return ONLY the keywords without additional explanations or formatting.
         """
 
     resume_prompt_template = PromptTemplate(
