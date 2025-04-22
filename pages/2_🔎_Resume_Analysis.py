@@ -26,37 +26,25 @@ warnings.filterwarnings("ignore", module=r"chromadb\.types")
 warnings.filterwarnings("ignore", module=r"ollama\._types")
 
 ## LangChain
-from langchain_ollama import ChatOllama
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_ollama import OllamaEmbeddings
-from langchain_chroma import Chroma
+from langchain_openai import AzureChatOpenAI
+from langchain_openai import AzureOpenAIEmbeddings
+from langchain_astradb import AstraDBVectorStore
 from markitdown import MarkItDown
 from langchain_core.documents import Document
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_openai import OpenAIEmbeddings
 
-# Detect if running in Streamlit Cloud
-def is_streamlit_cloud():
-    return 'STREAMLIT_RUNTIME_GITHUB_TOKEN' in os.environ or 'GITHUB_TOKEN' in os.environ
+load_dotenv()
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
+AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY")
+ASTRA_DB_API_ENDPOINT = os.environ.get("ASTRA_DB_API_ENDPOINT")
+ASTRA_DB_APPLICATION_TOKEN = os.environ.get("ASTRA_DB_APPLICATION_TOKEN")
 
-# Configure models based on environment
-if is_streamlit_cloud():
-    # Use GitHub Models in Streamlit Cloud
-    st.write("Using GitHub Copilot models for analysis")
-    try:
-        API_HOST = os.getenv("API_HOST", "github")
-        client = openai.OpenAI(base_url="https://models.inference.ai.azure.com", api_key=os.environ.get("GITHUB_TOKEN"))
-        MODEL_NAME = os.getenv("GITHUB_MODEL", "gpt-4o")
-        EMBEDDING_LLM = os.getenv("GITHUB_MODEL", "text-embedding-3-large")
-        USE_GITHUB_MODEL = True
-    except Exception as e:
-        st.error(f"Error initializing GitHub models: {str(e)}")
-        st.stop()
-else:
-    # Use Google API and Nomic locally
-    st.write("Using Google API and Nomic for local analysis")
-    USE_GITHUB_MODEL = False
+# os.environ.get["GITHUB_TOKEN"] == st.secrets["GITHUB_TOKEN"]
+# os.environ.get["AZURE_OPENAI_API_KEY"] == st.secrets["AZURE_OPENAI_API_KEY"]
+# os.environ.get["ASTRA_DB_API_ENDPOINT"] == st.secrets["ASTRA_DB_API_ENDPOINT"]
+# os.environ.get["ASTRA_DB_APPLICATION_TOKEN"] == st.secrets["ASTRA_DB_APPLICATION_TOKEN"]
 
 st.title("Resume Analysis 🔎")
 
@@ -66,77 +54,37 @@ st.write("Upload your resume to see AI jobs recommendation.")
 # Upload component
 uploaded_file = st.file_uploader("Upload your resume (PDF, DOCX)", type=["pdf", "docx"])
 
-# API key handling for both environments
-def get_api_key():
-    # Try to get API key from Streamlit secrets first
-    try:
-        return st.secrets["GOOGLE_API_KEY"]
-    except (KeyError, AttributeError):
-        # Fall back to .env file for local development
-        load_dotenv()
-        api_key = os.environ.get("GOOGLE_API_KEY")
-        if not api_key:
-            raise ValueError("Google API key not found in environment variables or Streamlit secrets")
-        return api_key
+LLM = AzureChatOpenAI(
+    azure_endpoint="https://models.inference.ai.azure.com",
+    azure_deployment="gpt-4.1-nano",
+    openai_api_version="2025-03-01-preview", 
+    model_name="gpt-4.1-nano",
+    temperature=0.8,
+    api_key=GITHUB_TOKEN,
+)
 
-# Initialize LLM with appropriate API key
-def init_llm():
-    if USE_GITHUB_MODEL:
-        return None
-    else:
-        api_key = get_api_key()
-        return ChatGoogleGenerativeAI(
-            model="gemini-1.5-flash-8b",
-            temperature=0.8,
-            max_tokens=None,
-            api_key=api_key,
-        )
+EMBEDDING = AzureOpenAIEmbeddings(
+    azure_endpoint="https://resume-relief.openai.azure.com/",
+    azure_deployment="text-embedding-3-large",
+    openai_api_version="2024-02-01", 
+    model="text-embedding-3-large",
+    openai_api_key=AZURE_OPENAI_API_KEY,
+)
 
-# Create a function to initialize embeddings and vectorstore
-def init_vector_store():
-    """Initialize vector store in read-only mode to prevent any modifications to the DB."""
-    # Use a location that works in both environments
-    is_streamlit = is_streamlit_cloud()
-    
-    # Choose DB directory based on environment
-    if is_streamlit:
-        # For Streamlit Cloud deployment
-        # We'll need to load the DB from assets or a persistent storage location
-        st.error("ChromaDB access not configured for cloud deployment.")
-        st.info("Please configure a persistent storage solution for ChromaDB in cloud deployments.")
-        return None
-    else:
-        # Use local directory for development - exactly matching your DB creation path
-        db_dir = "./cake_chromadb"
-        
-        # Check if the DB exists before proceeding
-        if not os.path.exists(db_dir) or not os.path.exists(os.path.join(db_dir, "chroma.sqlite3")):
-            st.error(f"ChromaDB not found at {db_dir}. Please ensure the database has been created.")
-            return None
-            
-        # Use Nomic embeddings for local development
-        embedding = OllamaEmbeddings(model="nomic-embed-text:latest")
-    
-    try:
-        # Initialize vector store in read-only mode
-        return Chroma(
-            collection_name="cake_db",
-            embedding_function=embedding,
-            persist_directory=db_dir,
-            create_collection_if_not_exists=False,
-            collection_metadata={"read_only": True}
-        )
-    except Exception as e:
-        st.error(f"Error accessing ChromaDB: {str(e)}")
-        st.info("Make sure you've already built the database with your job data.")
-        return None
+VECTORSTORE = AstraDBVectorStore(
+    collection_name="cake_db",
+    embedding=EMBEDDING,
+    token=ASTRA_DB_APPLICATION_TOKEN,
+    api_endpoint=ASTRA_DB_API_ENDPOINT,
+    namespace="cake_db",
+)
 
 def convert_to_md(input_file):
     md = MarkItDown()
     result = md.convert(input_file)
     return result.text_content
 
-def agent_extract_resume(resume, llm):
+def agent_extract_resume(resume):
     resume_template = """"
         You are an expert resume analyzer. Extract the most relevant job search information from the following resume markdown.
 
@@ -155,35 +103,25 @@ def agent_extract_resume(resume, llm):
         Return ONLY the search query text without additional explanations or formatting.
         """
 
-    if USE_GITHUB_MODEL:
-        resume_prompt_template = PromptTemplate(
-            input_variables=["resume_text"],
-            template=resume_template,
-        )
+    resume_prompt_template = PromptTemplate(
+        input_variables=["resume_text"],
+        template=resume_template,
+    )
 
-        chain = resume_prompt_template | MODEL_NAME | StrOutputParser()
-        output = chain.invoke(input={"resume_text": resume})
-        return output
-    else:
-        resume_prompt_template = PromptTemplate(
-            input_variables=["resume_text"],
-            template=resume_template,
-        )
+    chain = resume_prompt_template | LLM | StrOutputParser()
+    output = chain.invoke(input={"resume_text": resume})
+    return output
 
-        chain = resume_prompt_template | llm | StrOutputParser()
-        output = chain.invoke(input={"resume_text": resume})
-        return output
-
-def agent_retrieve_jobs(resume, k, category, seniority, vectorstore):
-    # Check if vectorstore is None
-    if vectorstore is None:
+def agent_retrieve_jobs(resume, k, category, seniority, VECTORSTORE):
+    # Check if VECTORSTORE is None
+    if VECTORSTORE is None:
         st.error("Vector database is not available.")
         st.info("This may be because you're running in Streamlit Cloud or the database wasn't found locally.")
         return []
     
     try:
-        # Only attempt search if vectorstore exists
-        results = vectorstore.similarity_search_with_relevance_scores(
+        # Only attempt search if VECTORSTORE exists
+        results = VECTORSTORE.similarity_search_with_relevance_scores(
             query=resume,
             k=k,
             filter={'$and': [
@@ -208,21 +146,6 @@ def agent_retrieve_jobs(resume, k, category, seniority, vectorstore):
 
 # For Streamlit usage
 def streamlit_recommendation(uploaded_file, category, seniority, k=3):
-    # Initialize components based on environment
-    llm = init_llm()  # Will be None if using GitHub model
-    
-    with st.spinner("Initializing vector store..."):
-        try:
-            vectorstore = init_vector_store()
-            if vectorstore is None:
-                # If running in cloud, we can still analyze the resume but can't retrieve jobs
-                st.warning("Job database is not available in this environment.")
-                st.info("We can still analyze your resume, but job matching won't be possible.")
-                # Option 1: Continue without vectorstore (resume analysis only)
-        except Exception as e:
-            st.error(f"Error initializing vector store: {str(e)}")
-            return None
-    
     # Process the uploaded file
     with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_file:
         temp_file.write(uploaded_file.getvalue())
@@ -238,18 +161,17 @@ def streamlit_recommendation(uploaded_file, category, seniority, k=3):
         
         # Extract resume information
         with st.spinner("Analyzing resume..."):
-            extracted_resume = agent_extract_resume(resume_md, llm)
+            extracted_resume = agent_extract_resume(resume_md)
             
         # Get job recommendations if possible
         results = []
-        if vectorstore is not None:
-            with st.spinner("Finding matching jobs..."):
-                results = agent_retrieve_jobs(extracted_resume, k, category, seniority, vectorstore)
+        with st.spinner("Finding matching jobs..."):
+            results = agent_retrieve_jobs(extracted_resume, k, category, seniority, VECTORSTORE)
         
         return {
             "extracted_query": extracted_resume,
             "results": results,
-            "vectorstore_available": vectorstore is not None
+            "vectorstore_available": VECTORSTORE is not None
         }
     except Exception as e:
         st.error(f"Error during recommendation process: {str(e)}")
