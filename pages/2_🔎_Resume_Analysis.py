@@ -76,7 +76,7 @@ def convert_to_md(input_file):
 
 def agent_extract_resume(resume):
     resume_template = """"
-        You are an expert resume analyzer. Extract the most relevant job search information from the following resume markdown.
+        You are an expert resume analyzer. Extract the most relevant job search keywords from the following resume markdown.
 
         Resume:
         {resume_text}
@@ -103,36 +103,25 @@ def agent_extract_resume(resume):
     return output
 
 def agent_retrieve_jobs(resume, k, category, seniority, VECTORSTORE):
-    # Check if VECTORSTORE is None
-    if VECTORSTORE is None:
-        st.error("Vector database is not available.")
-        st.info("This may be because you're running in Streamlit Cloud or the database wasn't found locally.")
-        return []
+    results = VECTORSTORE.similarity_search_with_relevance_scores(
+        query=resume,
+        k=k,
+        filter={'$and': [
+            {'category_major': {'$eq': category}}, 
+            {'seniority': {'$eq': seniority}},
+        ]}
+    )
     
-    try:
-        # Only attempt search if VECTORSTORE exists
-        results = VECTORSTORE.similarity_search_with_relevance_scores(
-            query=resume,
-            k=k,
-            filter={'$and': [
-                {'category_major': {'$eq': category}}, 
-                {'seniority': {'$eq': seniority}},
-            ]}
-        )
-        
-        # Return the results instead of printing
-        formatted_results = []
-        for doc, score in results:
-            formatted_results.append({
-                "content": doc.page_content,
-                "score": score * 100,
-                "metadata": doc.metadata
-            })
-        
-        return formatted_results
-    except Exception as e:
-        st.error(f"Error searching job database: {str(e)}")
-        return []
+    # Return the results instead of printing
+    formatted_results = []
+    for doc, score in results:
+        formatted_results.append({
+            "content": doc.page_content,
+            "score": score * 100,
+            "metadata": doc.metadata
+        })
+    
+    return formatted_results
 
 # For Streamlit usage
 def streamlit_recommendation(uploaded_file, category, seniority, k=3):
@@ -188,7 +177,7 @@ def job_category():
 # Add Streamlit interface elements
 if uploaded_file:
     # Display success message
-    st.success("Resume uploaded successfully!")
+    st.success("Resume uploaded successfully! Select job category and seniority level to get recommendations.")
     
     # Add category and seniority selection
     col1, col2 = st.columns(2)
@@ -212,6 +201,7 @@ if uploaded_file:
         
         if result:
             # Display the extracted query
+            st.markdown("---")
             st.subheader("Resume Analysis")
             st.info(f"Based on your resume, we identified the following key elements:\n\n{result['extracted_query']}")
             
@@ -258,15 +248,3 @@ if uploaded_file:
 
 else:
     st.info("Please upload your resume to get job recommendations.")
-
-# # Footer
-# st.markdown("---")
-# st.markdown(
-#     """
-#     <div style="text-align: center">
-#         © 2025 Resume Relief<br>
-#         Made with ❤️ by <a href="https://renaldi-ega.notion.site" target="_blank">Ren</a>
-#     </div>
-#     """, 
-#     unsafe_allow_html=True
-# )
