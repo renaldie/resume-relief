@@ -176,42 +176,37 @@ def analyze_resume(uploaded_file):
 
 def find_job_matches(keywords, category, seniority, k=10):
     """Find job matches based on resume keywords and preferences"""
-    try:
-        # with st.spinner("Matching up your skills...🧙‍♂️"):
-        results = agent_retrieve_jobs(keywords, k, category, seniority, VECTORSTORE)
-        return for i, job in enumerate(results, 1):
-            job_title = job['metadata'].get('title')
-            name = job['metadata'].get('company_name')
-            company_field = job['metadata'].get('company_field')
-            category_major = job['metadata'].get('category_major')
-            employment_type = job['metadata'].get('employment_type')
-            seniority = job['metadata'].get('seniority')
-            location = job['metadata'].get('location')
-            experience = job['metadata'].get('experience')
-            salary_range = job['metadata'].get('salary_range')
-            skills = job['metadata'].get('skills')
-            job_url = job['metadata'].get('job_url')
-            company_url = job['metadata'].get('company_url')
-            
-            with st.expander(f"{job['score']:.1f}% Match | {job_title} in {name}"):
-                job_tabs = st.tabs(["Details"])                     
-                with job_tabs[0]:
-                    st.markdown(f"**Job Title**: {job_title}")
-                    st.markdown(f"**Company**: {name}")
-                    st.markdown(f"**Company Field**: {company_field}")
-                    st.markdown(f"**Job Category**: {category_major}")
-                    st.markdown(f"**Employment Type**: {employment_type}")
-                    st.markdown(f"**Seniority**: {seniority}")
-                    st.markdown(f"**Location**: {location}")
-                    st.markdown(f"**Experience**: {experience}")
-                    st.markdown(f"**Salary Range**: {salary_range}")
-                    st.markdown(f"**Skills**: {skills}")
-                    st.markdown(f"**Apply Here**: {job_url}")
-                    st.markdown(f"**Company Profile**: {company_url}")
-        # return results
-    except Exception as e:
-        st.error(f"Error retrieving job matches: {str(e)}")
-        return []
+    # with st.spinner("Matching up your skills...🧙‍♂️"):
+    results = agent_retrieve_jobs(keywords, k, category, seniority, VECTORSTORE)
+    for i, job in enumerate(results, 1):
+        job_title = job['metadata'].get('title')
+        name = job['metadata'].get('company_name')
+        company_field = job['metadata'].get('company_field')
+        category_major = job['metadata'].get('category_major')
+        employment_type = job['metadata'].get('employment_type')
+        seniority = job['metadata'].get('seniority')
+        location = job['metadata'].get('location')
+        experience = job['metadata'].get('experience')
+        salary_range = job['metadata'].get('salary_range')
+        skills = job['metadata'].get('skills')
+        job_url = job['metadata'].get('job_url')
+        company_url = job['metadata'].get('company_url')
+        
+        with st.expander(f"{job['score']:.1f}% Match | {job_title} in {name}"):
+            job_tabs = st.tabs(["Details"])                     
+            with job_tabs[0]:
+                st.markdown(f"**Job Title**: {job_title}")
+                st.markdown(f"**Company**: {name}")
+                st.markdown(f"**Company Field**: {company_field}")
+                st.markdown(f"**Job Category**: {category_major}")
+                st.markdown(f"**Employment Type**: {employment_type}")
+                st.markdown(f"**Seniority**: {seniority}")
+                st.markdown(f"**Location**: {location}")
+                st.markdown(f"**Experience**: {experience}")
+                st.markdown(f"**Salary Range**: {salary_range}")
+                st.markdown(f"**Skills**: {skills}")
+                st.markdown(f"**Apply Here**: {job_url}")
+                st.markdown(f"**Company Profile**: {company_url}")
 
 def refresh_keywords():
     """Callback for the Recreate Keywords button"""
@@ -378,7 +373,7 @@ if st.session_state.keywords_generated:
     # Find matching jobs button
     # if st.button("Find Matching Jobs", type="primary"):
     # Use the existing find_job_matches function
-    results = find_job_matches(st.session_state.resume_keywords, category, seniority)
+    find_job_matches(st.session_state.resume_keywords, category, seniority)
     
     # # Display job matches
     # for i, job in enumerate(results, 1):
