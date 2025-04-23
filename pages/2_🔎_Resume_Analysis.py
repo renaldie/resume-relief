@@ -36,20 +36,6 @@ AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY") or st.secrets.get(
 ASTRA_DB_API_ENDPOINT = os.environ.get("ASTRA_DB_API_ENDPOINT") or st.secrets.get("ASTRA_DB_API_ENDPOINT")
 ASTRA_DB_APPLICATION_TOKEN = os.environ.get("ASTRA_DB_APPLICATION_TOKEN") or st.secrets.get("ASTRA_DB_APPLICATION_TOKEN")
 
-# Initialize session state
-if "resume_analyzed" not in st.session_state:
-    st.session_state.resume_analyzed = False
-if "resume_keywords" not in st.session_state:
-    st.session_state.resume_keywords = None
-if "resume_md" not in st.session_state:
-    st.session_state.resume_md = None
-
-st.title("AI Resume Analysis in 3 Steps🔎")
-st.subheader("1 - Upload Resume ⬆️")
-
-# Upload component
-uploaded_file = st.file_uploader(label="Upload your resume (PDF, DOCX)", type=["pdf", "docx"], label_visibility='hidden')
-
 LLM = AzureChatOpenAI(
     azure_endpoint="https://models.inference.ai.azure.com",
     azure_deployment="gpt-4.1-nano",
@@ -103,8 +89,8 @@ def agent_extract_resume(resume):
         5. Industry expertise
         6. Relevant certifications
 
-        Format your response as list of keywords that would match this candidate with appropriate job positions.
-        Return ONLY the keywords without additional explanations or formatting.
+        Format your response as list of keywords in one line that would match this candidate with appropriate job positions.
+        Return ONLY the keywords without additional explanations, formatting, or new line.
         """
 
     resume_prompt_template = PromptTemplate(
@@ -137,8 +123,6 @@ def agent_retrieve_jobs(resume, k, category, seniority, VECTORSTORE):
     
     return formatted_results
 
-# Add these two new functions before the Streamlit UI code:
-
 def analyze_resume(uploaded_file):
     """Process the uploaded resume file and extract keywords"""
     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
@@ -154,8 +138,8 @@ def analyze_resume(uploaded_file):
                 return None
         
         # Extract resume information
-        with st.spinner("Getting important keywords...🐝"):
-            extracted_keywords = agent_extract_resume(resume_md)
+        # with st.spinner("Getting important keywords...🐝"):
+        extracted_keywords = agent_extract_resume(resume_md)
             
         return {
             "resume_md": resume_md,
@@ -259,15 +243,39 @@ job_category_dict = {
     "Other": "💅 Other",
     }
 
+# Initialize session state
+if "resume_analyzed" not in st.session_state:
+    st.session_state.resume_analyzed = False
+if "resume_keywords" not in st.session_state:
+    st.session_state.resume_keywords = None
+if "resume_md" not in st.session_state:
+    st.session_state.resume_md = None
+if "last_uploaded_file_name" not in st.session_state:
+    st.session_state.last_uploaded_file_name = None
+
+st.title("AI Resume Analysis in 3 Steps🔎")
+st.subheader("1 - Upload Resume ⬆️")
+
+# Upload component
+uploaded_file = st.file_uploader(label="Upload your resume (PDF, DOCX)", type=["pdf", "docx"], label_visibility='hidden')
+
+# Track new file uploads and reset analysis state when needed
+if uploaded_file and uploaded_file.name != st.session_state.last_uploaded_file_name:
+    st.session_state.resume_analyzed = False
+    st.session_state.resume_keywords = None
+    st.session_state.resume_md = None
+    st.session_state.last_uploaded_file_name = uploaded_file.name
+
 # STEP 1: Resume Analysis Only
 if uploaded_file and not st.session_state.resume_analyzed:
-    # if st.button("Analyze Resume", type="primary"):
-    #     # Process resume using existing analyze_resume function
+    # if st.button("Start the Magic", type="primary", icon='✨'):
+        # Process resume using existing analyze_resume function
     result = analyze_resume(uploaded_file)
     if result:
         st.session_state.resume_md = result["resume_md"]
         st.session_state.resume_keywords = result["keywords"]
         st.session_state.resume_analyzed = True
+        refresh_keywords()
 
 # STEP 2: Display Keywords and Job Category Selection
 if st.session_state.resume_analyzed:
@@ -344,8 +352,8 @@ if st.session_state.resume_analyzed:
                 st.markdown(f"**Company Profile**: {company_url}")
 
 
-# Initial state instructions
-if not uploaded_file:
-    st.info("Upload your resume to begin the magic 💫")
-elif not st.session_state.resume_analyzed:
-    st.info("Click 'Analyze Resume' to extract keywords from your resume.")
+# # Initial state instructions
+# if not uploaded_file:
+#     st.info("Upload your resume to begin the magic 💫")
+# elif not st.session_state.resume_analyzed:
+#     st.info("Click 'Analyze Resume' to extract keywords from your resume.")
