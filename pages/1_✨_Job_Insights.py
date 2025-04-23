@@ -8,7 +8,7 @@ import string
 
 st.title("Job Insights ✨")
 
-"""Find out what is trending 📊"""
+# """Find out what is trending 📊"""
 
 # Load the data
 @st.cache_data

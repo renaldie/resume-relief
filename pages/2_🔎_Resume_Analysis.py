@@ -32,6 +32,7 @@ warnings.filterwarnings("ignore", module=r"ollama\._types")
 
 ## LangChain
 from langchain_openai import AzureChatOpenAI
+from langchain_ollama import ChatOllama
 from langchain_openai import AzureOpenAIEmbeddings
 from langchain_astradb import AstraDBVectorStore
 from markitdown import MarkItDown
@@ -40,13 +41,19 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_openai import OpenAIEmbeddings
 
-LLM = AzureChatOpenAI(
-    azure_endpoint="https://models.inference.ai.azure.com",
-    azure_deployment="gpt-4.1-nano",
-    openai_api_version="2025-03-01-preview", 
-    model_name="gpt-4.1-nano",
-    temperature=1,
-    api_key=GITHUB_TOKEN,
+# LLM = AzureChatOpenAI(
+#     azure_endpoint="https://models.inference.ai.azure.com",
+#     azure_deployment="gpt-4.1-nano",
+#     openai_api_version="2025-03-01-preview", 
+#     model_name="gpt-4.1-nano",
+#     temperature=1,
+#     api_key=GITHUB_TOKEN,
+# )
+
+LLM = ChatOllama(
+    model = "llama3.2:1b",
+    temperature = 0.8,
+    num_predict = 256,
 )
 
 EMBEDDING = AzureOpenAIEmbeddings(
@@ -176,45 +183,16 @@ def refresh_keywords():
             st.session_state.resume_keywords = result["keywords"]
             st.session_state.resume_analyzed = True
 
-# For Streamlit usage
-# def streamlit_recommendation(uploaded_file, category, seniority, k=10):
-#     # Process the uploaded file
-#     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-#         temp_file.write(uploaded_file.getvalue())
-#         temp_file_path = temp_file.name
-    
-#     try:
-#         # Convert resume to markdown
-#         with st.spinner("Converting resume..."):
-#             resume_md = convert_to_md(temp_file_path)
-#             if not resume_md:
-#                 st.error("Failed to convert resume to text. Please check the file format.")
-#                 return None
-        
-#         # Extract resume information
-#         with st.spinner("Analyzing resume..."):
-#             extracted_resume = agent_extract_resume(resume_md)
-            
-#         # Get job recommendations if possible
-#         results = []
-#         with st.spinner("Finding matching jobs..."):
-#             results = agent_retrieve_jobs(extracted_resume, k, category, seniority, VECTORSTORE)
-        
-#         return {
-#             "extracted_query": extracted_resume,
-#             "results": results,
-#             "vectorstore_available": VECTORSTORE is not None
-#         }
-#     except Exception as e:
-#         st.error(f"Error during recommendation process: {str(e)}")
-#         return None
-#     finally:
-#         # Clean up temporary file
-#         if os.path.exists(temp_file_path):
-#             os.unlink(temp_file_path)
+def toggle_edit_mode():
+    st.session_state.edit_mode = not st.session_state.edit_mode
+    # When entering edit mode, create a copy of current keywords for editing
+    if st.session_state.edit_mode:
+        st.session_state.edited_keywords = st.session_state.resume_keywords
 
-# # Load available job categories from dataset
-# @st.cache_data
+def save_edited_keywords():
+    st.session_state.resume_keywords = st.session_state.edited_keywords
+    st.session_state.edit_mode = False
+
 job_seniority_dict = {
     'Internship': '🎓 Internship',
     'Entry level': '🌱 Entry Level',
@@ -256,47 +234,72 @@ if "resume_md" not in st.session_state:
     st.session_state.resume_md = None
 if "last_uploaded_file_name" not in st.session_state:
     st.session_state.last_uploaded_file_name = None
+if "keywords_generated" not in st.session_state:
+    st.session_state.keywords_generated = False
+if "edit_mode" not in st.session_state:
+    st.session_state.edit_mode = False
 
 st.title("AI Resume Analysis in 3 Steps🔎")
-st.subheader("1 - Upload Resume ⬆️")
-
-# Upload component
+st.subheader("1 | Upload Resume ⬆️")
 uploaded_file = st.file_uploader(label="Upload your resume (PDF, DOCX)", type=["pdf", "docx"], label_visibility='hidden')
 
-# Track new file uploads and reset analysis state when needed
 if uploaded_file and uploaded_file.name != st.session_state.last_uploaded_file_name:
     st.session_state.resume_analyzed = False
     st.session_state.resume_keywords = None
     st.session_state.resume_md = None
+    st.session_state.keywords_generated = False
     st.session_state.last_uploaded_file_name = uploaded_file.name
 
-# STEP 1: Resume Analysis Only
+# STEP 1: Resume Analysis
 if uploaded_file and not st.session_state.resume_analyzed:
-    # if st.button("Start the Magic", type="primary", icon='✨'):
-        # Process resume using existing analyze_resume function
-    result = analyze_resume(uploaded_file)
-    if result:
-        st.session_state.resume_md = result["resume_md"]
-        st.session_state.resume_keywords = result["keywords"]
-        st.session_state.resume_analyzed = True
-        refresh_keywords()
+    if st.button("Analyze Keywords", type="primary", icon='✨', use_container_width=True,):
+        result = analyze_resume(uploaded_file)
+        if result:
+            st.session_state.resume_md = result["resume_md"]
+            st.session_state.resume_keywords = result["keywords"]
+            st.session_state.resume_analyzed = True
+            refresh_keywords()
 
-# STEP 2: Display Keywords and Job Category Selection
+
+# STEP 2: Display Keywords
 if st.session_state.resume_analyzed:
     st.markdown("---")
-    st.subheader("2 - Magic Keywords ✨")
-    st.info(f"{st.session_state.resume_keywords}")
-    st.button("Let's Find Another Keywords", type="primary", on_click=refresh_keywords)
-
+    st.subheader("2 | Resume Keywords ✨")
+    
+    # Display keywords in edit mode or view mode
+    if st.session_state.edit_mode:
+        # Edit mode - show text area and save/cancel buttons
+        st.session_state.edited_keywords = st.text_area(
+            "Edit your keywords",
+            value=st.session_state.edited_keywords,
+            height=250,
+            key="keyword_editor"
+        )
+        
+        col1, col2 = st.columns(2)
+        if col1.button("Save Changes", type="primary", use_container_width=True):
+            save_edited_keywords()
+            st.rerun()
+        if col2.button("Cancel", type="secondary", use_container_width=True):
+            st.session_state.edit_mode = False
+            st.rerun()
+    else:
+        # View mode - show keywords and action buttons
+        st.success(f"{st.session_state.resume_keywords}")
+        left, middle, right = st.columns(3)
+        if left.button("See Job Suggestions", type="primary", use_container_width=True, icon="🧙‍♂️"):
+            st.session_state.keywords_generated = True
+        middle.button("Refresh Keywords", type="secondary", use_container_width=True, icon="🔄", on_click=refresh_keywords)
+        right.button("Manual Edit", type="secondary", icon="📝", use_container_width=True, on_click=toggle_edit_mode)
+    
+# STEP 3: Display Job Category Selection
+if st.session_state.keywords_generated:
     st.markdown("---")
-    st.subheader("3 - Voila, We Found These for You! 🧙‍♂️")
-    st.info("Select your dream **Industry** and **Seniority Level**")
-    
-    # Add category and seniority selection
+    st.subheader("3 | Voila, We Found These for You! 🧙‍♂️")
+    # st.info("Select your dream **Industry** and **Seniority Level**")
+
     col1, col2 = st.columns(2)
-    
     with col1:
-        # Keep your existing category selection code
         displayed_options = list(job_category_dict.values())
         actual_options = list(job_category_dict.keys())
         display_index = st.selectbox(
@@ -307,12 +310,11 @@ if st.session_state.resume_analyzed:
         category = actual_options[selected_index]
     
     with col2:
-        # Keep your existing seniority selection code
         displayed_options = list(job_seniority_dict.values())
         actual_options = list(job_seniority_dict.keys())
         display_index = st.selectbox(
             "Seniority Level",
-            options=displayed_options
+            options=displayed_options,
         )
         selected_index = displayed_options.index(display_index)
         seniority = actual_options[selected_index]
@@ -322,9 +324,8 @@ if st.session_state.resume_analyzed:
     # Use the existing find_job_matches function
     results = find_job_matches(st.session_state.resume_keywords, category, seniority)
     
-    # Keep your existing job display code
+    # Display job matches
     for i, job in enumerate(results, 1):
-        # All your existing job display code...
         job_title = job['metadata'].get('title')
         name = job['metadata'].get('company_name')
         company_field = job['metadata'].get('company_field')
@@ -339,7 +340,6 @@ if st.session_state.resume_analyzed:
         company_url = job['metadata'].get('company_url')
         
         with st.expander(f"{job['score']:.1f}% Match | {job_title} in {name}"):
-            # Create tabs for better organization
             job_tabs = st.tabs(["Details"])                     
             with job_tabs[0]:
                 st.markdown(f"**Job Title**: {job_title}")
@@ -356,7 +356,7 @@ if st.session_state.resume_analyzed:
                 st.markdown(f"**Company Profile**: {company_url}")
 
 
-# # Initial state instructions
+# # state instructions
 # if not uploaded_file:
 #     st.info("Upload your resume to begin the magic 💫")
 # elif not st.session_state.resume_analyzed:
