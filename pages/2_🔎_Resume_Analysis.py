@@ -39,7 +39,8 @@ from markitdown import MarkItDown
 from langchain_core.documents import Document
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain_openai import OpenAIEmbeddings
+from langchain_core.output_parsers import PydanticOutputParser
+from pydantic import BaseModel, Field
 
 LLM = AzureChatOpenAI(
     azure_endpoint="https://models.inference.ai.azure.com",
@@ -85,6 +86,13 @@ def convert_to_md(input_file):
     result = md.convert(input_file)
     return result.text_content
 
+class Keywords(BaseModel):
+    keywords: List[str] = Field(description="keywords")
+keywords_parser = PydanticOutputParser(pydantic_object=Keywords)
+
+# Format your response as list of keywords in one line that would match this candidate with appropriate job positions.
+# Return ONLY the keywords without additional explanations, formatting, or new line.
+
 def agent_extract_resume(resume):
     resume_template = """"
         You are an expert resume analyzer. Extract the most relevant job search keywords from the following resume markdown.
@@ -92,7 +100,7 @@ def agent_extract_resume(resume):
         Resume:
         {resume_text}
 
-        Create a concise keywords that captures the candidate's:
+        Create a list of keywords capturing the candidate's:
         1. Primary technical skills (languages, frameworks, tools)
         2. Most recent or significant job roles/titles
         3. Years of experience in key areas
@@ -102,16 +110,18 @@ def agent_extract_resume(resume):
 
         Format your response as list of keywords in one line that would match this candidate with appropriate job positions.
         Return ONLY the keywords without additional explanations, formatting, or new line.
+        \n{format_instructions}
         """
 
     resume_prompt_template = PromptTemplate(
         input_variables=["resume_text"],
         template=resume_template,
+        partial_variables={"format_instructions": keywords_parser.get_format_instructions()},
     )
 
-    chain = resume_prompt_template | LLM | StrOutputParser()
+    chain = resume_prompt_template | LLM | keywords_parser
     output = chain.invoke(input={"resume_text": resume})
-    return output
+    return output.keywords
 
 def agent_retrieve_jobs(resume, k, category, seniority, VECTORSTORE):
     results = VECTORSTORE.similarity_search_with_relevance_scores(
@@ -253,13 +263,29 @@ if uploaded_file and uploaded_file.name != st.session_state.last_uploaded_file_n
 # STEP 1: Resume Analysis
 if uploaded_file and not st.session_state.resume_analyzed:
     if st.button("Analyze Keywords", type="primary", icon='✨', use_container_width=True,):
+        # with st.spinner("Analyzing resume..."):
         result = analyze_resume(uploaded_file)
-        if result:
-            st.session_state.resume_md = result["resume_md"]
-            st.session_state.resume_keywords = result["keywords"]
-            st.session_state.resume_analyzed = True
-            refresh_keywords()
+        retry_count = 0
+        max_retries = 3
 
+        while result and not isinstance(result['keywords'], list) and retry_count < max_retries:
+            st.spinner(f'Need more time {retry_count+1}/{max_retries}', icon="⏳")
+            result = analyze_resume(uploaded_file)
+            retry_count += 1
+    
+        if result and isinstance(result['keywords'], list):
+            st.session_state.resume_md = result['resume_md']
+            st.session_state.resume_keywords = result['keywords']
+            st.session_state.resume_analyzed = True
+        
+        # result = analyze_resume(uploaded_file)
+        # while result["keywords"] is not list:
+        #     result = analyze_resume(uploaded_file)
+        # if result:
+        #     st.session_state.resume_md = result["resume_md"]
+        #     st.session_state.resume_keywords = result["keywords"]
+        #     st.session_state.resume_analyzed = True
+        #     refresh_keywords()
 
 # STEP 2: Display Keywords
 if st.session_state.resume_analyzed:
