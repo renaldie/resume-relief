@@ -282,7 +282,7 @@ if st.session_state.resume_analyzed:
     st.markdown("---")
     st.subheader("2 - Magic Keywords ✨")
     st.info(f"{st.session_state.resume_keywords}")
-    st.button("Recreate Keywords", type="primary", on_click=refresh_keywords)
+    st.button("Let's Find Another Keywords", type="primary", on_click=refresh_keywords)
 
     st.markdown("---")
     st.subheader("3 - Voila, We Found These for You! 🧙‍♂️")
