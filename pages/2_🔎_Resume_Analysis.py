@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 load_dotenv()
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN") or st.secrets.get("GITHUB_TOKEN")
 AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY") or st.secrets.get("AZURE_OPENAI_API_KEY")
@@ -23,7 +24,6 @@ from collections import Counter
 import string
 import warnings
 import tempfile
-from dotenv import load_dotenv
 import openai
 from typing import Dict, List, Any
 
