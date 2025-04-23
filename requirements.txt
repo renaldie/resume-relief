@@ -16,6 +16,8 @@ langchain-ollama
 langchain-google-genai
 chromadb
 langchain-chroma
+langchain
+langsmith
 langchain-core
 openai
 langchain-openai
