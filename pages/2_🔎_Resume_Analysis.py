@@ -41,20 +41,20 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_openai import OpenAIEmbeddings
 
-# LLM = AzureChatOpenAI(
-#     azure_endpoint="https://models.inference.ai.azure.com",
-#     azure_deployment="gpt-4.1-nano",
-#     openai_api_version="2025-03-01-preview", 
-#     model_name="gpt-4.1-nano",
-#     temperature=1,
-#     api_key=GITHUB_TOKEN,
-# )
-
-LLM = ChatOllama(
-    model = "llama3.2:1b",
-    temperature = 0.8,
-    num_predict = 256,
+LLM = AzureChatOpenAI(
+    azure_endpoint="https://models.inference.ai.azure.com",
+    azure_deployment="gpt-4.1-nano",
+    openai_api_version="2025-03-01-preview", 
+    model_name="gpt-4.1-nano",
+    temperature=1,
+    api_key=GITHUB_TOKEN,
 )
+
+# LLM = ChatOllama(
+#     model = "llama3.2:1b",
+#     temperature = 0.8,
+#     num_predict = 256,
+# )
 
 EMBEDDING = AzureOpenAIEmbeddings(
     azure_endpoint="https://resume-relief.openai.azure.com/",
