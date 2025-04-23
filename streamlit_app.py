@@ -15,15 +15,14 @@ st.set_page_config(
     layout="wide",
 )
 
-home_page = st.Page("pages/home_page.py", title="Home", icon="🪴")
-page_1 = st.Page("pages/1_✨_Job_Insights.py", title="Job Insights", icon="✨")
-page_2 = st.Page("pages/2_🔎_Resume_Analysis.py", title="Resume Analysis", icon="🔎")
-
-pg = st.navigation([home_page, page_1, page_2])
-pg.run()
-
 # Main app
 def main():
+    home_page = st.Page("pages/home_page.py", title="Home", icon="🪴")
+    page_1 = st.Page("pages/1_✨_Job_Insights.py", title="Job Insights", icon="✨")
+    page_2 = st.Page("pages/2_🔎_Resume_Analysis.py", title="Resume Analysis", icon="🔎")
+
+    pg = st.navigation([home_page, page_1, page_2])
+    pg.run()
     # Add a simple credit at the bottom
     st.markdown("---")
     
