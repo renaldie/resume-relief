@@ -22,6 +22,7 @@ def main():
     page_2 = st.Page("pages/2_🔎_Resume_Analysis.py", title="Resume Analysis", icon="🔎")
 
     pg = st.navigation([home_page, page_1, page_2])
+    pg.run()
     # Add a simple credit at the bottom
     st.markdown("---")
     
