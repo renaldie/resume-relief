@@ -1,3 +1,13 @@
+load_dotenv()
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN") or st.secrets.get("GITHUB_TOKEN")
+AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY") or st.secrets.get("AZURE_OPENAI_API_KEY")
+ASTRA_DB_API_ENDPOINT = os.environ.get("ASTRA_DB_API_ENDPOINT") or st.secrets.get("ASTRA_DB_API_ENDPOINT")
+ASTRA_DB_APPLICATION_TOKEN = os.environ.get("ASTRA_DB_APPLICATION_TOKEN") or st.secrets.get("ASTRA_DB_APPLICATION_TOKEN")
+langsmith_tracing = os.environ.get("LANGSMITH_TRACING") or st.secrets.get("LANGSMITH_TRACING")
+langsmith_endpoint = os.environ.get("LANGSMITH_ENDPOINT") or st.secrets.get("LANGSMITH_ENDPOINT")
+langsmith_key = os.environ.get("LANGSMITH_API_KEY") or st.secrets.get("LANGSMITH_API_KEY")
+langsmith_project = os.environ.get("LANGSMITH_PROJECT") or st.secrets.get("LANGSMITH_PROJECT")
+
 import sys
 import importlib.util
 import os
@@ -29,16 +39,6 @@ from langchain_core.documents import Document
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_openai import OpenAIEmbeddings
-
-load_dotenv()
-GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN") or st.secrets.get("GITHUB_TOKEN")
-AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY") or st.secrets.get("AZURE_OPENAI_API_KEY")
-ASTRA_DB_API_ENDPOINT = os.environ.get("ASTRA_DB_API_ENDPOINT") or st.secrets.get("ASTRA_DB_API_ENDPOINT")
-ASTRA_DB_APPLICATION_TOKEN = os.environ.get("ASTRA_DB_APPLICATION_TOKEN") or st.secrets.get("ASTRA_DB_APPLICATION_TOKEN")
-langsmith_tracing = os.environ.get("LANGSMITH_TRACING") or st.secrets.get("LANGSMITH_TRACING")
-langsmith_endpoint = os.environ.get("LANGSMITH_ENDPOINT") or st.secrets.get("LANGSMITH_ENDPOINT")
-langsmith_key = os.environ.get("LANGSMITH_API_KEY") or st.secrets.get("LANGSMITH_API_KEY")
-langsmith_project = os.environ.get("LANGSMITH_PROJECT") or st.secrets.get("LANGSMITH_PROJECT")
 
 LLM = AzureChatOpenAI(
     azure_endpoint="https://models.inference.ai.azure.com",
