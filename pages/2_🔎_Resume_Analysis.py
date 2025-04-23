@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+import streamlit as st
 load_dotenv()
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN") or st.secrets.get("GITHUB_TOKEN")
 AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY") or st.secrets.get("AZURE_OPENAI_API_KEY")
@@ -16,7 +17,6 @@ if "SSL_CERT_FILE" in os.environ:
     del os.environ["SSL_CERT_FILE"]
 
 import pandas as pd
-import streamlit as st
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import re
