@@ -81,6 +81,10 @@ VECTORSTORE = AstraDBVectorStore(
     namespace="cake_db",
 )
 
+st.title("AI Resume Analysis in 3 Steps🔎")
+st.subheader("1 | Upload Resume ⬆️")
+uploaded_file = st.file_uploader(label="Upload your resume (PDF, DOCX)", type=["pdf", "docx"], label_visibility='hidden')
+
 def convert_to_md(input_file):
     md = MarkItDown()
     result = md.convert(input_file)
@@ -248,10 +252,6 @@ if "keywords_generated" not in st.session_state:
     st.session_state.keywords_generated = False
 if "edit_mode" not in st.session_state:
     st.session_state.edit_mode = False
-
-st.title("AI Resume Analysis in 3 Steps🔎")
-st.subheader("1 | Upload Resume ⬆️")
-uploaded_file = st.file_uploader(label="Upload your resume (PDF, DOCX)", type=["pdf", "docx"], label_visibility='hidden')
 
 if uploaded_file and uploaded_file.name != st.session_state.last_uploaded_file_name:
     st.session_state.resume_analyzed = False
