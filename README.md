@@ -1,12 +1,11 @@
 # Resume Relief - Job Skills Analyzer
 
-An interactive visualization tool that helps job seekers understand what skills and requirements are needed across different job categories and seniority levels.
+An AI-powered interactive visualization tool and resume recommendation that helps job seekers understand the skills required for different job categories and seniority levels and also recommending matching jobs based on their resumes.
 
 ## Features
-- Compare job requirements across different career stages
-- Analyze key skills for various industries
-- Visualize how job descriptions change with seniority
-- Interactive selection of job categories and comparison metrics
+- Analyze key skills for various industries and seniority levels
+- Extract keywords from your resume
+- Match your resume with job postings
 
 ## Data
 The tool uses a dataset of job postings with information about:
