@@ -87,7 +87,7 @@ def convert_to_md(input_file):
     return result.text_content
 
 class Keywords(BaseModel):
-    keywords: List[str] = Field(description="keywords")
+    keywords: str = Field(description="keywords")
 keywords_parser = PydanticOutputParser(pydantic_object=Keywords)
 
 # Format your response as list of keywords in one line that would match this candidate with appropriate job positions.
@@ -110,17 +110,18 @@ def agent_extract_resume(resume):
 
         Format your response as list of keywords in one line that would match this candidate with appropriate job positions.
         Return ONLY the keywords without additional explanations, formatting, or new line.
+        \n{format_instructions}
         """
 
     resume_prompt_template = PromptTemplate(
         input_variables=["resume_text"],
         template=resume_template,
-        # partial_variables={"format_instructions": keywords_parser.get_format_instructions()},
+        partial_variables={"format_instructions": keywords_parser.get_format_instructions()},
     )
 
-    chain = resume_prompt_template | LLM | StrOutputParser()
+    chain = resume_prompt_template | LLM | keywords_parser
     output = chain.invoke(input={"resume_text": resume})
-    return output
+    return output.keywords
 
 def agent_retrieve_jobs(resume, k, category, seniority, VECTORSTORE):
     results = VECTORSTORE.similarity_search_with_relevance_scores(
