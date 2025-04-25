@@ -19,7 +19,7 @@ def main():
     # st.header("Analyze Jobs, Resumes, and Skills")
     
     st.markdown("""
-    ### AI Job Analysis and Job Recommendation Platform 
+    ### AI Job Analysis and Recommendation Platform 
     
     ✨ **Job Analysis** - Discover what employers really want
     
