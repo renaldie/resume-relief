@@ -11,17 +11,17 @@ import string
 # Main page content
 
 def main():
-    col1, col2 = st.columns([0.2, 1.5])
+    col1, col2 = st.columns([0.2, 2.5])
     with col1:
-        st.image("assets/logo.jpg", width=100)
+        st.image("assets/logo.jpg")
         
     with col2:
-        st.title("Land Your Dream Job Faster 😎")
+        st.title("**Resume Relief**")
+    # st.header("Analyze Jobs, Resumes, and Skills")
     
+
     st.markdown("""
-    **Resume Relief** analyzes job requirements and matches them to your skills.
-    
-    ## Get Started:
+    ### AI Job Analysis and Resume Mathing Platform 
     
     ✨ **Job Insights** - Discover what employers really want
     
