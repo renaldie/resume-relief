@@ -116,10 +116,10 @@ def agent_extract_resume(resume):
     resume_prompt_template = PromptTemplate(
         input_variables=["resume_text"],
         template=resume_template,
-        partial_variables={"format_instructions": keywords_parser.get_format_instructions()},
+        # partial_variables={"format_instructions": keywords_parser.get_format_instructions()},
     )
 
-    chain = resume_prompt_template | LLM | keywords_parser
+    chain = resume_prompt_template | LLM | StringOutputParser()
     output = chain.invoke(input={"resume_text": resume})
     return output.keywords
 
