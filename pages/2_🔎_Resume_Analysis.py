@@ -110,7 +110,6 @@ def agent_extract_resume(resume):
 
         Format your response as list of keywords in one line that would match this candidate with appropriate job positions.
         Return ONLY the keywords without additional explanations, formatting, or new line.
-        \n{format_instructions}
         """
 
     resume_prompt_template = PromptTemplate(
