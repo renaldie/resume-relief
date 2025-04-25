@@ -17,18 +17,17 @@ def main():
         
     with col2:
         st.title("Goodbye Jobless 😎")
+    
     st.markdown("""
-    ## Welcome to Resume Relief!
-
-    This tool helps you understand job requirements across different industries and seniority levels,
-    and provides insights on how your resume matches those requirements.
-
-    ### **👈 Use the sidebar to navigate between pages:**
-
-    ✨ **Job Insights**: Explore job market requirements
-
-    🔎 **Resume Analysis**: Upload your resume to get AI recommendations
-
+    # Land Your Dream Job Faster!
+    
+    **Resume Relief** analyzes job requirements and matches them to your skills.
+    
+    ## Get Started:
+    
+    ✨ **Job Insights** - Discover what employers really want
+    
+    🔎 **Resume Analysis** - See how your resume measures up
     """)
 
 if __name__ == "__main__":
