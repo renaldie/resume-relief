@@ -6,7 +6,7 @@ import re
 from collections import Counter
 import string
 
-st.title("Job Insights ✨")
+st.title("Jobs Analysis ✨")
 
 # """Find out what is trending 📊"""
 

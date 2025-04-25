@@ -239,7 +239,7 @@ if "keywords_generated" not in st.session_state:
 if "edit_mode" not in st.session_state:
     st.session_state.edit_mode = False
 
-st.title("AI Resume Analysis in 3 Steps🔎")
+st.title("AI Jobs Recommendation in 3 Steps🔎")
 st.subheader("1 | Upload Resume ⬆️")
 uploaded_file = st.file_uploader(label="Upload your resume (PDF, DOCX)", type=["pdf", "docx"], label_visibility='hidden')
 
