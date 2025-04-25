@@ -21,9 +21,9 @@ def main():
     st.markdown("""
     ### AI Job Analysis and Job Recommendation Platform 
     
-    ✨ **Job Insights** - Discover what employers really want
+    ✨ **Job Analysis** - Discover what employers really want
     
-    🔎 **Resume Analysis** - See how your resume measures up
+    🔎 **Job Recommendation** - Personal recommendations based on your resume
     """)
 
 if __name__ == "__main__":

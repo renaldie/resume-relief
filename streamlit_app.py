@@ -18,8 +18,8 @@ st.set_page_config(
 # Main app
 def main():
     home_page = st.Page("pages/home_page.py", title="Home", icon="🪴")
-    page_1 = st.Page("pages/1_✨_Job_Insights.py", title="Job Insights", icon="✨")
-    page_2 = st.Page("pages/2_🔎_Resume_Analysis.py", title="Resume Analysis", icon="🔎")
+    page_1 = st.Page("pages/1_✨_Job_Insights.py", title="Job Analysis", icon="✨")
+    page_2 = st.Page("pages/2_🔎_Resume_Analysis.py", title="Job Recommendation", icon="🔎")
 
     pg = st.navigation([home_page, page_1, page_2])
     pg.run()
