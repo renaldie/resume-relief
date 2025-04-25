@@ -120,7 +120,7 @@ def agent_extract_resume(resume):
 
     chain = resume_prompt_template | LLM | StrOutputParser()
     output = chain.invoke(input={"resume_text": resume})
-    return output.keywords
+    return output
 
 def agent_retrieve_jobs(resume, k, category, seniority, VECTORSTORE):
     results = VECTORSTORE.similarity_search_with_relevance_scores(
