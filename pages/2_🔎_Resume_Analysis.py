@@ -269,7 +269,7 @@ if uploaded_file and not st.session_state.resume_analyzed:
         max_retries = 3
 
         while result and not isinstance(result['keywords'], list) and retry_count < max_retries:
-            st.spinner(f'Need more time {retry_count+1}/{max_retries}', icon="⏳")
+            st.spinner(f'Need more time {retry_count+1}/{max_retries}')
             result = analyze_resume(uploaded_file)
             retry_count += 1
     
