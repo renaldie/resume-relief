@@ -16,11 +16,9 @@ def main():
         st.image("assets/logo.jpg", width=100)
         
     with col2:
-        st.title("Goodbye Jobless 😎")
+        st.title("Land Your Dream Job Faster 😎")
     
     st.markdown("""
-    # Land Your Dream Job Faster!
-    
     **Resume Relief** analyzes job requirements and matches them to your skills.
     
     ## Get Started:

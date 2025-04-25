@@ -260,7 +260,6 @@ if uploaded_file and not st.session_state.resume_analyzed:
             st.session_state.resume_analyzed = True
             refresh_keywords()
 
-
 # STEP 2: Display Keywords
 if st.session_state.resume_analyzed:
     st.markdown("---")
