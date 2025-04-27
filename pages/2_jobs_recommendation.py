@@ -2,6 +2,8 @@ from dotenv import load_dotenv
 import os
 import streamlit as st
 load_dotenv()
+import langsmith
+from langsmith import traceable
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN") or st.secrets.get("GITHUB_TOKEN")
 AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY") or st.secrets.get("AZURE_OPENAI_API_KEY")
 ASTRA_DB_API_ENDPOINT = os.environ.get("ASTRA_DB_API_ENDPOINT") or st.secrets.get("ASTRA_DB_API_ENDPOINT")
@@ -32,6 +34,7 @@ warnings.filterwarnings("ignore", module=r"ollama\._types")
 
 ## LangChain
 from langchain_openai import AzureChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain_ollama import ChatOllama
 from langchain_openai import AzureOpenAIEmbeddings
 from langchain_astradb import AstraDBVectorStore
@@ -85,6 +88,7 @@ def convert_to_md(input_file):
     result = md.convert(input_file)
     return result.text_content
 
+@traceable
 def agent_extract_resume(resume):
     resume_template = """"
         You are an expert resume analyzer. Extract the most relevant job search keywords from the following resume markdown.
