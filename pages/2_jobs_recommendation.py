@@ -243,7 +243,7 @@ if "edit_mode" not in st.session_state:
 
 st.title("AI Jobs Recommendation in 3 Steps🔎")
 st.subheader("1 | Upload Resume ⬆️")
-uploaded_file = st.file_uploader(label="Upload your resume (PDF, DOCX)", type=["pdf", "docx"], label_visibility='hidden')
+uploaded_file = st.file_uploader(label="Upload your resume (PDF, DOCX, PPTX)", type=["pdf", "docx"], label_visibility='hidden')
 
 if uploaded_file and uploaded_file.name != st.session_state.last_uploaded_file_name:
     st.session_state.resume_analyzed = False
