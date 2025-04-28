@@ -166,7 +166,7 @@ def analyze_resume(uploaded_file):
         if os.path.exists(temp_file_path):
             os.unlink(temp_file_path)
 
-def find_job_matches(keywords, category, seniority, k=10):
+def find_job_matches(keywords, category, seniority, k=9):
     """Find job matches based on resume keywords and preferences"""
     try:
         # with st.spinner("Matching up your skills...🧙‍♂️"):
@@ -325,6 +325,96 @@ if st.session_state.keywords_generated:
     # Use the existing find_job_matches function
     results = find_job_matches(st.session_state.resume_keywords, category, seniority)
     
+    # # Add custom CSS for card styling
+    # st.markdown("""
+    # <style>
+    #     .job-card {
+    #         border: 1px solid #ddd;
+    #         border-radius: 10px;
+    #         padding: 15px;
+    #         margin-bottom: 10px;
+    #         background-color: white;
+    #         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    #         height: 100%;
+    #         position: relative;
+    #         transition: transform 0.3s;
+    #     }
+    #     .job-card:hover {
+    #         transform: translateY(-5px);
+    #         box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    #     }
+    #     .match-percentage {
+    #         position: absolute;
+    #         top: 10px;
+    #         right: 10px;
+    #         background-color: #4CAF50;
+    #         color: white;
+    #         border-radius: 20px;
+    #         padding: 5px 10px;
+    #         font-weight: bold;
+    #     }
+    #     .job-title {
+    #         color: #666;
+    #         font-weight: bold;
+    #         font-size: 1.1em;
+    #         margin-right: 60px;
+    #         margin-bottom: 8px;
+    #         margin-top: 5px;
+    #     }
+    #     .company-name {
+    #         color: #666;
+    #         margin-bottom: 15px;
+    #     }
+    #     .details-link {
+    #         color: #1E88E5;
+    #         cursor: pointer;
+    #         text-decoration: underline;
+    #     }
+    # </style>
+    # """, unsafe_allow_html=True)
+
+    # # Create rows of 3 cards each
+    # for i in range(0, len(results), 3):
+    #     cols = st.columns(3)
+        
+    #     # Create 3 cards per row (or fewer for the last row)
+    #     for j in range(3):
+    #         if i+j < len(results):
+    #             job = results[i+j]
+    #             job_title = job['metadata'].get('title')
+    #             company_name = job['metadata'].get('company_name')
+    #             match_score = job['score']
+                
+    #             with cols[j]:
+    #                 # Use a container for each card
+    #                 card = st.container()
+    #                 with card:
+    #                     # Use HTML for better styling control
+    #                     st.markdown(f"""
+    #                     <div class="job-card">
+    #                         <div class="match-percentage">{match_score:.1f}%</div>
+    #                         <div class="job-title">{job_title}</div>
+    #                         <div class="company-name">{company_name}</div>
+    #                     </div>
+    #                     """, unsafe_allow_html=True)
+                        
+    #                     # Add an expander for details
+    #                     with st.expander("Details"):
+    #                         st.markdown(f"**Job Title**: {job_title}")
+    #                         st.markdown(f"**Company**: {company_name}")
+    #                         st.markdown(f"**Company Field**: {job['metadata'].get('company_field')}")
+    #                         st.markdown(f"**Job Category**: {job['metadata'].get('category_major')}")
+    #                         st.markdown(f"**Employment Type**: {job['metadata'].get('employment_type')}")
+    #                         st.markdown(f"**Seniority**: {job['metadata'].get('seniority')}")
+    #                         st.markdown(f"**Location**: {job['metadata'].get('location')}")
+    #                         st.markdown(f"**Experience**: {job['metadata'].get('experience')}")
+    #                         st.markdown(f"**Salary Range**: {job['metadata'].get('salary_range')}")
+    #                         st.markdown(f"**Skills**: {job['metadata'].get('skills')}")
+                            
+    #                         col1, col2 = st.columns(2)
+    #                         col1.link_button("Apply Now", job['metadata'].get('job_url'))
+    #                         col2.link_button("Company Profile", job['metadata'].get('company_url'))
+
     # Display job matches
     for i, job in enumerate(results, 1):
         job_title = job['metadata'].get('title')
