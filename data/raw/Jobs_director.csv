@@ -4299,3 +4299,118 @@ Who We Are Looking For:
 Open and positive mind love to take on challenges Self-starters ready to take initiative and bring fresh ideas to the tableTeam players who believe in our vision and are eager to contribute to our journeyIndividuals willing to invest their skills and time now for a potentially rewarding future
 Note: 
 We are in the early stages of our startup journey, and while we're not in a position to offer competitive salaries just yet, we are offering stock options to those who join us now and help build the foundation of our success. This way, we can share the success and profits together as our company grows.",https://www.cake.me/companies/tranx-io
+Tech Lead (Backend Focused),夜幕數位有限公司,Information Services,IT,"CTO, Chief Technology Officer",Full-time,Director,"Songshan District, Taipei City, Taiwan",1,5 years of experience required,"200,000 ~ 300,000 TWD / month","['Livestreaming', 'MySQL', 'PostgreSQL']","🧠 關於這個職位ｌAbout This Role
+我們正在尋找一位 能獨立完成直播功能開發與上線 的技術核心夥伴。這是一份高度實戰、強調獨立執行的 Tech Lead（偏後端） 職位。未來隨著產品擴張，你也將參與建立並領導技術團隊。
+NightCo 是一個已穩定營運的成人影音平台，你將從零開始設計並開發直播系統，解決串流、互動、支付整合、穩定性等核心挑戰。
+We’re looking for a hands-on and independent Tech Lead (back-end focused) to build and launch our platform’s live streaming feature. This is a very practical, execution-driven role. As we grow, you’ll also help shape and lead our future engineering team.
+NightCo is an operating adult content platform with stable revenue. You’ll be responsible for designing and developing it from scratch — solving challenges around streaming, interactivity, monetization, and system stability.
+
+🛠 工作內容｜What You’ll Do
+
+
+建構 NightCo 的直播系統：串流處理（RTMP/WebRTC）、與前後台系統串接
+
+
+設計並實作直播聊天室、禮物打賞、即時互動與金流整合（已具虛擬貨幣系統）
+
+
+優化後端效能、安全性與直播穩定性
+
+
+與創辦人密切合作，快速落地產品功能與流程
+
+
+Build NightCo’s live streaming backend from the ground up (RTMP/WebRTC ingestion, playback, OBS integration)
+
+
+Develop live chat, gifting/tipping, real-time interactivity, and integrate our existing virtual currency/payment system
+
+
+Optimize backend performance, scalability, and reliability for live sessions
+
+
+Collaborate directly with the founder to turn product ideas into working features, fast","✅ 你需要具備的條件｜Requirements
+
+
+5 年以上後端開發經驗，精通 Node.js / TypeScript 或等同技術
+
+
+有串流技術開發經驗（RTMP, WebRTC, HLS, FFMPEG 等）
+
+
+熟悉 REST API 設計與串接第三方串流服務（如 Agora / Mux / LiveKit 等）
+
+
+熟悉資料庫操作與效能調校（PostgreSQL / MySQL / Redis）
+
+
+能獨立從規劃到部署完整交付功能
+
+
+熟悉 MVP 流程與資源有限下的技術選擇
+
+
+能接受成人平台內容，並具專業態度看待該產業
+
+
+5+ years of backend development experience, proficient in Node.js / TypeScript or equivalent
+
+
+Hands-on experience with streaming technologies (RTMP, WebRTC, HLS, FFMPEG, etc.)
+
+
+Solid knowledge of RESTful API design and 3rd-party live service integrations (e.g., Agora, Mux, LiveKit)
+
+
+Familiarity with database systems and optimization (PostgreSQL / MySQL / Redis)
+
+
+Able to independently plan, develop, and deploy full features
+
+
+Understanding of MVP-style development and resource-efficient decision making
+
+
+Comfortable working in the adult industry with a professional mindset⭐ 加分條件｜Bonus Points
+
+
+有建置直播平台經驗（即使只負責部分模組）
+
+
+熟悉直播互動設計：聊天室、禮物、打賞、收益分潤等
+
+
+有基本前端整合能力，能協助直播相關 UI 串接
+
+
+Experience building or contributing to a live streaming platform
+
+
+Familiarity with live feature logic: chatrooms, gifting, tipping, revenue sharing
+
+
+Basic front-end integration skills to assist with live UI development💡 我們能提供｜What We Offer
+
+
+明確的產品目標與穩定成長方向
+
+
+與創辦人一對一合作，高效率、無官僚
+
+
+已上線平台，具穩定用戶與營收
+
+
+有機會談股權回報，與公司共成長
+
+
+Clear product vision and stable business direction
+
+
+Direct collaboration with the founder, no bureaucracy
+
+
+A live, revenue-generating platform with active users
+
+
+Equity options for high-impact contributors — share both the risk and reward",https://www.cake.me/companies/nightco/jobs/tech-lead-back-end-focused?locale=en,1 - 10 people,台北市中正區,公司由一群有想法有目標、愛工作更愛生活的團隊組成，是的，我們很熱血，喜歡技術、喜歡創新、更喜歡玩耍，同時，我們更樂於跟比自己更強的夥伴共事並且相互激盪，如果你也嚮往這樣的環境跟團隊氛圍，或者需要舞台發揮，那麼我們將會很歡迎你的加入。,https://www.cake.me/companies/nightco
