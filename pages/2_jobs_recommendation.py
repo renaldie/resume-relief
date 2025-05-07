@@ -30,6 +30,7 @@ from typing import Dict, List, Any
 
 # API Keys
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN") or st.secrets.get("GITHUB_TOKEN")
+OPEN_AI_API_KEY = os.environ.get("OPEN_AI_API_KEY") or st.secrets.get("OPEN_AI_API_KEY")
 AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY") or st.secrets.get("AZURE_OPENAI_API_KEY")
 ASTRA_DB_API_ENDPOINT = os.environ.get("ASTRA_DB_API_ENDPOINT") or st.secrets.get("ASTRA_DB_API_ENDPOINT")
 ASTRA_DB_APPLICATION_TOKEN = os.environ.get("ASTRA_DB_APPLICATION_TOKEN") or st.secrets.get("ASTRA_DB_APPLICATION_TOKEN")
@@ -41,15 +42,20 @@ langsmith_project = os.environ.get("LANGSMITH_PROJECT") or st.secrets.get("LANGS
 if "SSL_CERT_FILE" in os.environ:
     del os.environ["SSL_CERT_FILE"]
 
-
-LLM = AzureChatOpenAI(
-    azure_endpoint="https://models.inference.ai.azure.com",
-    azure_deployment="gpt-4.1-nano",
-    openai_api_version="2025-03-01-preview", 
+LLM = ChatOpenAI(
     model_name="gpt-4.1-nano",
     temperature=1,
-    api_key=GITHUB_TOKEN,
+    openai_api_key=OPEN_AI_API_KEY,
 )
+
+# LLM = AzureChatOpenAI(
+#     azure_endpoint="https://models.inference.ai.azure.com",
+#     azure_deployment="gpt-4.1-nano",
+#     openai_api_version="2025-03-01-preview", 
+#     model_name="gpt-4.1-nano",
+#     temperature=1,
+#     api_key=GITHUB_TOKEN,
+# )
 
 # LLM = ChatOllama(
 #     model = "llama3.2:1b",
