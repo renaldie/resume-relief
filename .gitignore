@@ -1,5 +1,11 @@
-# Ignore environment variables
+# Environments
 .env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
 # Ignore specific data files
 data/104_jobs_all_categories_clean.csv
