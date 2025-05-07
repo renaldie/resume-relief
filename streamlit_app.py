@@ -23,7 +23,7 @@ def main():
 
     pg = st.navigation([home_page, page_1, page_2])
     pg.run()
-    # Add a simple credit at the bottom
+
     st.markdown("---")
     
     # cols = st.columns([2, 1, 2])
