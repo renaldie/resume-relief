@@ -42,20 +42,20 @@ langsmith_project = os.environ.get("LANGSMITH_PROJECT") or st.secrets.get("LANGS
 if "SSL_CERT_FILE" in os.environ:
     del os.environ["SSL_CERT_FILE"]
 
-LLM = ChatOpenAI(
-    model_name="gpt-4.1-nano",
-    temperature=1,
-    openai_api_key=OPEN_AI_API_KEY,
-)
-
-# LLM = AzureChatOpenAI(
-#     azure_endpoint="https://models.inference.ai.azure.com",
-#     azure_deployment="gpt-4.1-nano",
-#     openai_api_version="2025-03-01-preview", 
+# LLM = ChatOpenAI(
 #     model_name="gpt-4.1-nano",
 #     temperature=1,
-#     api_key=GITHUB_TOKEN,
+#     openai_api_key=OPEN_AI_API_KEY,
 # )
+
+LLM = AzureChatOpenAI(
+    azure_endpoint="https://models.inference.ai.azure.com",
+    azure_deployment="gpt-4.1-nano",
+    openai_api_version="2025-03-01-preview", 
+    model_name="gpt-4.1-nano",
+    temperature=1,
+    api_key=GITHUB_TOKEN,
+)
 
 # LLM = ChatOllama(
 #     model = "llama3.2:1b",
