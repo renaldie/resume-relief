@@ -30,7 +30,7 @@ from typing import Dict, List, Any
 
 # API Keys
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN") or st.secrets.get("GITHUB_TOKEN")
-OPEN_AI_API_KEY = os.environ.get("OPEN_AI_API_KEY") or st.secrets.get("OPEN_AI_API_KEY")
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY")
 AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY") or st.secrets.get("AZURE_OPENAI_API_KEY")
 ASTRA_DB_API_ENDPOINT = os.environ.get("ASTRA_DB_API_ENDPOINT") or st.secrets.get("ASTRA_DB_API_ENDPOINT")
 ASTRA_DB_APPLICATION_TOKEN = os.environ.get("ASTRA_DB_APPLICATION_TOKEN") or st.secrets.get("ASTRA_DB_APPLICATION_TOKEN")
@@ -45,7 +45,7 @@ if "SSL_CERT_FILE" in os.environ:
 # LLM = ChatOpenAI(
 #     model_name="gpt-4.1-nano",
 #     temperature=1,
-#     openai_api_key=OPEN_AI_API_KEY,
+#     openai_api_key=OPENAI_API_KEY,
 # )
 
 LLM = AzureChatOpenAI(
