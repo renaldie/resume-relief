@@ -2,18 +2,21 @@
 import sys
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 
 # Streamlit
 import streamlit as st
 import warnings
 import tempfile
+
 warnings.filterwarnings("ignore", module=r"chromadb\.types")
 warnings.filterwarnings("ignore", module=r"ollama\._types")
 
 # LangSmith
 import langsmith
 from langsmith import traceable
+
 # LangChain
 from langchain_openai import AzureChatOpenAI
 from langchain_openai import ChatOpenAI
@@ -25,19 +28,34 @@ from langchain_core.documents import Document
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_openai import OpenAIEmbeddings
+
 # LangChain Helper
 from typing import Dict, List, Any
 
 # API Keys
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN") or st.secrets.get("GITHUB_TOKEN")
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY")
-AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY") or st.secrets.get("AZURE_OPENAI_API_KEY")
-ASTRA_DB_API_ENDPOINT = os.environ.get("ASTRA_DB_API_ENDPOINT") or st.secrets.get("ASTRA_DB_API_ENDPOINT")
-ASTRA_DB_APPLICATION_TOKEN = os.environ.get("ASTRA_DB_APPLICATION_TOKEN") or st.secrets.get("ASTRA_DB_APPLICATION_TOKEN")
-langsmith_tracing = os.environ.get("LANGSMITH_TRACING") or st.secrets.get("LANGSMITH_TRACING")
-langsmith_endpoint = os.environ.get("LANGSMITH_ENDPOINT") or st.secrets.get("LANGSMITH_ENDPOINT")
-langsmith_key = os.environ.get("LANGSMITH_API_KEY") or st.secrets.get("LANGSMITH_API_KEY")
-langsmith_project = os.environ.get("LANGSMITH_PROJECT") or st.secrets.get("LANGSMITH_PROJECT")
+AZURE_OPENAI_API_KEY = os.environ.get("AZURE_OPENAI_API_KEY") or st.secrets.get(
+    "AZURE_OPENAI_API_KEY"
+)
+ASTRA_DB_API_ENDPOINT = os.environ.get("ASTRA_DB_API_ENDPOINT") or st.secrets.get(
+    "ASTRA_DB_API_ENDPOINT"
+)
+ASTRA_DB_APPLICATION_TOKEN = os.environ.get(
+    "ASTRA_DB_APPLICATION_TOKEN"
+) or st.secrets.get("ASTRA_DB_APPLICATION_TOKEN")
+langsmith_tracing = os.environ.get("LANGSMITH_TRACING") or st.secrets.get(
+    "LANGSMITH_TRACING"
+)
+langsmith_endpoint = os.environ.get("LANGSMITH_ENDPOINT") or st.secrets.get(
+    "LANGSMITH_ENDPOINT"
+)
+langsmith_key = os.environ.get("LANGSMITH_API_KEY") or st.secrets.get(
+    "LANGSMITH_API_KEY"
+)
+langsmith_project = os.environ.get("LANGSMITH_PROJECT") or st.secrets.get(
+    "LANGSMITH_PROJECT"
+)
 
 if "SSL_CERT_FILE" in os.environ:
     del os.environ["SSL_CERT_FILE"]
@@ -51,7 +69,7 @@ if "SSL_CERT_FILE" in os.environ:
 LLM = AzureChatOpenAI(
     azure_endpoint="https://models.inference.ai.azure.com",
     azure_deployment="gpt-4.1-nano",
-    openai_api_version="2025-03-01-preview", 
+    openai_api_version="2025-03-01-preview",
     model_name="gpt-4.1-nano",
     temperature=1,
     api_key=GITHUB_TOKEN,
@@ -66,7 +84,7 @@ LLM = AzureChatOpenAI(
 EMBEDDING = AzureOpenAIEmbeddings(
     azure_endpoint="https://resume-relief.openai.azure.com/",
     azure_deployment="text-embedding-3-large",
-    openai_api_version="2024-02-01", 
+    openai_api_version="2024-02-01",
     model="text-embedding-3-large",
     openai_api_key=AZURE_OPENAI_API_KEY,
 )
@@ -74,7 +92,7 @@ EMBEDDING = AzureOpenAIEmbeddings(
 # EMBEDDING = AzureOpenAIEmbeddings(
 #     azure_endpoint="https://models.inference.ai.azure.com",
 #     azure_deployment="text-embedding-3-large",
-#     openai_api_version="2024-02-01", 
+#     openai_api_version="2024-02-01",
 #     model="text-embedding-3-large",
 #     openai_api_key=GITHUB_TOKEN,
 # )
@@ -87,10 +105,12 @@ VECTORSTORE = AstraDBVectorStore(
     namespace="cake_db",
 )
 
+
 def convert_to_md(input_file):
     md = MarkItDown()
     result = md.convert(input_file)
     return result.text_content
+
 
 @traceable
 def agent_extract_resume(resume):
@@ -121,49 +141,54 @@ def agent_extract_resume(resume):
     output = chain.invoke(input={"resume_text": resume})
     return output
 
+
 def agent_retrieve_jobs(resume, k, category, seniority, VECTORSTORE):
     results = VECTORSTORE.similarity_search_with_relevance_scores(
         query=resume,
         k=k,
-        filter={'$and': [
-            {'category_major': {'$eq': category}}, 
-            {'seniority': {'$eq': seniority}},
-        ]}
+        filter={
+            "$and": [
+                {"category_major": {"$eq": category}},
+                {"seniority": {"$eq": seniority}},
+            ]
+        },
     )
-    
+
     # Return the results instead of printing
     formatted_results = []
     for doc, score in results:
-        formatted_results.append({
-            "content": doc.page_content,
-            "score": score * 100,
-            "metadata": doc.metadata
-        })
-    
+        formatted_results.append(
+            {
+                "content": doc.page_content,
+                "score": score * 100,
+                "metadata": doc.metadata,
+            }
+        )
+
     return formatted_results
+
 
 def analyze_resume(uploaded_file):
     """Process the uploaded resume file and extract keywords"""
     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
         temp_file.write(uploaded_file.getvalue())
         temp_file_path = temp_file.name
-    
+
     try:
         # Convert resume to markdown
         with st.spinner("Converting resume to text..."):
             resume_md = convert_to_md(temp_file_path)
             if not resume_md:
-                st.error("Failed to convert resume to text. Please check the file format.")
+                st.error(
+                    "Failed to convert resume to text. Please check the file format."
+                )
                 return None
-        
+
         # Extract resume information
         # with st.spinner("Getting important keywords...🐝"):
         extracted_keywords = agent_extract_resume(resume_md)
-            
-        return {
-            "resume_md": resume_md,
-            "keywords": extracted_keywords
-        }
+
+        return {"resume_md": resume_md, "keywords": extracted_keywords}
     except Exception as e:
         st.error(f"Error during resume analysis: {str(e)}")
         return None
@@ -171,6 +196,7 @@ def analyze_resume(uploaded_file):
         # Clean up temporary file
         if os.path.exists(temp_file_path):
             os.unlink(temp_file_path)
+
 
 def find_job_matches(keywords, category, seniority, k=9):
     """Find job matches based on resume keywords and preferences"""
@@ -182,6 +208,7 @@ def find_job_matches(keywords, category, seniority, k=9):
         st.error(f"Error retrieving job matches: {str(e)}")
         return []
 
+
 def refresh_keywords():
     """Callback for the Recreate Keywords button"""
     if uploaded_file:
@@ -191,24 +218,27 @@ def refresh_keywords():
             st.session_state.resume_keywords = result["keywords"]
             st.session_state.resume_analyzed = True
 
+
 def toggle_edit_mode():
     st.session_state.edit_mode = not st.session_state.edit_mode
     # When entering edit mode, create a copy of current keywords for editing
     if st.session_state.edit_mode:
         st.session_state.edited_keywords = st.session_state.resume_keywords
 
+
 def save_edited_keywords():
     st.session_state.resume_keywords = st.session_state.edited_keywords
     st.session_state.edit_mode = False
 
+
 job_seniority_dict = {
-    'Internship': '🎓 Internship',
-    'Entry level': '🌱 Entry Level',
-    'Assistant': '🔍 Assistant',
-    'Mid-Senior level': '⚙️ Mid-Senior Level',
-    'Director': '🚀 Director',
-    'Executive (VP, GM, C-Level)': '👑 Executive (VP, GM, C-Level)',
-    }
+    "Internship": "🎓 Internship",
+    "Entry level": "🌱 Entry Level",
+    "Assistant": "🔍 Assistant",
+    "Mid-Senior level": "⚙️ Mid-Senior Level",
+    "Director": "🚀 Director",
+    "Executive (VP, GM, C-Level)": "👑 Executive (VP, GM, C-Level)",
+}
 
 job_category_dict = {
     "Bio, Medical": "🧬 Bio / Medical",
@@ -231,7 +261,7 @@ job_category_dict = {
     "Public Social Work": "💞 Public Social Work",
     "Sales": "📈 Sales",
     "Other": "💅 Other",
-    }
+}
 
 # Initialize session state
 if "resume_analyzed" not in st.session_state:
@@ -249,7 +279,11 @@ if "edit_mode" not in st.session_state:
 
 st.title("AI Jobs Recommendation in 3 Steps🔎")
 st.subheader("1 | Upload Resume ⬆️")
-uploaded_file = st.file_uploader(label="Upload your resume (PDF, DOCX, PPTX)", type=["pdf", "docx"], label_visibility='hidden')
+uploaded_file = st.file_uploader(
+    label="Upload your resume (PDF, DOCX, PPTX)",
+    type=["pdf", "docx"],
+    label_visibility="hidden",
+)
 
 if uploaded_file and uploaded_file.name != st.session_state.last_uploaded_file_name:
     st.session_state.resume_analyzed = False
@@ -260,7 +294,12 @@ if uploaded_file and uploaded_file.name != st.session_state.last_uploaded_file_n
 
 # STEP 1: Resume Analysis
 if uploaded_file and not st.session_state.resume_analyzed:
-    if st.button("Analyze Keywords", type="primary", icon='✨', use_container_width=True,):
+    if st.button(
+        "Analyze Keywords",
+        type="primary",
+        icon="✨",
+        use_container_width=True,
+    ):
         result = analyze_resume(uploaded_file)
         if result:
             st.session_state.resume_md = result["resume_md"]
@@ -272,7 +311,7 @@ if uploaded_file and not st.session_state.resume_analyzed:
 if st.session_state.resume_analyzed:
     st.markdown("---")
     st.subheader("2 | Resume Keywords ✨")
-    
+
     # Display keywords in edit mode or view mode
     if st.session_state.edit_mode:
         # Edit mode - show text area and save/cancel buttons
@@ -280,9 +319,9 @@ if st.session_state.resume_analyzed:
             "Edit your keywords",
             value=st.session_state.edited_keywords,
             height=250,
-            key="keyword_editor"
+            key="keyword_editor",
         )
-        
+
         col1, col2 = st.columns(2)
         if col1.button("Save Changes", type="primary", use_container_width=True):
             save_edited_keywords()
@@ -294,11 +333,25 @@ if st.session_state.resume_analyzed:
         # View mode - show keywords and action buttons
         st.success(f"{st.session_state.resume_keywords}")
         left, middle, right = st.columns(3)
-        if left.button("See Job Suggestions", type="primary", use_container_width=True, icon="🧙‍♂️"):
+        if left.button(
+            "See Job Suggestions", type="primary", use_container_width=True, icon="🧙‍♂️"
+        ):
             st.session_state.keywords_generated = True
-        middle.button("Refresh Keywords", type="secondary", use_container_width=True, icon="🔄", on_click=refresh_keywords)
-        right.button("Manual Edit", type="secondary", icon="📝", use_container_width=True, on_click=toggle_edit_mode)
-    
+        middle.button(
+            "Refresh Keywords",
+            type="secondary",
+            use_container_width=True,
+            icon="🔄",
+            on_click=refresh_keywords,
+        )
+        right.button(
+            "Manual Edit",
+            type="secondary",
+            icon="📝",
+            use_container_width=True,
+            on_click=toggle_edit_mode,
+        )
+
 # STEP 3: Display Job Category Selection
 if st.session_state.keywords_generated:
     st.markdown("---")
@@ -309,13 +362,10 @@ if st.session_state.keywords_generated:
     with col1:
         displayed_options = list(job_category_dict.values())
         actual_options = list(job_category_dict.keys())
-        display_index = st.selectbox(
-            "Industry",
-            options=displayed_options
-        )
+        display_index = st.selectbox("Industry", options=displayed_options)
         selected_index = displayed_options.index(display_index)
         category = actual_options[selected_index]
-    
+
     with col2:
         displayed_options = list(job_seniority_dict.values())
         actual_options = list(job_seniority_dict.keys())
@@ -325,14 +375,15 @@ if st.session_state.keywords_generated:
         )
         selected_index = displayed_options.index(display_index)
         seniority = actual_options[selected_index]
-    
+
     # Find matching jobs button
     # if st.button("Find Matching Jobs", type="primary"):
     # Use the existing find_job_matches function
     results = find_job_matches(st.session_state.resume_keywords, category, seniority)
-    
+
     # Add custom CSS for card styling
-    st.markdown("""
+    st.markdown(
+        """
     <style>
         .job-card {
             border: 1px solid #ddd;
@@ -377,49 +428,72 @@ if st.session_state.keywords_generated:
             text-decoration: underline;
         }
     </style>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     # Create rows of 3 cards each
     for i in range(0, len(results), 3):
         cols = st.columns(3)
-        
+
         # Create 3 cards per row (or fewer for the last row)
         for j in range(3):
-            if i+j < len(results):
-                job = results[i+j]
-                job_title = job['metadata'].get('title')
-                company_name = job['metadata'].get('company_name')
-                match_score = job['score']
-                
+            if i + j < len(results):
+                job = results[i + j]
+                job_title = job["metadata"].get("title")
+                company_name = job["metadata"].get("company_name")
+                match_score = job["score"]
+
                 with cols[j]:
                     # Use a container for each card
                     card = st.container()
                     with card:
                         # Use HTML for better styling control
-                        st.markdown(f"""
+                        st.markdown(
+                            f"""
                         <div class="job-card">
                             <div class="match-percentage">{match_score:.1f}%</div>
                             <div class="job-title">{job_title}</div>
                             <div class="company-name">{company_name}</div>
                         </div>
-                        """, unsafe_allow_html=True)
-                        
+                        """,
+                            unsafe_allow_html=True,
+                        )
+
                         # Add an expander for details
                         with st.expander("Details"):
                             st.markdown(f"**Job Title**: {job_title}")
                             st.markdown(f"**Company**: {company_name}")
-                            st.markdown(f"**Company Field**: {job['metadata'].get('company_field')}")
-                            st.markdown(f"**Job Category**: {job['metadata'].get('category_major')}")
-                            st.markdown(f"**Employment Type**: {job['metadata'].get('employment_type')}")
-                            st.markdown(f"**Seniority**: {job['metadata'].get('seniority')}")
-                            st.markdown(f"**Location**: {job['metadata'].get('location')}")
-                            st.markdown(f"**Experience**: {job['metadata'].get('experience')}")
-                            st.markdown(f"**Salary Range**: {job['metadata'].get('salary_range')}")
+                            st.markdown(
+                                f"**Company Field**: {job['metadata'].get('company_field')}"
+                            )
+                            st.markdown(
+                                f"**Job Category**: {job['metadata'].get('category_major')}"
+                            )
+                            st.markdown(
+                                f"**Employment Type**: {job['metadata'].get('employment_type')}"
+                            )
+                            st.markdown(
+                                f"**Seniority**: {job['metadata'].get('seniority')}"
+                            )
+                            st.markdown(
+                                f"**Location**: {job['metadata'].get('location')}"
+                            )
+                            st.markdown(
+                                f"**Experience**: {job['metadata'].get('experience')}"
+                            )
+                            st.markdown(
+                                f"**Salary Range**: {job['metadata'].get('salary_range')}"
+                            )
                             st.markdown(f"**Skills**: {job['metadata'].get('skills')}")
-                            
+
                             col1, col2 = st.columns(2)
-                            col1.link_button("Apply Now", job['metadata'].get('job_url'))
-                            col2.link_button("Company Profile", job['metadata'].get('company_url'))
+                            col1.link_button(
+                                "Apply Now", job["metadata"].get("job_url")
+                            )
+                            col2.link_button(
+                                "Company Profile", job["metadata"].get("company_url")
+                            )
 
     # # Display job matches
     # for i, job in enumerate(results, 1):
@@ -435,9 +509,9 @@ if st.session_state.keywords_generated:
     #     skills = job['metadata'].get('skills')
     #     job_url = job['metadata'].get('job_url')
     #     company_url = job['metadata'].get('company_url')
-        
+
     #     with st.expander(f"{job['score']:.1f}% Match | {job_title} in {name}"):
-    #         job_tabs = st.tabs(["Details"])                     
+    #         job_tabs = st.tabs(["Details"])
     #         with job_tabs[0]:
     #             st.markdown(f"**Job Title**: {job_title}")
     #             st.markdown(f"**Company**: {name}")
