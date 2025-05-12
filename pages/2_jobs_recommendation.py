@@ -1,17 +1,11 @@
 # System
-import sys
 import os
 from dotenv import load_dotenv
-
-load_dotenv()
 
 # Streamlit
 import streamlit as st
 import warnings
 import tempfile
-
-warnings.filterwarnings("ignore", module=r"chromadb\.types")
-warnings.filterwarnings("ignore", module=r"ollama\._types")
 
 # LangSmith
 import langsmith
@@ -24,13 +18,15 @@ from langchain_ollama import ChatOllama
 from langchain_openai import AzureOpenAIEmbeddings
 from langchain_astradb import AstraDBVectorStore
 from markitdown import MarkItDown
-from langchain_core.documents import Document
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_openai import OpenAIEmbeddings
 
 # LangChain Helper
-from typing import Dict, List, Any
+
+warnings.filterwarnings("ignore", module=r"chromadb\.types")
+warnings.filterwarnings("ignore", module=r"ollama\._types")
+load_dotenv()
 
 # API Keys
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN") or st.secrets.get("GITHUB_TOKEN")
