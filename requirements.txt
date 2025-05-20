@@ -9,13 +9,10 @@ jieba
 googletrans
 
 # LangChain
-pysqlite3-binary
 python-dotenv
 markitdown[all]
 langchain-ollama
 langchain-google-genai
-chromadb
-langchain-chroma
 langchain
 langsmith
 langchain-core
