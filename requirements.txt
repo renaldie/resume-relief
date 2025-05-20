@@ -19,3 +19,7 @@ langchain-core
 openai
 langchain-openai
 langchain-astradb
+
+# Chatbot
+google-generativeai
+retry
