@@ -3,13 +3,9 @@ import streamlit as st
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import re
-from collections import Counter
 import string
 
 st.title("Jobs Analysis ✨")
-
-# """Find out what is trending 📊"""
-
 
 # Load the data
 @st.cache_data
@@ -17,7 +13,6 @@ def load_data():
     # Load data just once
     df = pd.read_csv("data/jobs_processed.csv", encoding="utf-8-sig")
     return df
-
 
 # Generate wordcloud with specific colormap
 def generate_wordcloud(text, title, colormap):
