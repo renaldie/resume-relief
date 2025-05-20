@@ -10,6 +10,8 @@ def main():
     ✨ **Job Analysis** - Discover what employers really want
     
     🔎 **Job Recommendation** - Personal recommendations based on your resume
+
+    👩🏻‍💼 **Job Seeking Coach** -  Personal coach to help you in how to better your resume, job interview preparations and skill development
     """
     )
 
