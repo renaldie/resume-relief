@@ -12,15 +12,14 @@ import langsmith
 from langsmith import traceable
 
 # LangChain
-from langchain_openai import AzureChatOpenAI
 from langchain_openai import ChatOpenAI
-from langchain_ollama import ChatOllama
+from langchain_openai import OpenAIEmbeddings
+from langchain_openai import AzureChatOpenAI
 from langchain_openai import AzureOpenAIEmbeddings
 from langchain_astradb import AstraDBVectorStore
 from markitdown import MarkItDown
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain_openai import OpenAIEmbeddings
 
 # LangChain Helper
 
@@ -53,15 +52,19 @@ langsmith_project = os.environ.get("LANGSMITH_PROJECT") or st.secrets.get(
     "LANGSMITH_PROJECT"
 )
 
-if "SSL_CERT_FILE" in os.environ:
-    del os.environ["SSL_CERT_FILE"]
-
+# OpenAI Model
 # LLM = ChatOpenAI(
 #     model_name="gpt-4.1-nano",
 #     temperature=1,
 #     openai_api_key=OPENAI_API_KEY,
 # )
 
+# EMBEDDING = OpenAIEmbeddings(
+#     model="text-embedding-3-large",
+#     openai_api_key=OPENAI_API_KEY,
+# )
+
+# Github Model
 LLM = AzureChatOpenAI(
     azure_endpoint="https://models.inference.ai.azure.com",
     azure_deployment="gpt-4.1-nano",
@@ -71,26 +74,19 @@ LLM = AzureChatOpenAI(
     api_key=GITHUB_TOKEN,
 )
 
-# LLM = ChatOllama(
-#     model = "llama3.2:1b",
-#     temperature = 0.8,
-#     num_predict = 256,
-# )
-
 EMBEDDING = AzureOpenAIEmbeddings(
-    azure_endpoint="https://resume-relief.openai.azure.com/",
-    azure_deployment="text-embedding-3-large",
-    openai_api_version="2024-02-01",
+    azure_endpoint="https://models.inference.ai.azure.com",
     model="text-embedding-3-large",
-    openai_api_key=AZURE_OPENAI_API_KEY,
+    api_key=GITHUB_TOKEN,
 )
 
+# Azure OpenAI Model
 # EMBEDDING = AzureOpenAIEmbeddings(
-#     azure_endpoint="https://models.inference.ai.azure.com",
-#     azure_deployment="text-embedding-3-large",
-#     openai_api_version="2024-02-01",
 #     model="text-embedding-3-large",
-#     openai_api_key=GITHUB_TOKEN,
+#     azure_deployment="text-embedding-3-large",
+#     azure_endpoint="https://resume-relief.openai.azure.com/",
+#     openai_api_version="2024-02-01",
+#     api_key=AZURE_OPENAI_API_KEY,
 # )
 
 VECTORSTORE = AstraDBVectorStore(
@@ -100,7 +96,6 @@ VECTORSTORE = AstraDBVectorStore(
     api_endpoint=ASTRA_DB_API_ENDPOINT,
     namespace="cake_db",
 )
-
 
 def convert_to_md(input_file):
     md = MarkItDown()
@@ -138,30 +133,34 @@ def agent_extract_resume(resume):
     return output
 
 
-def agent_retrieve_jobs(resume, k, category, seniority, VECTORSTORE):
-    results = VECTORSTORE.similarity_search_with_relevance_scores(
-        query=resume,
-        k=k,
-        filter={
-            "$and": [
-                {"category_major": {"$eq": category}},
-                {"seniority": {"$eq": seniority}},
-            ]
-        },
-    )
-
-    # Return the results instead of printing
-    formatted_results = []
-    for doc, score in results:
-        formatted_results.append(
-            {
-                "content": doc.page_content,
-                "score": score * 100,
-                "metadata": doc.metadata,
-            }
+def agent_retrieve_jobs(keywords, k, category, seniority, VECTORSTORE):
+    try:
+        results = VECTORSTORE.similarity_search_with_relevance_scores(
+            query=keywords,
+            k=k,
+            filter={
+                "$and": [
+                    {"category_major": {"$eq": category}},
+                    {"seniority": {"$eq": seniority}},
+                ]
+            },
         )
 
-    return formatted_results
+        # Return the results instead of printing
+        formatted_results = []
+        for doc, score in results:
+            formatted_results.append(
+                {
+                    "content": doc.page_content,
+                    "score": score * 100,
+                    "metadata": doc.metadata,
+                }
+            )
+
+        return formatted_results
+    except Exception as e:
+        st.error(f"Error retrieving job matches: {str(e)}")
+        return []
 
 
 def analyze_resume(uploaded_file):
@@ -192,18 +191,6 @@ def analyze_resume(uploaded_file):
         # Clean up temporary file
         if os.path.exists(temp_file_path):
             os.unlink(temp_file_path)
-
-
-def find_job_matches(keywords, category, seniority, k=9):
-    """Find job matches based on resume keywords and preferences"""
-    try:
-        # with st.spinner("Matching up your skills...🧙‍♂️"):
-        results = agent_retrieve_jobs(keywords, k, category, seniority, VECTORSTORE)
-        return results
-    except Exception as e:
-        st.error(f"Error retrieving job matches: {str(e)}")
-        return []
-
 
 def refresh_keywords():
     """Callback for the Recreate Keywords button"""
@@ -375,7 +362,12 @@ if st.session_state.keywords_generated:
     # Find matching jobs button
     # if st.button("Find Matching Jobs", type="primary"):
     # Use the existing find_job_matches function
-    results = find_job_matches(st.session_state.resume_keywords, category, seniority)
+    results = agent_retrieve_jobs(
+        keywords=st.session_state.resume_keywords, 
+        k=9,
+        category=category, 
+        seniority=seniority,
+        VECTORSTORE=VECTORSTORE)
 
     # Add custom CSS for card styling
     st.markdown(
