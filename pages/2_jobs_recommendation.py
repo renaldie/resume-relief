@@ -74,20 +74,20 @@ LLM = AzureChatOpenAI(
     api_key=GITHUB_TOKEN,
 )
 
-EMBEDDING = AzureOpenAIEmbeddings(
-    azure_endpoint="https://models.inference.ai.azure.com",
-    model="text-embedding-3-large",
-    api_key=GITHUB_TOKEN,
-)
+# EMBEDDING = AzureOpenAIEmbeddings(
+#     azure_endpoint="https://models.inference.ai.azure.com",
+#     model="text-embedding-3-large",
+#     api_key=GITHUB_TOKEN,
+# )
 
 # Azure OpenAI Model
-# EMBEDDING = AzureOpenAIEmbeddings(
-#     model="text-embedding-3-large",
-#     azure_deployment="text-embedding-3-large",
-#     azure_endpoint="https://resume-relief.openai.azure.com/",
-#     openai_api_version="2024-02-01",
-#     api_key=AZURE_OPENAI_API_KEY,
-# )
+EMBEDDING = AzureOpenAIEmbeddings(
+    model="text-embedding-3-large",
+    azure_deployment="text-embedding-3-large",
+    azure_endpoint="https://resume-relief.openai.azure.com/",
+    openai_api_version="2024-02-01",
+    api_key=AZURE_OPENAI_API_KEY,
+)
 
 VECTORSTORE = AstraDBVectorStore(
     collection_name="cake_db",
