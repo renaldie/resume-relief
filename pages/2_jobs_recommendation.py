@@ -263,8 +263,8 @@ if "edit_mode" not in st.session_state:
 st.title("AI Jobs Recommendation in 3 Steps🔎")
 st.subheader("1 | Upload Resume ⬆️")
 uploaded_file = st.file_uploader(
-    label="Upload your resume (PDF, DOCX, PPTX)",
-    type=["pdf", "docx"],
+    label="Upload your resume",
+    type=["pdf", "doc", "docx", "pptx"],
     label_visibility="hidden",
 )
 
