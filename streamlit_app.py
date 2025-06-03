@@ -38,7 +38,7 @@ def main():
             """
             <div style="text-align: center">
                 © 2025 Resume Relief<br>
-                Made by <a href="https://renaldi-ega.notion.site" target="_blank">Ren</a> in Hsinchu with ❤️<br>
+                Made by Team 1 in Hsinchu with ❤️<br>
             </div>
             """, 
             unsafe_allow_html=True
@@ -46,3 +46,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Made by <a href="https://renaldi-ega.notion.site" target="_blank">Ren</a> in Hsinchu with ❤️<br>
