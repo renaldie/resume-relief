@@ -8,6 +8,10 @@ spacy
 jieba
 googletrans
 
+#Chatbot
+google-generativeai
+retry
+
 # LangChain
 pysqlite3-binary
 python-dotenv
