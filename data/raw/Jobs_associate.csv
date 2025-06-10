@@ -19531,3 +19531,135 @@ Experience living or studying in the U.S.; understanding of American culture and
 Sam Shiah, the founder of the company, started the business in 2018. Since then, it has gradually grown into a seven-figure business, and our long-term vision is to reach eight figures.
 Our mission is to assist our students in securing the highest-paying and most prestigious jobs on Wall Street. We take pride in being the original and premier Wall Street Coaching Program available. Despite others copying our business strategies, we remain the market leader in this industry. Since 2018, we have experienced steady growth and continue to be the fastest-growing company in the market.
 We have achieved outstanding results in helping individuals fulfill their dreams. Check out our stellar Trustpilot rating here.",https://www.cake.me/companies/wall-street-mastermind
+AI 工程師 (AI Engineer),PalUp,Software,IT,Machine Learning Engineer,Full-time,Assistant,"Nangang District, Taipei City, Taiwan, Taipei City, Taiwan",5,2 years of experience required,"1,000,000 ~ 1,800,000 TWD / year",[],"***由此連結提交你的履歷 Please apply to this job via our Careers page: https://jobs.ashbyhq.com/palup/bff49073-e32f-4cef-a2ff-d96f82b58c20*** 我們正在尋找一位充滿熱情且技術熟練的AI工程師加入我們的團隊，負責設計、開發和實施人工智慧解決方案。你將與跨職能團隊合作，利用機器學習、深度學習和資料分析技術來解決複雜問題並推動產品創新。 
+
+主要職責 
+設計並開發AI模型，包括機器學習和深度學習演算法，以滿足業務需求。清理、預處理和分析大規模資料集，確保模型輸入資料的品質。將AI模型整合到現有系統或應用程式中，並優化其效能與可擴展性。與資料科學家、軟體工程師和產品經理合作，定義專案目標並交付成果。持續監控和改進已部署的AI系統，確保其準確性和可靠性。研究最新的AI技術和趨勢，提出應用於公司產品的創新建議。撰寫清晰的技術文件，記錄模型開發過程和部署細節。開發和實施大型語言模型（LLMs）、檢索增強生成（RAG）系統、AI代理和基於圖的AI解決方案，以增強智慧系統。優化LLMs以適應特定用例，包括微調、提示工程和生產環境中的部署。設計和構建RAG管道，整合外部知識來源，提升模型準確性和上下文相關性。創建具備任務規劃、決策制定和多步推理能力的自主AI代理。利用基於圖的AI技術，如知識圖譜和圖神經網路，建模複雜關係並增強決策能力。
+
+
+
+
+Who We Are
+We are seeking a passionate and technically skilled AI Engineer to join our team, responsible for designing, developing, and implementing artificial intelligence solutions. You will collaborate with cross-functional teams, leveraging machine learning, deep learning, and data analysis techniques to address complex problems and drive product innovation.
+
+What You Will Do
+Design and develop AI models, including machine learning and deep learning algorithms, to address business needs.Clean, preprocess, and analyze large-scale datasets to ensure the quality of model input data.Integrate AI models into existing systems or applications, optimizing for performance and scalability.Collaborate with data scientists, software engineers, and product managers to define project goals and deliver results.Continuously monitor and improve deployed AI systems to ensure accuracy and reliability.Research the latest AI technologies and trends, proposing innovative applications for company products.Write clear technical documentation, detailing model development processes and deployment specifics.Develop and implement large language models (LLMs), retrieval-augmented generation (RAG) systems, AI agents, and graph-based AI solutions to enhance intelligent systems.Optimize LLMs for specific use cases, including fine-tuning, prompt engineering, and deployment in production environments.Design and build RAG pipelines to integrate external knowledge sources, improving model accuracy and contextual relevance.Create autonomous AI agents capable of task planning, decision-making, and multi-step reasoning.Leverage graph-based AI techniques, such as knowledge graphs and graph neural networks, to model complex relationships and enhance decision-making.","技能與資格要求
+學歷：電腦科學、資料科學、數學、工程或相關領域的學士學位（碩士或博士學位尤佳）。經驗：至少2-3年在AI、機器學習或相關領域的實務經驗。程式語言：精通Python，熟悉相關套件（如TensorFlow、PyTorch、Scikit-learn、Pandas、LangChain、LlamaIndex）。
+
+技術能力
+深入理解機器學習演算法（例如回歸、分類、叢集）和深度學習框架（例如CNN、RNN、Transformer）。具備大型語言模型（LLMs）的專業知識，包括微調、提示工程和部署。熟悉檢索增強生成（RAG）系統，包括向量資料庫（例如Pinecone、Weaviate）和嵌入模型。具備構建AI代理的能力，支援任務自動化、推理和與外部API的互動。了解基於圖的AI，包括圖神經網路（GNNs）、知識圖譜及其在推薦系統或網路分析中的應用。精通資料處理、特徵工程以及文字、圖像或多模態資料的嵌入技術。具備雲端平台（例如AWS、Google Cloud、Azure）和模型部署管道的經驗。
+
+問題解決能力：能夠獨立分析並解決技術挑戰。
+團隊合作：具備良好的溝通能力和跨部門協作經驗。
+
+加分條件
+具備自然語言處理（NLP）、電腦視覺或強化學習的專案經驗。熟悉大數據工具（例如Hadoop、Spark）或容器技術（例如Docker、Kubernetes）。發表過AI相關論文或擁有開源專案貢獻。具備LLM框架（例如Hugging Face Transformers、OpenAI API）和代理框架（例如AutoGen、CrewAI）的實務經驗。熟悉圖資料庫（例如Neo4j、ArangoDB）和圖演算法在AI應用中的知識。Who You Are
+Bachelor’s degree in Computer Science, Data Science, Mathematics, Engineering, or a related field (Master’s or PhD preferred).Experience: At least 2-3 years of hands-on experience in AI, machine learning, or related fields.Technical Skills:Programming Languages: Proficient in Python, with strong familiarity with relevant libraries (e.g., TensorFlow, PyTorch, Scikit-learn, Pandas, LangChain, LlamaIndex).Deep understanding of machine learning algorithms (e.g., regression, classification, clustering) and deep learning frameworks (e.g., CNN, RNN, Transformer).Expertise in large language models (LLMs), including fine-tuning, prompt engineering, and deployment.Experience with retrieval-augmented generation (RAG) systems, including vector databases (e.g., Pinecone, Weaviate) and embedding models.Proficiency in building AI agents with capabilities in task automation, reasoning, and interaction with external APIs.Knowledge of graph-based AI, including graph neural networks (GNNs), knowledge graphs, and their applications in recommendation systems or network analysis.Strong skills in data processing, feature engineering, and embeddings for text, image, or multimodal data.Experience with cloud platforms (e.g., AWS, Google Cloud, Azure) and model deployment pipelines.Problem-Solving: Ability to independently analyze and resolve technical challenges.Team Collaboration: Excellent communication skills and experience working across departments.
+
+Bonus If You Have
+Project experience in natural language processing (NLP), computer vision, or reinforcement learning.Familiarity with big data tools (e.g., Hadoop, Spark) or container technologies (e.g., Docker, Kubernetes).Published AI-related papers or contributions to open-source projects.Hands-on experience with LLM frameworks (e.g., Hugging Face Transformers, OpenAI API) and agent frameworks (e.g., AutoGen, CrewAI).Knowledge of graph databases (e.g., Neo4j, ArangoDB) and graph algorithms for AI applications.",https://www.cake.me/companies/palup/jobs/ai-engineer-f22?locale=en,11 ~ 50 people,台北市南港區園區街3-1號5樓之二,"PalUp is a social network where your favorite creators, beloved brands, and a wide variety of AI experts with unique talents come together to connect with you.
+Picture getting style tips from a Fashion Stylist you admire, chatting with an Athlete you cheer for, or sharing a moment with a Musician who inspires you. On PalUp, you’re never just a ""follower"" — you can always have real, personal conversations anytime you want.",https://www.cake.me/companies/palup
+課程規劃師（課程銷售人員）,萌客股份有限公司,Education,Customer Service,CRM Specialist,Full-time,Assistant,Taiwan,2,1 years of experience required,"32,000 ~ 50,000 TWD / month","['Word', 'Excel']","想幫助別人開啟語言之路，同時也想為自己創造收入嗎？
+我們正在尋找【課程規劃師】，與對語言學習有興趣的朋友對話，協助他們找到最適合的學習方案。
+✔ 和主動來詢問的學生聊聊
+✔ 根據他們的需求規劃最適合的課程
+✔ 分享語言的美好，賺進實打實的獎金！
+
+🎯 沒有陌生開發、不用到處敲門
+🎯 有人主動找上門，你只要好好介紹＋真心對待
+🎯 業績越好，抽成越多，努力有感！
+
+如果你口才不錯、熱愛分享、目標感強，那我們想見你！
+✔ 若有英文多益 TOEIC 550 分以上、JLPT 日文檢定 N3 以上、TOPIK 韓文檢定 3 級以上的證照可以薪資加給唷！
+
+
+【我們是 MK反轉外語】
+
+MK反轉外語是一家致力於打造策略性、個別化語言學習系統的線上外語學習機構。
+我們相信，學習外語不是靠苦背或短期衝刺，而是透過有計畫、有策略的學習處方箋，幫助學員將語言變成可以自然運用的能力。
+我們已經陪伴千名學員，透過三師制度（外語學習諮商師、學習分析師、課程規劃師）的協作，引導學員走出屬於自己的語言學習之路。
+👉 你將成為與學員第一線接觸的重要夥伴，幫助他們踏出關鍵的第一步。
+
+【工作內容】
+
+
+與主動來詢問的學員聯繫，了解其學習需求與目標
+
+引導學員了解 MK反轉外語的課程制度與特色
+
+協助完成學習契約簽訂、收款、課程權限開通、LINE 群入退
+
+使用線上表單與 Asana 工具管理學員名單
+
+協助學員在學習期間遇到流程性問題時提供協助
+
+與外語學習諮商師、學習分析師保持良好溝通，確保學員順利學習
+
+回報銷售進度與成效，協助優化學員聯繫流程（視個人能力與意願）
+
+【我們希望你具備的特質】
+
+
+具備良好的溝通能力與親和力，喜歡與人互動
+
+目標感強，樂於挑戰自我，能適應獎金制工作模式
+
+細心、負責，能維護良好的學員體驗
+
+熟悉 Google Workspace 工具，會使用基本線上表單、簡報
+
+能夠適應 MK反轉外語強調「策略性學習」的品牌理念，對外語學習具備基本理解
+
+【加分條件】
+
+
+有教育、業務、顧問、客戶服務相關經驗佳
+
+熟悉 MK反轉外語課程架構或曾為本機構學員
+
+具備以下任一語言能力證明（可享薪資加給）：
+TOEIC 550 分以上
+
+JLPT N3 以上
+
+TOPIK 韓檢 3 級以上
+
+【工作地點與性質】
+
+
+工作地點：桃園中壢 MK反轉外語實體辦公室
+（非遠端，我們重視團隊協作與現場交流）
+
+工作性質：正職
+
+工作時間：日班（週休二日，需配合公司活動與線上說明會時段安排）
+
+需求人數：1 - 2 人
+
+
+【薪資與福利】
+
+
+薪資結構：底薪 + 業績獎金（高抽成比例，努力有感）
+
+其他福利：
+完整內部培訓（對課程制度、品牌理念、實務流程皆有系統化訓練）
+
+每年有機會隨團參與日本學旅活動
+
+員工專屬語言學習資源與內部學習社群
+
+透明晉升制度，優秀者有機會晉升主管
+
+【我們尋找的不是單純「銷售」】
+
+在 MK反轉外語，課程規劃師不只是銷售人員，而是學員學習旅程中的陪跑者與第一位引導者。
+你的工作，不是強推課程，而是聆聽、理解、推薦真正適合對方的學習方案，幫助每一位學員從「學不會語言的挫折感」，走向「語言成為生活一部分」的喜悅。
+如果你熱愛語言，也願意陪伴別人成長，歡迎加入我們！","職業技能
+具備良好的銷售技巧，能夠有效提高轉化率。積極主動，有高度責任感與團隊合作精神。
+經歷條件
+學歷 學士學位。經歷 2-3 年相關銷售工作經驗。
+決策參與度
+行銷方案的可行度的評估和決策",https://www.cake.me/companies/mkplus/jobs/course-planner-course-salesperson?locale=en,11 ~ 50 people,桃園市中壢區中山路185號6樓,"歡迎加入MK的教育團隊！我們非常高興有新血能為MK注入更多活力與多元性！
+在這裡，我們將為學員提供最優質、最有效和最具有成效的語言學習體驗。我們的教育理念是以學員為中心，注重個人化學習，讓每個學員都能找到最適合自己的學習方式和節奏。我們的目標是幫助每一位學員克服語言障礙，實現語言學習和語言目標。
+我們的團隊由一群充滿熱情、專業和創造力的人才組成，我們相信透過共同的努力和合作，能夠達成更多的成就。我們提供良好的工作環境、發展機會和福利待遇，希望在這裡能充分發揮你的潛力和才華，實現個人職業生涯的成功和成長。",https://www.cake.me/companies/mkplus
