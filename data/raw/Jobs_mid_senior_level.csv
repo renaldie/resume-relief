@@ -22612,3 +22612,69 @@ We make machines that make chips; the hearts of the devices that keep us informe
 Whether you are a student or an experienced engineer, whether you want to design or build, work with customers or software code, we are looking for people like you to help us push technology further. Explore what we have to offer. If it sounds interesting, let’s stay in touch. If it sounds right for you, let’s talk about how you can be part of progress.
 --
 總部位於荷蘭的ASML (台灣艾司摩爾) 是全球最大晶片微影設備市場的翹楚，為半導體製造商提供微影設備及相關服務。全球十大半導體廠皆為ASML的客戶。ASML是一個國際化的企業，在微影設備市場的佔有率達80%以上，用於研發的支出以員工人均計算名列歐洲第二。2019年的全球銷售額逾118億歐元。36年來，ASML透過和客戶及供應商的緊密合作，搭配上高效能的營運流程，以及來自全球的優秀員工，逐步開創了我們在晶片微影領域的技術領先地位。ASML 致力成為全球主要半導體製造商之重要夥伴，協助其設計研發及整合高階系統，開發可用於各類資訊科技產品、行動通訊及物聯網相關產品的晶片。",https://www.cake.me/companies/ASML-Taiwan
+"資深軟體工程師 Senior Software Engineer, Fullstack",巴涼科技股份有限公司,Computer Networking,IT,Software Engineer,Full-time,Mid-Senior level,"Taipei City, Taiwan",1,3 years of experience required,"60,000 ~ 110,000 TWD / month",[],"招募背景
+在製造業數位轉型的浪潮中，我們看見工程圖作為核心資料載體，其潛藏價值長期被埋沒。CADASU 致力於以 AI 重新定義工程圖的角色，協助客戶在圖面管理、製程推估與報價決策上實現質的飛躍。
+隨著用戶規模快速擴張，我們正面臨一連串高強度挑戰：
+
+打磨既有功能，提升使用體驗與穩定性
+
+架構可承載成長的基礎設施
+
+快速迭代產品，驗證市場需求
+我們正在尋找思維敏捷、願意與產品共演進的工程夥伴，一起推動這項深具產業影響力的任務。
+工作內容
+開發與維護公司主產品 CADASU，並根據需求開發新產品，主要業務包含：
+參與產品功能規劃與技術方案討論撰寫可維護、可擴展的程式碼數據分析或業務上的小工具開發設計與開發 RESTful API，支援前端應用與第三方整合優化資料庫架構，處理大量工程圖檔的儲存與檢索監控系統效能，持續優化回應時間與資源使用
+為何我們值得加入
+• 我們完成了從 0 到 1 的產品開發與設計，已經找到早期付費使用者
+• 你會與夥伴一同實現從 1 到 100 的 SaaS 產品實作，累積經市場驗證的實務經驗
+• 年輕、開放的合作氣氛，可接受質疑的團隊夥伴，很大的自我學習成長空間
+• 工作上會接觸到不同領域的高手，了解不同產業生態、各行業的眉角
+• 我們重視人才的獨創性，你有機會成為參與重大決策的一份子","必要條件
+此職位為 Fullstack，會依照候選人的特質與強項分配前後端開發比例。
+• 熟悉 JavaScript（ES6+ 語法）、CSS 與 HTML
+• 熟悉 Python 及 Django/FastAPI 框架
+（前兩項條件中具備一項即可）
+• 具備基本的 Linux 系統操作能力
+• 良好的團隊合作與溝通能力
+目前我們使用的技術如下（非必要條件）：
+Python 3.10+Django REST FrameworkPostgreSQLRedisCelery
+加分條件
+• 熟悉關聯式資料庫設計與優化
+• 有AWS 部署經驗
+• 有製造業或 B2B SaaS 產品經驗
+我們看重的價值
+• 能適應快速的工作節奏
+• 負責任，有獨立完成專案的能力
+• 表達精確，以邏輯、數據與團隊溝通
+• 開放的心態，樂於、主動嘗試新工具（提升效率的工具可以報帳）
+工時與休假
+• 上下班時間：表定 09:00 至 18:00
+• 週休二日，依國定假日休假
+• 彈性遠端工作
+• 辦公室地點：臺北市 捷運藍線後山埤站走路 1 分鐘
+福利制度
+• 每月全額補助購買一本書
+• 不定期員工聚餐
+• 另有員工分紅，認股或選擇權",https://www.cake.me/companies/remotenc/jobs/senior-software-engineer-fullstack?locale=en,1 ~ 10 people,台北市南港區忠孝東路六段六號八樓之八,"CADASU – 解鎖工程圖價值的 AI 助手
+CADASU（www.cadasu.com）是 巴涼科技（RemoteNC Inc.）推出的工程圖 AI 助手，專注於重塑傳統製造業中工程圖的處理方式。針對少量多樣的製造挑戰，CADASU 為工程圖賦能，讓企業能夠更高效地挖掘工程圖中的價值。
+
+隨著製造業邁向數位化與智能化，我們看到了工程圖資料被忽略的龐大價值潛力。因此，CADASU 的使命是通過 AI 技術，重新定義工程圖的應用，幫助製造業客戶在圖紙管理、製程評估及報價流程中大幅提升效率與精確度。
+
+核心價值：
+	1.	智能分析與自動化處理
+CADASU 不僅能快速搜尋相似零件，還能自動分析工程圖上的尺寸、材料及製造特徵，生成品檢表、報價建議及製程評估報告，讓生產流程更高效、更精準。
+	2.	開箱即用，快速導入
+CADASU 以預訓練超過 百萬張工程圖的 LCM（大型工程圖模型） 為基礎，客戶無需進行繁瑣部署或修改現有流程，用戶註冊後即可立即上手，顯著縮短導入週期並降低成本與風險。
+	3.	免地推，雲端服務輕鬆啟用
+CADASU 採用直覺式聊天界面設計，無需業務地推，客戶可透過簡單註冊便快速上手，大幅降低工程軟體學習門檻，進一步推動數位化轉型。
+
+
+自 2024 年專案啟動以來，我們已成功獲得許多製造業龍頭企業指標用戶肯定，並幫助客戶節省高達 20% 的生產成本。智能助手功能更獲大量潛在用戶加入候補清單，我們的解決方案不僅受到客戶的高度肯定，也逐步成為製造業數位化轉型的關鍵推動者。
+
+如果您對我們的產品與使命感興趣，請立即聯繫我們！我們期待與您合作，共同定義製造業的未來。",https://www.cake.me/companies/remotenc
+IT - IT OPS Asia ERP Manager - Tainan,ASML Taiwan 台灣艾司摩爾,Semiconductor,IT,"System, Network Administrator",Full-time,Mid-Senior level,"Tainan City, Taiwan",1,10 years of experience required,Negotiable,[],"ContextThe IT ERP Manager is responsible for leading the planning, implementation, support, and continuous improvement of the company's ERP systems(e.g., SAP, Oracle, etc.). This role acts as the key liaison between business units and IT to ensure ERP solutions align with business objectives, while managing a team of BPA (analysts, developers, or consultants) as needed.RequirementsBachelor with substantial work experience or Master with equivalent experienceExperience in leading project teamsSpecific for Line manager additional requirements:IT / Technical domain knowledgeExperience with delivery of solutions and products.ResponsibilitiesIT line Manager, coordinates and manages operational annual plan ,Evaluates organizational design for own functional.Lead the planning, implementation and optimization of ERP systems(SAP, Oracle)Align ERP initiatives with overall BPA and business strategy.Evaluate and recommend new features or upgrades based on business needs and technological advancements.Project & Change ManagementOversee ERP-related projects from initiation to completion, ensuring timelines, budgets, and scope are met.Manage change requests, system enhancements, and process improvements.Collaborate with business units to define project requirements and deliver business value.Support project implementation through effective information dissemination and logistics coordination.Assist the GL and team leads in preparing reports, presentations, and meeting materials.Ensure compliance with IT governance and company policies.Diversity and inclusionASML is an Equal Opportunity Employer that values and respects the importance of a diverse and inclusive workforce. It is the policy of the company to recruit, hire, train and promote persons in all job titles without regard to race, color, religion, sex, age, national origin, veteran status, disability, sexual orientation, or gender identity. We recognize that diversity and inclusion is a driving force in the success of our company.Need to know more about applying for a job at ASML? Read our frequently asked questions.",,https://www.cake.me/companies/ASML-Taiwan/jobs/j00324574-it-it-ops-asia-erp-manager-tainan-516085e5abaee4d3307836dc205d51?locale=en,1001 ~ 5000 people,新竹市公道五路三段一號十一樓,"Be part of progress.
+We make machines that make chips; the hearts of the devices that keep us informed, entertained and safe. Devices that improve our quality of life and help to tackle the world’s toughest problems. We build some of the most amazing machines that you will ever see, and the software to run them. Never satisfied, we measure our performance in units that begin with pico or nano.
+Whether you are a student or an experienced engineer, whether you want to design or build, work with customers or software code, we are looking for people like you to help us push technology further. Explore what we have to offer. If it sounds interesting, let’s stay in touch. If it sounds right for you, let’s talk about how you can be part of progress.
+--
+總部位於荷蘭的ASML (台灣艾司摩爾) 是全球最大晶片微影設備市場的翹楚，為半導體製造商提供微影設備及相關服務。全球十大半導體廠皆為ASML的客戶。ASML是一個國際化的企業，在微影設備市場的佔有率達80%以上，用於研發的支出以員工人均計算名列歐洲第二。2019年的全球銷售額逾118億歐元。36年來，ASML透過和客戶及供應商的緊密合作，搭配上高效能的營運流程，以及來自全球的優秀員工，逐步開創了我們在晶片微影領域的技術領先地位。ASML 致力成為全球主要半導體製造商之重要夥伴，協助其設計研發及整合高階系統，開發可用於各類資訊科技產品、行動通訊及物聯網相關產品的晶片。",https://www.cake.me/companies/ASML-Taiwan
