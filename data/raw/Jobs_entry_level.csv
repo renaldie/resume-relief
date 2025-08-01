@@ -21050,3 +21050,75 @@ We make machines that make chips; the hearts of the devices that keep us informe
 Whether you are a student or an experienced engineer, whether you want to design or build, work with customers or software code, we are looking for people like you to help us push technology further. Explore what we have to offer. If it sounds interesting, let’s stay in touch. If it sounds right for you, let’s talk about how you can be part of progress.
 --
 總部位於荷蘭的ASML (台灣艾司摩爾) 是全球最大晶片微影設備市場的翹楚，為半導體製造商提供微影設備及相關服務。全球十大半導體廠皆為ASML的客戶。ASML是一個國際化的企業，在微影設備市場的佔有率達80%以上，用於研發的支出以員工人均計算名列歐洲第二。2019年的全球銷售額逾118億歐元。36年來，ASML透過和客戶及供應商的緊密合作，搭配上高效能的營運流程，以及來自全球的優秀員工，逐步開創了我們在晶片微影領域的技術領先地位。ASML 致力成為全球主要半導體製造商之重要夥伴，協助其設計研發及整合高階系統，開發可用於各類資訊科技產品、行動通訊及物聯網相關產品的晶片。",https://www.cake.me/companies/ASML-Taiwan
+"軟體工程師 Software Engineer, Fullstack",巴涼科技股份有限公司,Computer Networking,IT,Software Engineer,Full-time,Entry level,"Taipei City, Taiwan",1,No requirement for relevant working experience,"45,000 ~ 90,000 TWD / month",[],"招募背景
+在製造業數位轉型的浪潮中，我們看見工程圖作為核心資料載體，其潛藏價值長期被埋沒。CADASU 致力於以 AI 重新定義工程圖的角色，協助客戶在圖面管理、製程推估與報價決策上實現質的飛躍。
+隨著用戶規模快速擴張，我們正面臨一連串高強度挑戰：
+打磨既有功能，提升使用體驗與穩定性架構可承載成長的基礎設施快速迭代產品，驗證市場需求
+我們正在尋找思維敏捷、願意與產品共演進的工程夥伴，一起推動這項深具產業影響力的任務。
+工作內容
+開發與維護公司主產品 CADASU，並根據需求開發新產品，主要業務包含：
+參與產品功能規劃與技術方案討論撰寫可維護、可擴展的程式碼數據分析或業務上的小工具開發設計與開發 RESTful API，支援前端應用與第三方整合優化資料庫架構，處理大量工程圖檔的儲存與檢索監控系統效能，持續優化回應時間與資源使用
+為何我們值得加入
+• 我們完成了從 0 到 1 的產品開發與設計，已經找到早期付費使用者
+• 你會與夥伴一同實現從 1 到 100 的 SaaS 產品實作，累積經市場驗證的實務經驗
+• 年輕、開放的合作氣氛，可接受質疑的團隊夥伴，很大的自我學習成長空間
+• 工作上會接觸到不同領域的高手，了解不同產業生態、各行業的眉角
+• 我們重視人才的獨創性，你有機會成為參與重大決策的一份子","必要條件
+此職位為 Fullstack，會依照候選人的特質與強項分配前後端開發比例。
+• 熟悉 JavaScript（ES6+ 語法）、CSS 與 HTML
+• 熟悉 Python 及 Django/FastAPI 框架
+（前兩項條件中具備一項即可）
+• 具備基本的 Linux 系統操作能力
+• 良好的團隊合作與溝通能力
+目前我們使用的技術如下（非必要條件）：
+Python 3.10+Django REST FrameworkPostgreSQLRedisCelery
+加分條件
+• 具備 RESTful API 設計經驗
+• 熟悉 SQL/任一種前端框架（Bootstrap, jQuery, Vue.js, React 等）
+• 具備 AWS 部署經驗
+• 有製造業或 B2B SaaS 產品經驗
+我們看重的價值
+• 能適應快速的工作節奏
+• 負責任，有獨立完成專案的能力
+• 表達精確，以邏輯、數據與團隊溝通
+• 開放的心態，樂於、主動嘗試新工具（提升效率的工具可以報帳）
+工時與休假
+• 上下班時間：表定 09:00 至 18:00
+• 週休二日，依國定假日休假
+• 彈性遠端工作
+• 辦公室位置：臺北市 捷運藍線後山埤站走路 1 分鐘
+福利制度
+• 每月全額補助購買一本書
+• 不定期員工聚餐
+• 另有員工分紅，認股或選擇權",https://www.cake.me/companies/remotenc/jobs/r-amp-d-engineer-fullstack?locale=en,1 ~ 10 people,台北市南港區忠孝東路六段六號八樓之八,"CADASU – 解鎖工程圖價值的 AI 助手
+CADASU（www.cadasu.com）是 巴涼科技（RemoteNC Inc.）推出的工程圖 AI 助手，專注於重塑傳統製造業中工程圖的處理方式。針對少量多樣的製造挑戰，CADASU 為工程圖賦能，讓企業能夠更高效地挖掘工程圖中的價值。
+
+隨著製造業邁向數位化與智能化，我們看到了工程圖資料被忽略的龐大價值潛力。因此，CADASU 的使命是通過 AI 技術，重新定義工程圖的應用，幫助製造業客戶在圖紙管理、製程評估及報價流程中大幅提升效率與精確度。
+
+核心價值：
+	1.	智能分析與自動化處理
+CADASU 不僅能快速搜尋相似零件，還能自動分析工程圖上的尺寸、材料及製造特徵，生成品檢表、報價建議及製程評估報告，讓生產流程更高效、更精準。
+	2.	開箱即用，快速導入
+CADASU 以預訓練超過 百萬張工程圖的 LCM（大型工程圖模型） 為基礎，客戶無需進行繁瑣部署或修改現有流程，用戶註冊後即可立即上手，顯著縮短導入週期並降低成本與風險。
+	3.	免地推，雲端服務輕鬆啟用
+CADASU 採用直覺式聊天界面設計，無需業務地推，客戶可透過簡單註冊便快速上手，大幅降低工程軟體學習門檻，進一步推動數位化轉型。
+
+
+自 2024 年專案啟動以來，我們已成功獲得許多製造業龍頭企業指標用戶肯定，並幫助客戶節省高達 20% 的生產成本。智能助手功能更獲大量潛在用戶加入候補清單，我們的解決方案不僅受到客戶的高度肯定，也逐步成為製造業數位化轉型的關鍵推動者。
+
+如果您對我們的產品與使命感興趣，請立即聯繫我們！我們期待與您合作，共同定義製造業的未來。",https://www.cake.me/companies/remotenc
+Internship - Finance Global Enabling Services (GES) Intern - Hsinchu,ASML Taiwan 台灣艾司摩爾,Semiconductor,Other,Other,Full-time,Entry level,"Hsinchu City, Taiwan",1,No requirement for relevant working experience,Negotiable,[],"Introduction to the jobAs an Intern, you are expected to support the process of accounts payable and VAT-In to ensure financial records are correct and complete creating the basis for a clean audit trail with proper substantiation and specification.Your responsibilities are as follows:1. Accounts Payable(1). Support to GUI verification or vendor invoice and check the details, solve error when it occurs.(2). Collaborate with Procurement and Treasury for vendor payment.(3). From the financial input perspective to assist in vendor invoice related questions2. VAT(1). Support Preparation of VAT/GUI filings(2). Tax Refund Support- support to prepare/provide documents to National Tax Authority per request, communicate and co-work with stakeholders for information alignment.3. Assisting management as required on any tasks and projectsEducation and experienceBusiness School student- Junior to Senior or GraduateSkillsUnderstanding of Financial Accounting PrincipleFluent in written & spoken English and ChineseDiversity and inclusionASML is an Equal Opportunity Employer that values and respects the importance of a diverse and inclusive workforce. It is the policy of the company to recruit, hire, train and promote persons in all job titles without regard to race, color, religion, sex, age, national origin, veteran status, disability, sexual orientation, or gender identity. We recognize that diversity and inclusion is a driving force in the success of our company.Need to know more about applying for a job at ASML? Read our frequently asked questions.",,https://www.cake.me/companies/ASML-Taiwan/jobs/j00324881-internship-finance-global-enabling-services-ges-intern-8919c10ec5d1d17ca72cfb15b03a36?locale=en,1001 ~ 5000 people,新竹市公道五路三段一號十一樓,"Be part of progress.
+We make machines that make chips; the hearts of the devices that keep us informed, entertained and safe. Devices that improve our quality of life and help to tackle the world’s toughest problems. We build some of the most amazing machines that you will ever see, and the software to run them. Never satisfied, we measure our performance in units that begin with pico or nano.
+Whether you are a student or an experienced engineer, whether you want to design or build, work with customers or software code, we are looking for people like you to help us push technology further. Explore what we have to offer. If it sounds interesting, let’s stay in touch. If it sounds right for you, let’s talk about how you can be part of progress.
+--
+總部位於荷蘭的ASML (台灣艾司摩爾) 是全球最大晶片微影設備市場的翹楚，為半導體製造商提供微影設備及相關服務。全球十大半導體廠皆為ASML的客戶。ASML是一個國際化的企業，在微影設備市場的佔有率達80%以上，用於研發的支出以員工人均計算名列歐洲第二。2019年的全球銷售額逾118億歐元。36年來，ASML透過和客戶及供應商的緊密合作，搭配上高效能的營運流程，以及來自全球的優秀員工，逐步開創了我們在晶片微影領域的技術領先地位。ASML 致力成為全球主要半導體製造商之重要夥伴，協助其設計研發及整合高階系統，開發可用於各類資訊科技產品、行動通訊及物聯網相關產品的晶片。",https://www.cake.me/companies/ASML-Taiwan
+CS HMI- NPI Data Analyst Internship - Hsinchu,ASML Taiwan 台灣艾司摩爾,Semiconductor,Other,Other,Part-time,Entry level,"Hsinchu City, Taiwan",1,No requirement for relevant working experience,Negotiable,[],"ContextWorks together with other data analysts, project leaders and group leaders to solve business issues through analytics at ASML.Applies well-known data analysis techniques and methods, works under supervision.RequirementsBSc with experience in working with data analysis tools and techniques.ResponsibilitiesAnalytics (40%)Supports in implementing improvement initiative and operates under supervision of project leader and senior analyst. Identifies the problem areas, communicates risks, opportunities. Suggests methods and techniques which allow the business to make data informed decisions and operate more efficiently.Data Processing (including data preparation, report generation, data modeling and data cleansing) (40%)Processes and crunches data. Prepares data for analysis, reporting, and visualization.Data Visualization & Storytelling (20%)Supports the development of impactful representations of data and insights, through highly interactive visual interfaces.Project Management Participates in projects.SkillsStrong Analytical skillsExcellent written and spoken English languageExcellent Communication skillsproficiency in Excel/Visual Basic (Power BI) Programming skills of Matlab/Python will be highly valuableThis position requires access to controlled technology, as defined in the United States Export Administration Regulations (15 C.F.R. § 730, et seq.). Qualified candidates must be legally authorized to access such controlled technology prior to beginning work. Business demands may require ASML to proceed with candidates who are immediately eligible to access controlled technology.Diversity and inclusionASML is an Equal Opportunity Employer that values and respects the importance of a diverse and inclusive workforce. It is the policy of the company to recruit, hire, train and promote persons in all job titles without regard to race, color, religion, sex, age, national origin, veteran status, disability, sexual orientation, or gender identity. We recognize that diversity and inclusion is a driving force in the success of our company.Need to know more about applying for a job at ASML? Read our frequently asked questions.",,https://www.cake.me/companies/ASML-Taiwan/jobs/j00324683-cs-hmi-npi-data-analyst-internship-hsinchu-133c688d6350c741bc2a88486eb169?locale=en,1001 ~ 5000 people,新竹市公道五路三段一號十一樓,"Be part of progress.
+We make machines that make chips; the hearts of the devices that keep us informed, entertained and safe. Devices that improve our quality of life and help to tackle the world’s toughest problems. We build some of the most amazing machines that you will ever see, and the software to run them. Never satisfied, we measure our performance in units that begin with pico or nano.
+Whether you are a student or an experienced engineer, whether you want to design or build, work with customers or software code, we are looking for people like you to help us push technology further. Explore what we have to offer. If it sounds interesting, let’s stay in touch. If it sounds right for you, let’s talk about how you can be part of progress.
+--
+總部位於荷蘭的ASML (台灣艾司摩爾) 是全球最大晶片微影設備市場的翹楚，為半導體製造商提供微影設備及相關服務。全球十大半導體廠皆為ASML的客戶。ASML是一個國際化的企業，在微影設備市場的佔有率達80%以上，用於研發的支出以員工人均計算名列歐洲第二。2019年的全球銷售額逾118億歐元。36年來，ASML透過和客戶及供應商的緊密合作，搭配上高效能的營運流程，以及來自全球的優秀員工，逐步開創了我們在晶片微影領域的技術領先地位。ASML 致力成為全球主要半導體製造商之重要夥伴，協助其設計研發及整合高階系統，開發可用於各類資訊科技產品、行動通訊及物聯網相關產品的晶片。",https://www.cake.me/companies/ASML-Taiwan
+Manufacturing - Production Planner - Linkou,ASML Taiwan 台灣艾司摩爾,Semiconductor,Logistics / Trade,Trade administration,Full-time,Entry level,"Linkou District, New Taipei, Taiwan",1,2 years of experience required,Negotiable,[],"Role and responsibilitiesCreate production planCollecting and integrate all demands from different internal customer including both factory and field requirementCollecting and realizing all constrains from factory (ex : manpower , tools , cabins , procedures)Investigating all components (including make and buy items) availability to figure out supply chain bottleneck and available workaround.Creating production plan to dispatch factory resource to meet customer requirement by the most efficient wayCommunicating and balance supply (Factory) and demand (internal customers) sides to make prioritization and reach agreementProactively monitor demand change/cancellation so as to generate the inefficiency inventoryExecute production planCreating production order in SAP, trigger material delivery and monitor/control production progressProvide necessary support (ex: material , tool , SAP issue)Quick response for demand or supply change based on considered plan to secure and meet agreed planProactively monitor the production progress so as to prevent pending WIP and cause inefficiency inventoryClose productionManaging surplus/defect material returnSecuring correctness of financial recordsArranging shipmentEducation and experience - Engineering degree (Industrial Engineering and management preferred), or Business degree (Operations or Supply Chain Management) - 3-5 years of working experience plus - Knowledge and understanding of Supply Chain concepts - Work independently under pressure and react quickly to changing priorities- MRP knowledge - ERP systems knowledge - Production planning SkillsSoft skill- Strong communication/negotiation skill ·   - English oral & written is plus   - Effective prioritizing ·      - Strong analytical, planning, and organizational skills - Strategic thinking ·      - Detail management ·      - Pressure management Hard skill ·      - Microsoft office (Specially Excel)      - SAP ERP ·      - Access or other database plus    - Visual basic is plusThis position requires access to controlled technology, as defined in the United States Export Administration Regulations (15 C.F.R. § 730, et seq.). Qualified candidates must be legally authorized to access such controlled technology prior to beginning work. Business demands may require ASML to proceed with candidates who are immediately eligible to access controlled technology.Diversity and inclusionASML is an Equal Opportunity Employer that values and respects the importance of a diverse and inclusive workforce. It is the policy of the company to recruit, hire, train and promote persons in all job titles without regard to race, color, religion, sex, age, national origin, veteran status, disability, sexual orientation, or gender identity. We recognize that diversity and inclusion is a driving force in the success of our company.Need to know more about applying for a job at ASML? Read our frequently asked questions.",,https://www.cake.me/companies/ASML-Taiwan/jobs/j00322599-manufacturing-production-planner-linkou-ffe3a9cb54c5eabddaf928caa71280?locale=en,1001 ~ 5000 people,新竹市公道五路三段一號十一樓,"Be part of progress.
+We make machines that make chips; the hearts of the devices that keep us informed, entertained and safe. Devices that improve our quality of life and help to tackle the world’s toughest problems. We build some of the most amazing machines that you will ever see, and the software to run them. Never satisfied, we measure our performance in units that begin with pico or nano.
+Whether you are a student or an experienced engineer, whether you want to design or build, work with customers or software code, we are looking for people like you to help us push technology further. Explore what we have to offer. If it sounds interesting, let’s stay in touch. If it sounds right for you, let’s talk about how you can be part of progress.
+--
+總部位於荷蘭的ASML (台灣艾司摩爾) 是全球最大晶片微影設備市場的翹楚，為半導體製造商提供微影設備及相關服務。全球十大半導體廠皆為ASML的客戶。ASML是一個國際化的企業，在微影設備市場的佔有率達80%以上，用於研發的支出以員工人均計算名列歐洲第二。2019年的全球銷售額逾118億歐元。36年來，ASML透過和客戶及供應商的緊密合作，搭配上高效能的營運流程，以及來自全球的優秀員工，逐步開創了我們在晶片微影領域的技術領先地位。ASML 致力成為全球主要半導體製造商之重要夥伴，協助其設計研發及整合高階系統，開發可用於各類資訊科技產品、行動通訊及物聯網相關產品的晶片。",https://www.cake.me/companies/ASML-Taiwan
