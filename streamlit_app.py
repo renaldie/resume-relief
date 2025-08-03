@@ -38,7 +38,7 @@ def main():
             """
             <div style="text-align: center">
                 © 2025 Resume Relief<br>
-                Made by Team 1 in Hsinchu with ❤️<br>
+                Made by Ren in Hsinchu with ❤️<br>
             </div>
             """, 
             unsafe_allow_html=True
