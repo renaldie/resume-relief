@@ -25599,3 +25599,40 @@ We make machines that make chips; the hearts of the devices that keep us informe
 Whether you are a student or an experienced engineer, whether you want to design or build, work with customers or software code, we are looking for people like you to help us push technology further. Explore what we have to offer. If it sounds interesting, let’s stay in touch. If it sounds right for you, let’s talk about how you can be part of progress.
 --
 總部位於荷蘭的ASML (台灣艾司摩爾) 是全球最大晶片微影設備市場的翹楚，為半導體製造商提供微影設備及相關服務。全球十大半導體廠皆為ASML的客戶。ASML是一個國際化的企業，在微影設備市場的佔有率達80%以上，用於研發的支出以員工人均計算名列歐洲第二。2019年的全球銷售額逾118億歐元。36年來，ASML透過和客戶及供應商的緊密合作，搭配上高效能的營運流程，以及來自全球的優秀員工，逐步開創了我們在晶片微影領域的技術領先地位。ASML 致力成為全球主要半導體製造商之重要夥伴，協助其設計研發及整合高階系統，開發可用於各類資訊科技產品、行動通訊及物聯網相關產品的晶片。",https://www.cake.me/companies/ASML-Taiwan
+Sr. Site Reliability Engineer (Sr. SRE),裕順資訊有限公司,Information Services,IT,DevOps / System Admin,Full-time,Mid-Senior level,"Songshan District, Taipei City, Taiwan",1,4 years of experience required,"1,800,000 ~ 2,300,000 TWD / year","['Prometheus/Grafana', 'K8S', 'DevOps']","為什麼大家喜歡在 RichWell Co.Ltd. 上班？
+1.彈性上班-早上不趕打卡，想多睡一點、避開通勤人潮都OK。2.特休多多-不用等滿一年就能休假，我們比法規更大方，放假就是要爽爽的。3.獎金福利讚 年終、績效獎金該有的都有，努力絕對不白費。4.生日小驚喜，公司記得你的每個重要時刻。5.定期聚餐/Team Building 不只是工作夥伴，更是一起成長的戰友，吃吃喝喝感情更緊密。6.技術課、內部分享會，想學什麼我們都支持，讓你持續進化不退化！Responsibilities
+We are seeking an experienced Site Reliability Engineer (SRE) who will be responsible for ensuring a reliable & scalable platform infrastructure.Develop pipelines for deploying applications using IAC tool (e.g. Ansible, K8S, CI/CD pipeline via Jenkins/ArgoCD).Setup monitoring & telemetry with using Prometheus/Grafana stacks.Design and implement Disaster Recovery & backup solution.Scale systems sustainably through mechanisms like automation and evolve systems by pushing for changes that improve reliability and velocity.","Successful Applicant
+4+ years of experience in SRE, or DevOps.1+ years of experience in providing on-call for critical applications in production environment.Experience with containers or Kubernetes (K8s) & IAC tools such as Ansible/Saltstack.Experience in building CICD pipelines using Jenkins/ArgoCD of a large-scale enterprise application for land-based infrastructure and monitoring & maintaining mission critical system.Experience with Windows/Linux servers & Networking administration.Experience with http hosting service (e.g. IIS/Nginx).Excellent communication and interpersonal skills to engage both technical and non-technical stakeholders. Being proactive, responsible, accuracy high, ownership of the resources is a must.",https://www.cake.me/companies/richwell/jobs/site-reliability-engineer-sre-71702b?locale=en,51 ~ 200 people,台北市松山區,"裕順資訊有限公司 致力於提供高效、創新的解決方案，滿足客戶在科技和商業上的各種需求。作為一家領先的技術外包服務提供商之一，我們憑藉豐富的經驗和專業知識，支持客戶在數字化轉型、軟體開發、IT基礎設施管理及其他關鍵領域的需求。
+我們的價值主張：
+- 客戶導向： 我們始終以客戶需求為中心，通過深入理解其業務挑戰來提供度身定制的解決方案。
+- 技術卓越：我們擁有多才多藝的技術專家團隊，能夠應對各種複雜的技術挑戰，並提供可靠且創新的解決方案。
+- 品質保證：我們注重每一個細節，確保交付產品和服務的高品質，以滿足客戶的期望和需求。
+- 合作共贏：我們認為合作是成功的關鍵，通過與客戶、合作夥伴和員工的緊密合作，實現共同成長和成功。
+我們的服務範圍：
+1. 軟體開發與定制：包括全球化的應用程式開發、網站開發、移動應用程式開發等。
+2. IT基礎設施管理：提供全面的IT基礎架構管理和維護服務，確保系統的安全和高效運行。
+3. 數位轉型解決方案：協助客戶實現數字化轉型，包括雲端遷移、大數據分析、物聯網（IoT）應用等。
+我們深知每個客戶的需求獨特，因此我們樂意通過創新和協作來實現您的業務目標。如果您尋找一個可靠的技術合作夥伴，請與我們聯繫，我們將竭誠為您服務。",https://www.cake.me/companies/richwell
+( 可彈性遠端 ) Game Platform Product Manager / 遊戲平台產品經理,崴拓資訊有限公司 Wit Software Ltd.,Software,Design,Product Manager,Full-time,Mid-Senior level,"Xinyi District, Taipei City, Taiwan",2,3 years of experience required,"960,000 ~ 1,440,000 TWD / year","['軟體開發', '軟體遊戲', '產品負責人']","▎Who we are ?我們是一家高速成長的國際級娛樂科技公司，團隊成員遍布台灣、新加坡、中國與杜拜，亞洲地區規模約 200 人，致力於打造結合遊戲、社交、支付與即時通訊的下一代娛樂生態系。從高效能遊戲平台到全球級 IM 即時訊息系統與金流架構，我們正重新定義數位娛樂的體驗與可能。現在，我們正在尋找對 0-1 產品建立與線上數位娛樂產業充滿熱情的你，加入我們的產品部核心團隊。▎ What You'll Got
+在這裡，我們相信一位優秀的產品經理，追求的不只是專案完成，更是「打造有影響力的產品」與「推動用戶價值成長」的成就感。為了讓你專注在策略與執行之間取得平衡，我們提供以下支持：
+
+
+產品主導權與決策參與：你將與核心決策者（技術主管、營運與商業團隊）密切合作，從 0 到 1 主導產品方向、功能優先順序與落地策略。
+
+
+跨域協作與高透明溝通文化：團隊高度扁平，無論是與 UI/UX、RD 還是 QA，你都能快速對齊、靈活迭代，聚焦在產品本質的優化與創新。
+
+
+深入市場與用戶洞察的產品節奏：我們鼓勵產品經理主動蒐集用戶回饋、觀察競品與數據，提出能真正解決痛點的解法。
+
+
+彈性工作制度：試用期後每週一天遠端，滿一年後可申請全遠端，讓你在高效與生活之間取得最佳平衡。
+
+
+產品職涯成長雙軌發展：無論你志在成為具備影響力的 Product Leader，或專注於某垂直領域的專業 PM，我們都會支持你制定職涯發展地圖與資源陪跑。▎ What You’ll Do負責從產品的需求分析、產品設計、研發跟進到最終上線的部分或全部流程。需求管理：收集用戶需求，進行需求分析，並彙整排定產品需求。產品策劃：編寫詳細的產品設計流程，撰寫產品需求文檔，策劃使用者體驗的全程設計，能夠向 UI 設計師、研發工程師詳細講解設計意圖，確保產品的高品質。產品追蹤：跨部門協調和溝通，推動 UI、研發、QA 等人員緊密合作達成產品目標；對接核心技術、開發、測試、市場等各個環節，推動多個產品的功能完善及品質改進。運營支援：配合運營成員推廣產品，對接運營及使用者的問題需求，給予解決方案，提供文檔支援。用戶體驗：持續檢測分析產品資料，關注產品使用者體驗，定期進行競品分析，提出優化意見並持續完善產品。","▎What We're Looking For具備清晰思緒與邏輯分析，做事細心度高。溝通協調能力佳、善於團隊合作。主動積極、有責任心。具備遊戲、娛樂、支付、直播、社群、區塊鏈等相關經驗者尤佳。( 其一即可 )
+▎Bonus Qualifications
+具備 PMP 等相關證照。Axure、墨刀等相關經驗。有軟體專案管理相關經驗。可閱讀技術文件。有 Coding 相關經驗。有提供企劃書或文案者佳。",https://www.cake.me/companies/wit-software-ltd/jobs/product-manager-v0?locale=en,51 ~ 200 people,台灣台北市信義區松仁路100號36樓,"「 技術創新、追求卓越 」- Innovating Excellence to Shape Gaming's Future!
+🧚🏻 歡迎追蹤崴拓資訊的 LinkedIn Company Page，了解更多崴拓人的 #技術 #生活 #文化 🧚🏻
+
+Wit Software Ltd. ( 崴拓資訊 ) 是一家致力於遊戲技術創新的公司，成立於 2022 年，打造高品質的遊戲軟體與系統解決方案。我們擁有扎實的技術實力與核心開發能力，不僅滿足市場需求，更推動遊戲產業的升級與變革。我們以技術驅動創新，前後端開發技術覆蓋 ReactJS、VueJS、Kotlin、Golang 等多種技術，並透過敏捷開發 ( Scrum ) 加速專案進程，確保高效與高品質並行。在全球化的市場趨勢下，我們積極融合多元文化與創意發想，致力於打造能夠影響國際市場的遊戲與系統產品。對於 Wit Software 而言，人才始終是最關鍵的核心，我們打造充滿挑戰與成長機會的環境，鼓勵每位專業人才突破界限，與我們攜手開創遊戲技術的未來。目前團隊成員遍布台灣、新加坡、中國與杜拜，亞洲地區規模約 200 人，致力於打造結合遊戲、社交、支付與即時通訊的下一代娛樂生態系。從高效能遊戲平台到全球級 IM 即時訊息系統與金流架構，我們正重新定義數位娛樂的體驗與可能。無論你是遊戲開發者、系統架構師，或是對遊戲技術充滿熱情的專業人才，Wit Taiwan 都歡迎你的加入！📩 想與我們一起打造未來遊戲技術？立即應徵相關職位吧！---Wit Software Ltd. is a company dedicated to innovation in gaming technology. Founded in July 2022, we have rapidly expanded through our 1+1 elite team model, developing high-quality gaming software and system solutions. With solid technical expertise and core development capabilities, we not only meet market demands but also drive the evolution and transformation of the gaming industry.At Wit Software, technology drives innovation. Our development expertise spans both frontend and backend technologies, including ReactJS, VueJS, Kotlin, and Golang. By adopting Agile development (Scrum), we accelerate project execution, ensuring both efficiency and quality. In the ever-evolving global market, we integrate diverse cultural perspectives and creative insights, striving to develop gaming and system solutions that make a global impact. Above all, talent is at the heart of Wit. We cultivate an environment filled with challenges and growth opportunities, empowering professionals to push boundaries and shape the future of gaming technology with us.Whether you are a game developer, system architect, or a passionate professional in gaming technology, Wit Software Ltd. welcomes you to join us!📩 Ready to shape the future of gaming technology? Apply Now!",https://www.cake.me/companies/wit-software-ltd
+SRE網站可靠性工程師 (DevOps),COMMEET＿擁樂數據服務股份有限公司,SaaS / Cloud Services,IT,DevOps / System Admin,Full-time,Mid-Senior level,"Songshan District, Taipei City, Taiwan",1,3 years of experience required,"70,000 ~ 90,000 TWD / month","['松山區長安東路二段225號A棟1樓之1', '松山區', 'Terraform']",COMMEET (https://commeet.co) 擴大徵才，歡迎有熱情之新夥伴加入我們的行列[工作內容]1.導入與執行 CI/CD 相關技術與程序2.撰寫自動化腳本3.負責系統發佈、部署、優化、監控、日誌等系統和流程的建設4.優化服務設計和技術架構滿足業務增長5.與團隊成員合作，建構高併發、可擴展性、維護性的系統架構6.MIS相關工作7.其他主管交辦事項,[職缺條件]•  3 年以上 SRE / DevOps 經驗•  熟悉至少一種主流雲端服務 (GCP/AWS/Azure)•  熟悉 Linux 和 Windows 作業系統•  熟悉 git workflow•  能靈活運用 git 並設計流程，以符合團隊需求•  熟悉 shellscript※ 依照產業及相關經驗敘薪[加分條件]•  有 Docker 和 Kubernetes 使用經驗•  有 Terraform 使用經驗[人格特質]• 做事細心負責任• 勇於溝通，樂於表達自己的想法• 喜歡主動學習新技術，願意與團隊研究及分享技術新知,https://www.cake.me/companies/commeet/jobs/data-science-engineer-537ad7?locale=en,11 ~ 50 people,台北市松山區長安東路二段225號A棟1樓之1,擁樂數據服務擁有專業的資訊開發團隊，深度經營 B2B 市場，提供企業客戶最智慧的營運管理解方。2020 年擁樂數據推出全新 B2B SaaS 品牌「COMMEET 智能費用管理系統」，致力於成為台灣企業數位轉型推動者，我們從財務流程出發，協助企業更有效率的達成營運管理目標。,https://www.cake.me/companies/commeet
