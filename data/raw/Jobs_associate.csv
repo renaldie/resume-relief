@@ -30249,3 +30249,19 @@ UI/UX互動系統介面設計師,聚典資訊 Ret[AI]ling Data,Artificial Intell
 2、具備開創性設計思維
 3、積極樂觀、細心的工作態度",,https://www.cake.me/companies/ret-ai-ling-data/jobs/ui-ux-interactive-system-interface-designer-student-internship-ca9?locale=en,11 ~ 50 people,台北市南港區園區街3-2號9樓912室,"聚典資訊，為台灣最注重消費者體驗與人工智慧整合之智慧零售諮詢公司，希冀為虛實通路的最佳展招諮詢公司，都市線下零售空間提供再發展的成長機會，亦提供線上零售面臨實體互動體驗有最適活動場景。現階發展，以零售品牌連鎖業，開發展店零售選址之優化，提供考量區域宜居度、城際移動力、商圈消費力之寬面向、多層次、全渠道之智能導航選址決策之視覺化圖資系統。未來結合過去亞太區零售諮詢經驗，以亞洲第一大之零售數據諮詢公司為願景。　
 Ret[AI]ling Data Enterprise, which focuses on the integration of consumer experience and artificial intelligence(A.I.) in Taiwan. Providing the best O2O (online to offline) expansion consultation in retail industry, positioning the expansion ability to urban entity storefronts, moreover, providing the most suitable physical interaction experience space for online stores. At the current stage of development, we specialize in optimizing store sites selection for retail chains. In addition, we will integrate our past retail consulting experience in the Asia Pacific region and are committed to becoming one of the most outstanding retailing expansion consulting company for smart retailing in Asia.",https://www.cake.me/companies/ret-ai-ling-data
+邊緣系統工程師 (Edge System Engineer),Owlsome Tech 翱翔智慧股份有限公司,Artificial Intelligence / Machine Learning,IT,Software Engineer,Full-time,Assistant,Taiwan,1,3 years of experience required,"800,000 ~ 1,300,000 TWD / year","['Sensory Integration', 'Raspberry Pi', 'Python']","公司摘要
+翱翔智慧是一家專注於電梯智慧應用解決方案的新創公司。
+公司自 2021 投入這個領域後，已經逐漸打開知名度，目前業務主要有兩大塊：「指標場域電梯智慧化」與「自走機器人關鍵整合」。我們預期明年會迎來不小的成長與突破，因此希望能在這個關鍵的階段開始尋找適合的合作夥伴。
+我們的團隊目前有 2 位工程師與一位經理，團隊精簡，溝通直接。我們主要使用的開發語言以 Python 為主，另外部分專案或功能有使用到 Node.js。
+職位摘要
+我們希望能尋找一位邊緣系統工程師，負責開發與維護關鍵的物聯網邊緣系統。
+工作條件
+全遠端工作每週一上午 10:00 有週會，討論接下來的任務規劃。每天下午 17:00 有 Stand-up Meeting，約 15-30 分鐘，主要目的 sync 每個人的當天進度。表訂上班時間為 9:30 - 18:30，可自行調整。作為核心成員，可參加員工認股權（ESOP）計畫。
+核心任務
+承接並負責現有基於 NVIDIA Jetson (Nano/Orin) 以及 Raspberry Pi (RPi) 的系統開發，確保不同產品線的邊緣端穩定運作。 開發高效能且可持續運行的訊號處理流程，將感測器數據轉化為關鍵運行指標 。深度應用 I2C、UART、RS232/485 等通訊協議，穩定串接硬體感測器組件 。針對無線網路不穩定的環境（如電梯井道），開發「斷線恢復」與「離線緩存」機制，確保數據上報不遺失、服務不中斷 。維護相關文件，為未來團隊持續擴充打好基礎。
+
+適合哪些人：
+100% 遠端工作，並且彈性調整工作時間，實現高度的自主權與彈性直接的產品影響力，你的設計與努力會直接反應在實際的場域上精實的團隊文化，我們重視誠信與合作，希望能專注在產品的優化AIoT 應用同時跨到軟體和硬體，實作起來很有趣，也很有挑戰性不需要處理高流量高併發的大型網路服務問題有機會到不同場域去測試與設定，不會一直待在電腦前面團隊氣氛開放，合作過的每一位夥伴都沒有抱怨過公司有人際問題","能力要求
+3 年以上軟體開發經驗，具備扎實的後端架構能力。精通 Python，能針對效能需求（邊緣端運算）與靈活性需求（API/通訊）進行開發。硬體底蘊：對底層通訊協議有深刻理解，包括但不限於：UART/RS485 的訊號轉換與封包校驗。I2C 串列數據讀取與校正。USB 設備訊號管理。熟悉 Git、CI/CD 架構，並且可進行規劃與開發。具備邊緣運算容錯設計能力，了解如何在網路極端不穩定的情況下，實作超時釋放、異常重啟等穩定性指標。樂於在新創環境中彈性應變。具備遠端合作所需要的責任感與自我要求。可偶爾於非上班時間支援緊急修復任務。
+加分條件 (Nice-to-have)
+硬體語言：熟悉  C/C++ 語言開發與硬體管理平台經驗：具備 NVIDIA Jetson 系列或 RPi 的量產級開發經驗 。通訊技術：有處理 MQTT over TLS 通訊經驗，並優化過高延遲環境下的封包傳輸 。開發經驗：熟悉邊緣端 Linux 系統裁剪或優化，以提升嵌入式系統的啟動速度與穩定性。",https://www.cake.me/companies/owlsome-tech/jobs/edge-system-engineer?locale=en,1 ~ 10 people,台北、台中,Owlsome Tech 成立於 2019 年初，是一家提供資料科學應用設計與開發的軟體新創。我們致力於為各領域的專家們提供數據蒐集儲存、資料探勘分析、與基於數據驅動的決策應用，Owlsome Tech 目標成為資料應用領域的服務者，為相信數據力量的產業先進提供創新的解決方案，提升台灣資料科學的應用水平與創新能力。除了打造優秀的資料科學解決方案外，我們也致力於打造開放自由的工作環境。在 Owlsome Tech 工作的每一位同仁都是重要的工作夥伴，因此我們建立遠端工作、自由安排工作時間等制度，讓每一位同仁都能發揮全力，同時享受生活。Owlsome Tech 是一家非常年輕的公司，需要懷抱夢想的每一位朋友一起建構無限的可能。如果你也期待創新應用的產生，並且具有冒險犯難的精神，歡迎加入我們！,https://www.cake.me/companies/owlsome-tech
