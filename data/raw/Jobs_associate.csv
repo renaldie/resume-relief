@@ -30265,3 +30265,20 @@ Ret[AI]ling Data Enterprise, which focuses on the integration of consumer experi
 3 年以上軟體開發經驗，具備扎實的後端架構能力。精通 Python，能針對效能需求（邊緣端運算）與靈活性需求（API/通訊）進行開發。硬體底蘊：對底層通訊協議有深刻理解，包括但不限於：UART/RS485 的訊號轉換與封包校驗。I2C 串列數據讀取與校正。USB 設備訊號管理。熟悉 Git、CI/CD 架構，並且可進行規劃與開發。具備邊緣運算容錯設計能力，了解如何在網路極端不穩定的情況下，實作超時釋放、異常重啟等穩定性指標。樂於在新創環境中彈性應變。具備遠端合作所需要的責任感與自我要求。可偶爾於非上班時間支援緊急修復任務。
 加分條件 (Nice-to-have)
 硬體語言：熟悉  C/C++ 語言開發與硬體管理平台經驗：具備 NVIDIA Jetson 系列或 RPi 的量產級開發經驗 。通訊技術：有處理 MQTT over TLS 通訊經驗，並優化過高延遲環境下的封包傳輸 。開發經驗：熟悉邊緣端 Linux 系統裁剪或優化，以提升嵌入式系統的啟動速度與穩定性。",https://www.cake.me/companies/owlsome-tech/jobs/edge-system-engineer?locale=en,1 ~ 10 people,台北、台中,Owlsome Tech 成立於 2019 年初，是一家提供資料科學應用設計與開發的軟體新創。我們致力於為各領域的專家們提供數據蒐集儲存、資料探勘分析、與基於數據驅動的決策應用，Owlsome Tech 目標成為資料應用領域的服務者，為相信數據力量的產業先進提供創新的解決方案，提升台灣資料科學的應用水平與創新能力。除了打造優秀的資料科學解決方案外，我們也致力於打造開放自由的工作環境。在 Owlsome Tech 工作的每一位同仁都是重要的工作夥伴，因此我們建立遠端工作、自由安排工作時間等制度，讓每一位同仁都能發揮全力，同時享受生活。Owlsome Tech 是一家非常年輕的公司，需要懷抱夢想的每一位朋友一起建構無限的可能。如果你也期待創新應用的產生，並且具有冒險犯難的精神，歡迎加入我們！,https://www.cake.me/companies/owlsome-tech
+全職研究助理,SymptomTrace - 星坦科技股份有限公司,Artificial Intelligence / Machine Learning,"Bio, Medical",Aide,Full-time,Assistant,"Banciao, New Taipei, Taiwan",1,No requirement for relevant working experience,"40,000 TWD / month",[],"本職缺將以協助目前亞東醫院之研究案為主，同時需協助Clinical Team以下事項：
+協助臨床試驗收案
+-協助執行指定的研究案試驗流程，未來依研究案之發展有可能安排至雙北其他醫院協助收案。
+-與醫師、個管師配合收案，協助病人加入研究、簽署同意書。
+-協助病人安裝APP及教導如何使用APP完成醫師指定問卷。
+-追蹤病人問卷填答情形、提醒病人填答問卷。
+2. 協助其他臨床試驗相關事務依據能力及臨床研究部當下業務狀況，協助其他臨床試驗相關事項，例如：
+
+-協助文獻查找、整理。
+-回報及處理病人及醫療團隊使用APP之相關問題及回饋。
+-處理研究相關之行政事項:包含報帳、協助報告撰寫、IRB相關行政事項。
+於面試時詳談。工作地點
+醫師門診時段至醫院（目前為亞東醫院）進行跟診，其餘工作時段可遠距工作。工作性質：全職",大學畢業， 護理、社工、醫管相關科系或具醫療相關背景尤佳收案對象為年長者，需有耐心、有良好溝通能力科系要求不拘，若為醫藥衛生學科類佳語文條件： 國語、台語、英語中等以上,https://www.cake.me/companies/symptomtrace/jobs/full-time-research-assistant-43d?locale=en,11 ~ 50 people,"NYCU YangMing Campus, Incubation Center, ZhiHe Building, No. 155, Section 2, Linong St, Beitou District, Taipei City, Taiwan 112","長期慢性病難以追蹤與管理？我們正在改變這一切！
+慢性疾病影響全球數億人，但目前的醫療系統往往難以提供持續、精準、個人化的追蹤與治療。許多患者只能依賴零散的門診紀錄、繁瑣的手動追蹤，甚至因為資源不足而錯失最佳治療時機。這不僅影響患者的健康，也增加了醫療體系的負擔。
+我們是一家醫療科技新創，我們的使命是改變這種現狀！ 我們正在打造真正有效的慢性病管理解決方案，結合AI技術、數據驅動決策與醫學專家的專業知識，提供更智慧、更個人化的患者管理工具。從協助醫療機構進行深入研究，到最終讓患者獲得即時且準確的照護，我們的解決方案將顛覆現有的慢病管理方式，真正提升患者的生活品質。Struggling to Track and Manage Chronic Diseases? We Are Changing That!
+Chronic diseases affect hundreds of millions of people worldwide, yet today’s healthcare systems often fail to provide continuous, precise, and personalized tracking and treatment. Many patients rely on scattered clinic records, cumbersome manual tracking, or even miss out on optimal treatment opportunities due to resource constraints. This not only impacts patients’ health but also places a heavy burden on the healthcare system.
+We are a health-tech startup, and our mission is to change this reality! We are building a truly effective chronic disease management solution that integrates AI technology, data-driven decision-making, and medical expertise to provide a smarter, more personalized approach to patient care. From empowering medical institutions with in-depth research capabilities to ultimately delivering real-time, accurate care for patients, our solution will revolutionize chronic disease management and significantly improve patient outcomes.",https://www.cake.me/companies/symptomtrace
