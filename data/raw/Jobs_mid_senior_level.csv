@@ -26360,3 +26360,48 @@ Partial Remote Work / 部分遠端工作
 Flexible work-from-home arrangement for one day each week. This benefit is an additional flexibility provided by the company and is subject to modification or adjustment at the company’s discretion. Details are subject to the company’s official policies and announcements.
 每週提供一天彈性在家工作安排。此為公司額外提供之彈性福利，且公司保有修改或調整之權利。詳細內容以公司正式政策及公告為準。",https://www.cake.me/companies/inline/jobs/inline-visual-designer?locale=en,51 ~ 200 people,台北市北平東路30-1號5樓,"＊歡迎身心障礙者投遞本司各項職缺We welcome applications from individuals with disabilities.inline 是一家專注於提升餐廳效率、管理桌況和預訂流程的軟體公司。亞太地區有近10,000家餐廳選擇使用 inline 的服務，其中包括知名連鎖品牌、米其林星級餐廳、購物中心和繁忙的特色名店餐廳。我們與食品科技平台、社交應用程式以及多種媒體服務合作，致力於擴大 Inline 餐廳客戶的曝光和業務機會。同時，全球最大的消費者預訂業務 Booking Holdings（OpenTable、Agoda、KAYAK、Booking.com）更是我們的投資者和尊貴合作夥伴。
 inline is a software business focused on maximizing restaurant efficiency managing tables and reservations. Nearly 10,000 restaurants across Asia-Pacific use inline's services, including leading chain brands, Michelin-starred restaurants, shopping malls, and busy brick-and-mortar restaurants. We also partner with food-tech platforms, social apps, and various media services to grow the exposure and business for inline restaurant customers.  The largest consumer booking business in the world, Booking Holdings (OpenTable, Agoda, KAYAK, Booking.com), is an investor and partner.",https://www.cake.me/companies/inline
+資安工程師（每月有遠端日）,BitoGroup 幣託科技股份有限公司,Blockchain,IT,Security Engineer,Full-time,Mid-Senior level,"Songshan District, Taipei City, Taiwan",1,3 years of experience required,"70,000 ~ 120,000 TWD / month",[],"▍團隊介紹：你的未來夥伴
+我們不只是在修補漏洞，我們是在建構「原生安全」的產品環境。資安工程師是我們技術團隊中的特種部隊，負責在駭客行動前找出弱點，並透過工程手段（Engineering）將防禦自動化。我們與 SRE、DevOps 團隊深度整合，共同打造高韌性的雲端架構。
+
+▍團隊文化：我們如何工作
+- 實戰導向（Hands-on Mentality）我們重視程式碼與系統實作，不只是看報表。我們鼓勵同仁參與 CTF 比賽、挖掘漏洞，並將研究成果轉化為公司的防禦工具。- 自動化優先（Security as Code）手動掃描是過去式。我們追求將安全檢測整合進 CI/CD Pipeline，實現自動化 DAST/SAST，讓安全檢查如同單元測試一般自然。- 紅藍軍對抗（Red & Blue Teaming）我們維持內部持續性的演練文化。透過紅軍（攻擊）發現盲點，藍軍（防禦）強化監控與回應機制，在真實威脅發生前完成進階部署。- 技術共好與分享（Knowledge Sharing）資安領域變化極快，我們每週舉行技術拆解會，分析最新 CVE 漏洞原理或新型攻擊載體，確保團隊始終站在技術前沿。
+
+▍關於職務：你將負責的工作內容
+1. 滲透測試與弱點分析：執行 Web、API 及雲端架構的滲透測試，並提供具體的程式碼修復建議。2. DevSecOps 流程建置：在開發流程中嵌入安全自動化工具，建立漏洞自動化掃描與管理平台。3. 入侵偵測與應變（IR）：設計與維護 SOC 告警規則，主導重大資安事故的技術鑑定與數位鑑識。4. 雲端安全加固：針對 K8s 容器安全、雲端權限（IAM）及網路架構進行深度硬化（Hardening)。5. 安全工具開發：使用 Go 或 Python 開發內部專用的資安輔助工具或自動化檢測腳本。6. 特權帳號管理（PAM）：確保所有高權限操作皆有稽核軌跡（Audit Trails）。7. 資安自動化：開發自動化工具時，須確保工具本身的安全性（Secure coding for security tools）。
+
+▍我們提供的福利與環境
+- 薪資範圍：月薪 NTD $70,000 - $120,000（依技術實力討論，資深者可面議）。- 戰力補助：全額補助資安證照考試費用（如 OSCP 等高階認證）、國內外資安大會門票、AI工具補助。- 工作彈性：遠距工作、彈性上下班。- 資安人專屬：提供高性能開發工作站與測試環境、不定期舉辦內部技術「攻防賽」、定期部門生日會、活動、聚餐。","▍我們在找的人才- 實戰背景：3 年以上資安技術實務經驗，精通 OWASP Top 10 原理及修復方案。- 技術深度：熟悉至少一門程式語言（Go, Python, Java），能讀懂並分析惡意程式碼。- 雲端知識：熟悉 AWS/GCP/Azure 其中一種雲端平台的安全架構與配置。- 核心思維：具備駭客思維（Think like a hacker），對系統底層架構、網路協議有強烈的好奇心。
+▍加分項目
+1. AI 與自動化安全：- 具備利用 LLM（大語言模型）優化原始碼審查（Code Review）的經驗。- 能開發 AI-based 異常流量檢測模型或自動化威脅獵捕工具。2. 專業技術認證：持有 OSCP, OSWE, CPENT 或雲端專業安全認證（如 AWS Security Specialty）。3. 社群貢獻：曾於 HITCON, Black Hat 等研討會發表研究，或在 Bug Bounty 平台（如 HackerOne）有優異紀錄。4. 容器安全：熟悉 K8s 安全佈署與容器逃逸防範。
+❗️因職務性質將進行工作背景調查（Reference Check），以確保資訊安全與團隊誠信。",https://www.cake.me/companies/bitogroup/jobs/information-security-engineer-b8ea6e?locale=en,51 ~ 200 people,台北市松山區南京東路四段16號8樓A室,"幣託集團BitoGroup成立於2014年，致力於以區塊鏈技術達成普惠金融目標，並協助企業與消費者進入Web3時代。集團旗下事業包括BitoPro加密貨幣交易所、NFT賦能平台BELS以及元宇宙社交平台O2 META。
+幣託遵守台灣金融法規之虛擬通貨相關規範，並為會員的加密資產投保，且取得ISO 27001資安認證，是台灣最值得信賴的加密貨幣投資品牌。",https://www.cake.me/companies/bitogroup
+QA Engineer,夯客股份有限公司,SaaS / Cloud Services,IT,QA / Test Engineer,Full-time,Mid-Senior level,"Taipei City, Taiwan, Daan District, Taipei City, Taiwan",1,No requirement for relevant working experience,"50,000 ~ 80,000 TWD / month",['QA Testing'],加入「夯客」品質工程團隊，你將參與一套已上線五年以上、服務全台眾多店家並承載高頻次業務操作的 SaaS 行動系統品質驗證工作。在「夯客」，品質不是驗收階段的最後一個步驟，而是產品開發流程中至關重要的環節。我們擁有完整的前端、後端、UI/UX 與 PM 團隊編制，並透過 Jira、Slack、GitHub、Swagger 等工具維持高效率、透明且具結構的品質驗收流程。你將與開發、產品與設計團隊密切合作，參與需求釐清、測試策略設計、自動化腳本開發、整合測試與迴歸驗證，確保產品在功能正確性、業務一致性與使用體驗上達到高標準。這是一個能接觸複雜邏輯處理與商業場景的機會，並能在制度完善且技術成熟的環境中深化品質工程與自動化能力。,"主要職責
+與 PM、設計團隊釐清需求、驗收條件與業務流程規劃測試策略、測試範圍與測試驗證方式撰寫並維護測試計劃、測試案例與相關測試文件執行 Mobile / Web / API 測試並驗證商業邏輯與業務流程一致性驗證系統端行為、資料一致性與整體系統邏輯正確性進行跨模組整合測試，確保系統在多服務協作下的穩定性撰寫並維護自動化測試腳本（Python、Pytest、Appium、Playwright）擴充自動化覆蓋率並提升迴歸測試效率與穩定性參與 CI/CD 測試流程整合與優化（GitHub Actions、Jenkins）使用工程方法與工具改善測試效率與品質推動品質文化，提升團隊對測試性與資料一致性的意識，並提升整體交付品質
+必要條件
+2 年以上 Mobile、Web 或 API 測試相關經驗熟悉至少一種程式語言（Python 或 TypeScript）理解自動化測試框架（Pytest、Appium、Playwright 擇一或同等技術）熟悉 API 測試流程與工具（Postman、Swagger 或 Insomnia）具備撰寫測試案例與測試計劃能力具備 Debug 與問題分析能力，可協助釐清問題與影響範圍具備良好的邏輯思維、溝通能力與跨職能協作能力對品質、細節與整體一致性具有高度要求
+加分項目
+熟悉 TestRail 或其他測試管理平台熟悉 CI/CD Pipeline 或 GitHub Actions、Jenkins 等工具熟悉 iOS / Android 測試環境或行動生態有金融、電商或 SaaS 系統流程測試經驗有性能測試（JMeter、k6、Locust）或穩定性測試經驗有可觀測性（Observability）或監控系統相關經驗運用 AI 驅動測試生成工具 (AI-assisted Test Generation) 的實務經驗，例如透過 Playwright Agents、openSpec 或其他 Prompt-based Engineering 方式自動產出測試程式碼，並對提升測試開發效率有深刻見解
+我們提供的環境與文化
+完整分工與成熟協作流程（PM、UI/UX、Dev、QA）制度化需求討論、驗收流程與迴歸流程扁平組織與高度自主：我們維持精簡、扁平的組織架構，溝通直接透明，沒有冗長的決策流程。每位工程師都能直接參與技術決策，你的意見能直接轉化為產品價值與產品、設計與工程團隊共同確保產品品質與上線節奏",https://www.cake.me/companies/hotcake/jobs/qa-test-engineer-067eb2?locale=en,11 ~ 50 people,台北市大安區忠孝東路四段169號8樓之一,"█為什麼你該加入產品型公司？
+業界領先產品：我們是台灣最受信賴的預約與經營管理系統，已超過 2,400 家商家導入夯客。高影響力：能參與產品發展，從1->100，你可以影響上萬名美業從業者的工作方式。優秀團隊：與優秀的設計與工程團隊合作，打造最優秀的產品體驗。快速成長機會：公司進入擴展階段，你將有機會參與國際市場拓展，開發更多應用場景。
+
+
+█ 團隊介紹
+
+
+紮實的開發與產品發展流程，給予發揮空間，發揮你的專長！
+打造世界一流的SaaS系統，自2021年1月正式上線，已經協助2000家品牌導入夯客完成數位升級，使用夯客的人次已多達80萬人，用直覺強大的產品解決產業痛點。夯客官網 : https://hotcake.app夯客介紹影片：Youtube連結Instagram：https://www.instagram.com/hotcake.app數位時代採訪介紹：https://supr.link/bxM2g數位時代 Podcast: https://supr.link/k8JBS
+█ 團隊履歷
+2018 創夢實驗室加速器 第三梯次團隊2019 台大創創Ｘ玉山銀行 加速器團隊2019 台大創創Ｘ東方線上 加速器團隊2021 台大創創一般加速器2022 中華電信5G加速器2022 500 Global加速器
+█ 投資人
+
+500 Startups活水影響力資本統一國際開發新光三越百貨
+
+█ 工作環境
+【注意，有辦公室守護獸不定期巡邏且長期駐點，怕「貓」者請勿面試】
+
+同事大多I人，非常欠缺E人夥伴加入。團隊氣氛溫馨。積極、正向，「做出體驗絕佳的產品」是我們團隊的使命。極度扁平的組織架構你可以盡情發揮你的專長有貓可以陪你工作",https://www.cake.me/companies/hotcake
+Senior Software Engineer / Programmer 資深軟體工程師(台中市政府旁),新加坡商鈦坦科技,Software,IT,Full Stack Development,Full-time,Mid-Senior level,"Xitun District, Taichung City, Taiwan",5,3 years of experience required,"95,000+ TWD / month","['台灣', '台中', 'MSSQL']","在鈦坦科技，我們將工程師視為「產品開發者」（PD, Product Developer）。這不僅是關於編寫【程式】，還包括全面考慮產品的效能、安全、使用性、維護成本及所需資源和時間。我們致力於開發但不只是完成功能，更在意創造出能讓客戶滿意的產品。對於敏捷開發，我們重視其真正的含義，而不是快速交付或空洞的術語。如果你具有熱忱、追求極致和樂於團隊合作的特質，歡迎你加入我們。在這裡，你將在專業顧問的指導下深入學習敏捷開發的精髓，與團隊共創卓越產品。我們相信，追求的不僅是最好，而是不斷進步。我們在日常開發使用到的【四大核心技術領域】有以下幾項軟體開發和版本控制：ASP.NET Core, Vue.js, Microsoft SQL Server, GitLab, etc.自動化測試： NUnit, Vitest, K6, etc.容器化和分散式系統: docker, K8s, Redis, Kafka, etc.監控和日誌系統：ELK, Grafana, Prometheus, etc.我們也非常歡迎熟練使用 AI 工具輔助開發如: Cursor, Windsurf, ChatGPT, Claude … 等【工作職責】•作為資深工程師，我們希望你對四大核心技術領域都有一定程度的了解以及實戰經驗• 提升團隊整體的技術能力和專業素養並且帶領團隊中的 Junior 成為 Senior• 在與客戶和內部團隊的技術溝通中扮演主導角色，提出創新的解決方案以應對複雜挑戰• 提供高效能的技術策略和解決方案，驅動公司產品和技術的進步• 可配合 24x7 的技術支援輪班，協助客戶排除系統問題【工作規範】基本要求• 在四大核心技術領域中至少其中的兩個領域擁有深厚的技術背景• 帶領過五人以上團隊解決複雜問題• 能夠清晰地向非技術人員解釋技術概念• 承擔有效決策和執行解決方案的能力【加分項目】• 具備大型項目或高負載系統的開發和維護經驗• 曾領導過跨功能團隊或大型技術項目","工作經驗3年以上學歷要求不拘科系要求未填寫語文條件
+中文(聽:中等、說:中等、讀:中等、寫:中等)英文(聽:中等、說:中等、讀:中等、寫:中等)
+擅長工具GitASP.NETC#MS SQLHTMLJavaScriptCSSVueJS工作技能軟體工程系統開發軟體程式設計其他條件加分項目具備大型項目或高負載系統的開發和維護經驗曾領導過跨功能團隊或大型技術項目",https://www.cake.me/companies/titansoft-tw/jobs/senior-software-engineer-full-end-engineer-taichung?locale=en,201 ~ 500 people,台北市南港區台北市南港區園區街 3 之 1 號 11 樓之 1（南港軟體園區 G 棟）,"鈦坦科技，是一間總部位於新加坡的軟體開發公司，提供線上軟體平台客製開發與維護，以及代理 Atlassian 旗下產品 Jira Software & Confluence、線上視覺化白板 Miro ，以自身實際使用經驗提供一站式導入服務。身處快速變動的軟體產業，我們採用敏捷開發，同時將敏捷思維注入公司文化，目的是快速、靈活地應對客戶和市場需求的變化，在多年導入及迭代的經驗下，我們也開始提供企業客製化敏捷課程及顧問諮詢服務。◆ Never Stop Growing ◆鈦坦科技台灣分公司座落於台北南港軟體園區內，隨著業務擴展，我們大舉擴編，甚至將版圖擴張至台中，至今我們仍不斷需要優秀人才加入。◆ Never Stop Trying ◆我們是不斷嘗試不同方法的一群人，不管是實踐敏捷開發，或是應用資料科學，都是為了讓產品更好，讓技術能夠真正創造價值。◆ Never Stop Challenging ◆在鈦坦這個充滿活力的專業團隊中，每位同仁都是不可或缺的成員，我們竭盡所能為每位同仁創造機會、提升自我、實現自我、挑戰自我。◆ Never Stop Changing ◆我們歡迎改變，並且隨機應變，面對不斷變化的市場需求，為我們的客戶打造高品質的產品。 ◆ Never Stop Improving ◆在鈦坦學習就是生活的一部分，只要是鈦坦人就可以參與多元的訓練計畫，發揮你全部潛能。 因為我們深信：公司的成長，來自夥伴的成長。
+敏捷式管理鈦坦人好文面試流程公開鈦坦人 IGFB 粉絲團",https://www.cake.me/companies/titansoft-tw
