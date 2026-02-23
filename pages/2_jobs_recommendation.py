@@ -65,11 +65,9 @@ langsmith_project = os.environ.get("LANGSMITH_PROJECT") or st.secrets.get(
 # )
 
 # Github Model
-LLM = AzureChatOpenAI(
-    azure_endpoint="https://models.inference.ai.azure.com",
-    azure_deployment="gpt-4.1-nano",
-    openai_api_version="2025-03-01-preview",
-    model_name="gpt-4.1-nano",
+LLM = ChatOpenAI(
+    base_url="https://models.github.ai/inference",
+    model="openai/gpt-4.1-mini",
     temperature=1,
     api_key=GITHUB_TOKEN,
 )
